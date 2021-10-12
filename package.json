@@ -1,0 +1,23 @@
+{
+   "name": "PlantesBackend",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "@types/node": "^8.0.29",
+      "nodemon": "^2.0.13",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   },
+   "dependencies": {
+      "@decorators/express": "^2.6.0",
+      "@types/express": "^4.17.13",
+      "express": "^4.17.1",
+      "pg": "^8.4.0",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.38"
+   },
+   "scripts": {
+      "start": "ts-node src/index.ts",
+      "dev": "nodemon src/index.ts"
+   }
+}
