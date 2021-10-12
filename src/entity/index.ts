@@ -1,5 +1,5 @@
-import { User } from "user/User";
+import { User } from 'user/User';
 
 export default {
-    User
-}
+  User,
+};

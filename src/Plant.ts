@@ -1,30 +1,28 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 // @Entity()
 export class Plant {
-
     @PrimaryGeneratedColumn()
     id: number
 
     @Column({ length: 64 })
     name: string
 
-    @Column("text")
+    @Column('text')
     description: string
 
-    @Column("money")
-    price: Number
+    @Column('money')
+    price: number
 
     @Column()
-    swap: Boolean
+    swap: boolean
 
     @Column()
-    donate: Boolean
+    donate: boolean
 
     @Column()
     card: string
 
     @Column()
-    amount: Number
-
+    amount: number
 }
