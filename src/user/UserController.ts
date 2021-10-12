@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { User } from "../entity/User";
+import { User } from "./User";
 
 
 export const getUsers: RequestHandler = async (req, res) => {
