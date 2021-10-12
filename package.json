@@ -30,7 +30,7 @@
       "typeorm": "0.2.38"
    },
    "scripts": {
-      "start": "ts-node src/app.ts",
+      "start": "ts-node -r tsconfig-paths/register src/app.ts",
       "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts"
    }
 }

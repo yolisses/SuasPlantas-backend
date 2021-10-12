@@ -1,6 +1,6 @@
-import { Router } from 'express'
-import { getUsers } from 'user/UserController'
+import { Router } from 'express';
+import { getUsers } from 'user/UserController';
 
-export const routes = Router()
+export const routes = Router();
 
-routes.get('/users', getUsers)
+routes.get('/users', getUsers);
