@@ -1,11 +1,13 @@
 {
    "name": "PlantesBackend",
    "version": "0.0.1",
+   "license": "UNLICENSED",
    "description": "Awesome project developed with TypeORM.",
    "devDependencies": {
       "@types/node": "^8.0.29",
       "nodemon": "^2.0.13",
       "ts-node": "3.3.0",
+      "tsconfig-paths": "^3.11.0",
       "typescript": "3.3.3333"
    },
    "dependencies": {
@@ -14,10 +16,11 @@
       "express": "^4.17.1",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
+      "ts-node-dev": "^1.1.8",
       "typeorm": "0.2.38"
    },
    "scripts": {
-      "start-prod": "ts-node src/index.ts",
-      "start": "nodemon src/index.ts"
+      "start": "ts-node src/app.ts",
+      "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts"
    }
 }

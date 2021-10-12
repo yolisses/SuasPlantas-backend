@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as express from "express";
 import { routes } from "./routes";
+import { User } from "user/User";
 
 createConnection().then(async connection => {
 
