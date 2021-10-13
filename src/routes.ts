@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { routes as plantsRoutes } from 'plants/routes';
+import { routes as plantsRoutes } from 'plant/routes';
 
 export const routes = Router();
 
