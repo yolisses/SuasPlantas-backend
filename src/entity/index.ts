@@ -1,4 +1,4 @@
-import { Plant } from 'plant/PlantModel';
+import { Plant } from 'plant/Plant';
 
 export default {
   Plant,

@@ -6,23 +6,24 @@ import { removePlant } from './removePlant';
 export const PlantController = {
   async getAll(req, res) {
     const plants = await getAllPlants();
-    return res.send(plants);
+    res.send(plants);
   },
 
   async getOne(req, res) {
     const { id } = req.params;
     const plant = await getPlant(id);
-    return res.send(plant);
+    res.send(plant);
   },
 
   async create(req, res) {
     const { name, description } = req.body;
     const plant = { name, description };
-    return res.send(await createPlant(plant));
+    res.send(await createPlant(plant));
   },
 
   async remove(req, res) {
     const { id } = req.params;
-    return removePlant(id);
+    await removePlant(id);
+    res.send();
   },
 };

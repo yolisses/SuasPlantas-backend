@@ -1,8 +1,9 @@
 import * as createError from 'http-errors';
-import { Plant } from './PlantModel';
+import { error } from 'utils/error';
+import { Plant } from './Plant';
 
 export async function getPlant(id: number) {
   const plant = await Plant.findOne(id);
-  if (!plant) throw new Error('Plant not found');
+  if (!plant) error(404, 'Plant not found');
   return plant;
 }

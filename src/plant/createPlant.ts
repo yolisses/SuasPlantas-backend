@@ -1,5 +1,5 @@
 import { IPlant } from './PlantInterface';
-import { Plant } from './PlantModel';
+import { Plant } from './Plant';
 
 export async function createPlant(plant:IPlant) {
   const result = await Plant.create(plant);
