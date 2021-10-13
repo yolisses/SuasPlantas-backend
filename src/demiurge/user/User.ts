@@ -5,14 +5,14 @@ import {
 @Entity()
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id: number;
+      id: number;
 
     @Column()
-    firstName: string;
+      firstName: string;
 
     @Column()
-    lastName: string;
+      lastName: string;
 
     @Column()
-    age: number;
+      age: number;
 }
