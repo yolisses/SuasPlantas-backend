@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import { getPlants } from './getPlants';
+import { PlantController } from './PlantController';
 
 export const routes = Router();
 
-routes.get('/', getPlants);
-routes.get('/:id', getPlants);
+routes.get('/', PlantController.getAll);
+routes.get('/:id', PlantController.getOne);
+routes.post('/', PlantController.create);
+routes.delete('/:id', PlantController.)
