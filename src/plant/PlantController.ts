@@ -18,7 +18,7 @@ export const PlantController = {
   async create(req, res) {
     const { name, description } = req.body;
     const plant = { name, description };
-    return createPlant(plant);
+    return res.send(await createPlant(plant));
   },
 
   async remove(req, res) {
