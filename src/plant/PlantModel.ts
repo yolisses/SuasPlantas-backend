@@ -11,6 +11,6 @@ export class Plant extends BaseEntity implements IPlant {
     @Column()
       name: string;
 
-    @Column()
+    @Column({ nullable: true })
       description?: string;
 }

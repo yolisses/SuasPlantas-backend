@@ -1,5 +1,3 @@
-export function errosMiddleware(err, req, res, next) {
-  console.error('middleware', err);
-  next(err);
+export function errorMiddleware(error, req, res, next) {
   return res.status(500).send('error');
 }
