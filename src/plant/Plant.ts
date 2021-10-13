@@ -11,6 +11,15 @@ export class Plant extends BaseEntity implements IPlant {
     @Column()
       name: string;
 
+    @Column('decimal', { precision: 6, scale: 2, nullable: true })
+      price: number;
+
+    @Column({ default: false })
+      swap: boolean;
+
+    @Column({ default: false })
+      donate: boolean;
+
     @Column({ nullable: true })
       description?: string;
 }
