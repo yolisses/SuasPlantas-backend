@@ -5,7 +5,7 @@ import { IPlant } from './PlantInterface';
 
 @Entity()
 export class Plant extends BaseEntity implements IPlant {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ type: 'int' })
       id: number;
 
     @Column()
