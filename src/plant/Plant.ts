@@ -13,10 +13,10 @@ import {
   Timestamp,
 
 } from 'typeorm';
-import { IPlant } from './PlantInterface';
+import { IPlantInfo } from './PlantInterface';
 
 @Entity()
-export class Plant extends BaseEntity implements IPlant {
+export class Plant extends BaseEntity implements IPlantInfo {
     @PrimaryGeneratedColumn({ type: 'int' })
       id: number;
 
