@@ -1,7 +1,6 @@
 import {
   Entity, PrimaryGeneratedColumn, Column, BaseEntity, BeforeUpdate, BeforeInsert, InsertEvent,
 } from 'typeorm';
-import { registerDecorator, ValidationOptions, ValidationArguments } from 'class-validator';
 import { IPlant } from './PlantInterface';
 
 @Entity()
@@ -12,8 +11,21 @@ export class Plant extends BaseEntity implements IPlant {
     @Column()
       name: string;
 
-    @Column('decimal', { precision: 6, scale: 2, nullable: true })
+    @Column({
+      scale: 2,
+      precision: 6,
+      type: 'decimal',
+      unsigned: true,
+      nullable: true,
+    })
       price: number;
+
+    @Column({
+      type: 'int',
+      unsigned: true,
+      nullable: true,
+    })
+      amount?: number;
 
     @Column({ default: false })
       swap: boolean;
@@ -30,6 +42,5 @@ export class Plant extends BaseEntity implements IPlant {
       if (!this.price && !this.swap && !this.donate) {
         throw new Error('Plant with no price or swap or donate');
       }
-      console.error(this.price);
     }
 }

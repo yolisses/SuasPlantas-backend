@@ -4,6 +4,7 @@ export interface IPlant{
     price?:number
     swap:boolean
     donate:boolean
+    amount?:number
 }
 
 export type PlantId = number
