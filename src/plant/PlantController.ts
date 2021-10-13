@@ -4,13 +4,15 @@ import { getPlant } from './getPlant';
 import { removePlant } from './removePlant';
 
 export const PlantController = {
-  async getOne(req, res) {
-    const { id } = req.params;
-    return getPlant(id);
+  async getAll(req, res) {
+    const plants = await getAllPlants();
+    return res.send(plants);
   },
 
-  async getAll(req, res) {
-    return getAllPlants();
+  async getOne(req, res) {
+    const { id } = req.params;
+    const plant = await getPlant(id);
+    return res.send(plant);
   },
 
   async create(req, res) {
@@ -19,7 +21,7 @@ export const PlantController = {
     return createPlant(plant);
   },
 
-  async delete(req, res) {
+  async remove(req, res) {
     const { id } = req.params;
     return removePlant(id);
   },

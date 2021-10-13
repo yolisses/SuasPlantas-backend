@@ -4,4 +4,4 @@ import { routes as plantsRoutes } from 'plant/routes';
 
 export const routes = Router();
 
-routes.get('/plants', plantsRoutes);
+routes.use('/plants', plantsRoutes);
