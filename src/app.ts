@@ -1,7 +1,8 @@
 import 'reflect-metadata';
+import 'express-async-errors';
 import { createConnection } from 'typeorm';
 import * as express from 'express';
-import { errosMiddleware } from 'errorMiddleware';
+import { errorMiddleware } from 'errorMiddleware';
 import { routes } from './routes';
 
 createConnection().then(async (connection) => {
@@ -10,7 +11,7 @@ createConnection().then(async (connection) => {
   app.use(express.json());
   app.use(routes);
 
-  app.use(errosMiddleware);
+  app.use(errorMiddleware);
 
   app.listen(3000, () => console.info('Server running on http://localhost:3000'));
 }).catch((error) => console.log(error));
