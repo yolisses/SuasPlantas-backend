@@ -1,6 +1,6 @@
 import { Tag } from 'tag/Tag';
 
-export interface IPlant{
+export interface IPlantInfo{
     name:string
     description?:string
     price?:number
@@ -9,5 +9,3 @@ export interface IPlant{
     amount?:number
     tags:Tag[]
 }
-
-export type PlantId = number
