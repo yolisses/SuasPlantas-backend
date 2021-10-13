@@ -1,5 +1,6 @@
+import { Tag } from 'tag/Tag';
 import {
-  Entity, PrimaryGeneratedColumn, Column, BaseEntity, BeforeUpdate, BeforeInsert,
+  Entity, PrimaryGeneratedColumn, Column, BaseEntity, BeforeUpdate, BeforeInsert, ManyToMany, JoinTable,
 } from 'typeorm';
 import { IPlant } from './PlantInterface';
 
@@ -43,4 +44,8 @@ export class Plant extends BaseEntity implements IPlant {
         throw new Error('Plant with no price or swap or donate');
       }
     }
+
+    @ManyToMany(() => Tag)
+    @JoinTable()
+      tags:Tag[];
 }

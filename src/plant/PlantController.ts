@@ -17,10 +17,10 @@ export const PlantController = {
 
   async create(req, res) {
     const {
-      name, description, price, swap, donate, amount,
+      name, description, price, swap, donate, amount, tags,
     } = req.body;
     const plant = {
-      name, description, price, swap, donate, amount,
+      name, description, price, swap, donate, amount, tags,
     };
     res.send(await createPlant(plant));
   },

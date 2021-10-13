@@ -1,3 +1,5 @@
+import { Tag } from 'tag/Tag';
+
 export interface IPlant{
     name:string
     description?:string
@@ -5,6 +7,7 @@ export interface IPlant{
     swap:boolean
     donate:boolean
     amount?:number
+    tags:Tag[]
 }
 
 export type PlantId = number
