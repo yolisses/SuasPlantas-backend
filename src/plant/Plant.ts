@@ -1,5 +1,5 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column, BaseEntity, BeforeUpdate, BeforeInsert, InsertEvent,
+  Entity, PrimaryGeneratedColumn, Column, BaseEntity, BeforeUpdate, BeforeInsert,
 } from 'typeorm';
 import { IPlant } from './PlantInterface';
 
