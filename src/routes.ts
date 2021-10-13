@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { getUsers } from 'user/UserController';
+
+import { routes as plantsRoutes } from 'plants/routes';
 
 export const routes = Router();
 
-routes.get('/users', getUsers);
+routes.get('/plants', plantsRoutes);
