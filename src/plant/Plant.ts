@@ -13,6 +13,7 @@ import {
   UpdateDateColumn,
   Timestamp,
   OneToMany,
+  DeleteDateColumn,
 
 } from 'typeorm';
 import { IPlantInfo } from './PlantInterface';
@@ -63,6 +64,9 @@ export class Plant extends BaseEntity implements IPlantInfo {
 
     @UpdateDateColumn()
       updatedAt:Timestamp;
+
+    @DeleteDateColumn()
+      deletedAt?: Date;
 
     @ManyToMany(() => Tag)
     @JoinTable()
