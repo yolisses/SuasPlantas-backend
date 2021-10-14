@@ -14,7 +14,7 @@ interface Response {
 }
 
 export async function getLocationByIp(ip: string) {
-  const devIp = ip && ip !== '127.0.0.1' ? ip : '181.192.105.255'
+  const devIp = ip && ip !== '127.0.0.1' && ip !== '::ffff:127.0.0.1' ? ip : '181.192.105.255'
   try {
 
     const apiKey = process.env.IP_GEOLOCATION_API_KEY;
