@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { AuthController } from './AuthController';
 
-export const userRoutes = Router();
+export const authRoutes = Router();
 
-userRoutes.post('/', AuthController.signIn);
+authRoutes.post('/sign-in', AuthController.signIn);

@@ -20,8 +20,8 @@ export class User extends BaseEntity {
     @Column({ unique: true })
     email: string
 
-    @Column()
-    description: string
+    @Column({ nullable: true })
+    description?: string
 
     @CreateDateColumn()
     createdAt: Timestamp;

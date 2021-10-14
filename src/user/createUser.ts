@@ -7,5 +7,5 @@ interface IUserCreationDTO {
 }
 
 export async function createUser(user: IUserCreationDTO) {
-    return User.create(user);
+    return User.create(user).save();
 }
