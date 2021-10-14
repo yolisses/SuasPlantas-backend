@@ -18,11 +18,12 @@ export const PlantController = {
 
   async create(req, res) {
     const { images } = req.body;
+    const { userId } = req;
     if (!images) error(400, 'Images not provided');
     if (images.length < 1) error(400, 'Images length smaller than one');
     if (images.length > 10) error(400, 'Images length bigger than 10');
 
-    res.send(await createPlant(req.body));
+    res.send(await createPlant(req.body, userId));
   },
 
   async remove(req, res) {
