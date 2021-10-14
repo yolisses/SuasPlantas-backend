@@ -16,10 +16,9 @@ import {
   DeleteDateColumn,
 
 } from 'typeorm';
-import { IPlantInfo } from './PlantInterface';
 
 @Entity()
-export class Plant extends BaseEntity implements IPlantInfo {
+export class Plant extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
