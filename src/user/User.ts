@@ -33,6 +33,12 @@ export class User extends BaseEntity {
     @Column({ nullable: true })
     whatsappNumber?: number
 
+    @Column()
+    state: string
+
+    @Column()
+    city: string
+
     @OneToMany(() => Plant, (plant) => plant.user)
     plants: Plant[];
 

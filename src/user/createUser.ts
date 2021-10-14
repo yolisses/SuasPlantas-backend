@@ -5,12 +5,13 @@ import { User } from './User';
 interface IUserCreationDTO {
     email: string
     name: string
+    state: string
+    city: string
     location: Point
 }
 
 export async function createUser(user: IUserCreationDTO): Promise<User> {
-    const { name, email, location } = user
-    const newUser = User.create({ name, email, location })
+    const newUser = User.create(user)
     await newUser.save()
 
     return newUser

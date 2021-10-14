@@ -21,12 +21,12 @@ export async function signIn(googleToken: string, ip: string) {
 
     if (!user) {
         const locationData = await getLocationByIp(ip)
-        const { latitude, longitude } = locationData
+        const { latitude, longitude, state, city } = locationData
         const location: Point = {
             type: 'Point',
             coordinates: [latitude, longitude]
         }
-        user = await createUser({ name, email, location })
+        user = await createUser({ name, email, location, state, city })
     }
     return user
 }
