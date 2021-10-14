@@ -1,3 +1,4 @@
+import { Point } from "geojson";
 import { Plant } from "plant/Plant";
 import {
     BaseEntity,
@@ -11,7 +12,7 @@ import {
     UpdateDateColumn
 } from "typeorm";
 
-@Entity()
+@Entity({ name: 'users' })
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number
@@ -34,8 +35,13 @@ export class User extends BaseEntity {
     @OneToMany(() => Plant, (plant) => plant.user)
     plants: Plant[];
 
-    @Column({ type: 'geography', spatialFeatureType: 'Point', srid: 4326 })
-    location: string
+    @Column({
+        nullable: true,
+        srid: 4326,
+        type: 'geography',
+        spatialFeatureType: 'Point',
+    })
+    location: Point;
 
     @CreateDateColumn()
     createdAt: Timestamp;

@@ -4,6 +4,7 @@ import { User } from "user/User";
 import { error } from "utils/error";
 import { verifyGoogleToken } from "./verifyGoogleToken";
 import { TokenPayload } from "google-auth-library";
+import { Point } from "geojson";
 
 
 export async function signIn(googleToken: string) {
@@ -15,7 +16,11 @@ export async function signIn(googleToken: string) {
     }
     const { email, name } = payload
     let user: User = await getUserByEmail(email)
+    const location: Point = {
+        type: 'Point',
+        coordinates: [21, 32]
+    }
     if (!user)
-        user = await createUser({ name, email })
+        user = await createUser({ name, email, location })
     return user
 }
