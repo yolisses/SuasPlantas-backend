@@ -1,4 +1,3 @@
-import * as createError from 'http-errors';
 import { error } from 'utils/error';
 import { Plant } from './Plant';
 
