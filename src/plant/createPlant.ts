@@ -2,21 +2,21 @@ import { PlantImage } from 'image/PlantImage';
 import { Tag } from 'tag/Tag';
 import { Plant } from './Plant';
 
-interface IPlantCreationDTO{
-name:string
-description:string
-amount?:number
-price?:number
-swap:boolean
-donate:boolean
-tags:string[]
-images:string[]
+interface IPlantCreationDTO {
+  name: string
+  description: string
+  amount?: number
+  price?: number
+  swap: boolean
+  donate: boolean
+  tags: string[]
+  images: string[]
 }
 
-export async function createPlant(plant:IPlantCreationDTO) {
-const {name, description, amount, price, swap, donate, tags, images}= plant
+export async function createPlant(plant: IPlantCreationDTO) {
+  const { name, description, amount, price, swap, donate, tags, images } = plant
 
-  const result = Plant.create({name, description, amount, price, swap, donate});
+  const result = Plant.create({ name, description, amount, price, swap, donate });
 
   const imagesInstances: PlantImage[] = await Promise.all(
     plant.images.map((uri) => {
