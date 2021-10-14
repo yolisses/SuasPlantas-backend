@@ -5,9 +5,10 @@ import { error } from "utils/error";
 import { verifyGoogleToken } from "./verifyGoogleToken";
 import { TokenPayload } from "google-auth-library";
 import { Point } from "geojson";
+import { getLocationByIp } from "location/getLocationByIp";
 
 
-export async function signIn(googleToken: string) {
+export async function signIn(googleToken: string, ip: string) {
     let payload: TokenPayload
     try {
         payload = await verifyGoogleToken(googleToken)
@@ -16,11 +17,16 @@ export async function signIn(googleToken: string) {
     }
     const { email, name } = payload
     let user: User = await getUserByEmail(email)
-    const location: Point = {
-        type: 'Point',
-        coordinates: [21, 32]
-    }
-    if (!user)
+
+
+    if (!user) {
+        const locationData = await getLocationByIp(ip)
+        const { latitude, longitude } = locationData
+        const location: Point = {
+            type: 'Point',
+            coordinates: [latitude, longitude]
+        }
         user = await createUser({ name, email, location })
+    }
     return user
 }
