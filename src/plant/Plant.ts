@@ -20,58 +20,58 @@ import { IPlantInfo } from './PlantInterface';
 
 @Entity()
 export class Plant extends BaseEntity implements IPlantInfo {
-    @PrimaryGeneratedColumn({ type: 'int' })
-      id: number;
+  @PrimaryGeneratedColumn({ type: 'int' })
+  id: number;
 
-    @Column()
-      name: string;
+  @Column()
+  name: string;
 
-    @Column({
-      scale: 2,
-      precision: 6,
-      type: 'decimal',
-      unsigned: true,
-      nullable: true,
-    })
-      price: number;
+  @Column({
+    scale: 2,
+    precision: 6,
+    type: 'decimal',
+    unsigned: true,
+    nullable: true,
+  })
+  price: number;
 
-    @Column({
-      type: 'int',
-      unsigned: true,
-      nullable: true,
-    })
-      amount?: number;
+  @Column({
+    type: 'int',
+    unsigned: true,
+    nullable: true,
+  })
+  amount?: number;
 
-    @Column({ default: false })
-      swap: boolean;
+  @Column({ default: false })
+  swap: boolean;
 
-    @Column({ default: false })
-      donate: boolean;
+  @Column({ default: false })
+  donate: boolean;
 
-    @Column({ nullable: true })
-      description?: string;
+  @Column({ nullable: true })
+  description?: string;
 
-    @BeforeUpdate()
-    @BeforeInsert()
-    checkAvailabilities() {
-      if (!this.price && !this.swap && !this.donate) {
-        throw new Error('Plant with no price or swap or donate');
-      }
+  @BeforeUpdate()
+  @BeforeInsert()
+  checkAvailabilities() {
+    if (!this.price && !this.swap && !this.donate) {
+      throw new Error('Plant with no price or swap or donate');
     }
+  }
 
-    @CreateDateColumn()
-      createdAt:Timestamp;
+  @CreateDateColumn()
+  createdAt: Timestamp;
 
-    @UpdateDateColumn()
-      updatedAt:Timestamp;
+  @UpdateDateColumn()
+  updatedAt: Timestamp;
 
-    @DeleteDateColumn()
-      deletedAt?: Date;
+  @DeleteDateColumn()
+  deletedAt?: Date;
 
-    @ManyToMany(() => Tag)
-    @JoinTable()
-      tags:Tag[];
+  @ManyToMany(() => Tag)
+  @JoinTable()
+  tags: Tag[];
 
-    @OneToMany(() => PlantImage, (image) => image.plant)
-      images: PlantImage[];
+  @OneToMany(() => PlantImage, (image) => image.plant)
+  images: PlantImage[];
 }
