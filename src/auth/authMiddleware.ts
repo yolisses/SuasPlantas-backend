@@ -1,28 +1,8 @@
-import jwt from 'jsonwebtoken';
+import { decodeToken } from "./decodeToken";
 
-export function authMiddleware(req, res, next) {
-  const secret = process.env.AUTH_SECRET;
+export async function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).send({ error: 'No token provided' });
-  }
-
-  const parts = authHeader.split(' ');
-  if (parts.length !== 2) {
-    return res.status(401).send({ error: 'Token with invalid number of segments' });
-  }
-
-  const [scheme, token] = parts;
-  if (!/^Bearer$/i.test(scheme)) {
-    return res.status(401).send({ error: 'Malformatted token' });
-  }
-
-  jwt.verify(token, secret, (err, decoded) => {
-    if (err) {
-      return res.status(401).send({ error: err });
-    }
-
-    req.userId = decoded.id;
-    return next();
-  });
+  const decoded = await decodeToken(authHeader)
+  req.userId = decoded.id
+  next()
 }

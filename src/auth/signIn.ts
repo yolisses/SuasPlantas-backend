@@ -11,7 +11,7 @@ export async function signIn(googleToken: string) {
     try {
         payload = await verifyGoogleToken(googleToken)
     } catch (err) {
-        error(400, err);
+        error(400, err.message);
     }
     const { email, name } = payload
     let user: User = await getUserByEmail(email)
