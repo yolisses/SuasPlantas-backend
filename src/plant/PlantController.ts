@@ -16,13 +16,27 @@ export const PlantController = {
   },
 
   async create(req, res) {
-    const {
-      name, description, price, swap, donate, amount, tags,
-    } = req.body;
-    const plant = {
-      name, description, price, swap, donate, amount, tags,
-    };
-    res.send(await createPlant(plant));
+    // const {
+    //   name,
+    //   description,
+    //   price,
+    //   swap,
+    //   donate,
+    //   amount,
+    //   tags,
+    //   imagesCount,
+    // } = req.body;
+    // const plant = {
+    //   name,
+    //   description,
+    //   price,
+    //   swap,
+    //   donate,
+    //   amount,
+    //   tags,
+    //   imagesCount,
+    // };
+    res.send(await createPlant(req.body));
   },
 
   async remove(req, res) {

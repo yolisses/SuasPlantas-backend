@@ -1,3 +1,4 @@
+import { PlantImage } from 'image/PlantImage';
 import { Tag } from 'tag/Tag';
 import {
   Entity,
@@ -11,6 +12,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Timestamp,
+  OneToMany,
 
 } from 'typeorm';
 import { IPlantInfo } from './PlantInterface';
@@ -65,4 +67,7 @@ export class Plant extends BaseEntity implements IPlantInfo {
     @ManyToMany(() => Tag)
     @JoinTable()
       tags:Tag[];
+
+    @OneToMany(() => PlantImage, (image) => image.plant)
+      images: PlantImage[];
 }
