@@ -14,8 +14,10 @@ import {
   Timestamp,
   OneToMany,
   DeleteDateColumn,
+  ManyToOne,
 
 } from 'typeorm';
+import { User } from 'user/User';
 
 @Entity()
 export class Plant extends BaseEntity {
@@ -70,6 +72,9 @@ export class Plant extends BaseEntity {
   @ManyToMany(() => Tag)
   @JoinTable()
   tags: Tag[];
+
+  @ManyToOne(() => User, (user) => user.plants, { nullable: false })
+  user: User;
 
   @OneToMany(() => PlantImage, (image) => image.plant)
   images: PlantImage[];
