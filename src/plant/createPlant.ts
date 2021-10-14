@@ -1,33 +1,34 @@
-import { Tag } from 'tag/Tag';
-import { error } from 'utils/error';
-import { generateImageName } from 'upload/generateImageName';
 import { PlantImage } from 'image/PlantImage';
-import { IPlantInfo } from './PlantInterface';
+import { Tag } from 'tag/Tag';
 import { Plant } from './Plant';
 
-interface ICreatePlantDTO extends IPlantInfo{
-  imagesCount:number
+interface IPlantCreationDTO{
+name:string
+description:string
+amount?:number
+price?:number
+swap:boolean
+donate:boolean
+tags:string[]
+images:string[]
 }
 
-export async function createPlant(plant:ICreatePlantDTO) {
-  const { imagesCount } = plant;
-  if (!imagesCount) error(400, 'Images count not provided');
-  if (imagesCount < 1) error(400, 'Images count smaller than one');
-  if (imagesCount > 10) error(400, 'Images count bigger than 10');
+export async function createPlant(plant:IPlantCreationDTO) {
   const result = await Plant.create(plant);
-  const images = [];
 
-  for (let i = 0; i < imagesCount; i++) {
-    images[i] = generateImageName();
-  }
-  result.images = await Promise.all(
-    images.map((image) => PlantImage.create({ uri: image }).save()),
+  const images: PlantImage[] = await Promise.all(
+    plant.images.map((uri) => {
+      const image = PlantImage.create();
+      image.uri = uri;
+      return image.save();
+    }),
   );
+  result.images = images;
 
   if (plant.tags) {
     const tags: Tag[] = await Tag.findByIds(plant.tags);
     result.tags = tags;
   }
-  await result.save();
-  return result;
+
+  return result.save();
 }

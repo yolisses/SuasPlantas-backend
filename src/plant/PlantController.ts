@@ -1,3 +1,4 @@
+import { error } from 'utils/error';
 import { createPlant } from './createPlant';
 import { getAllPlants } from './getAllPlants';
 import { getPlant } from './getPlant';
@@ -16,26 +17,11 @@ export const PlantController = {
   },
 
   async create(req, res) {
-    // const {
-    //   name,
-    //   description,
-    //   price,
-    //   swap,
-    //   donate,
-    //   amount,
-    //   tags,
-    //   imagesCount,
-    // } = req.body;
-    // const plant = {
-    //   name,
-    //   description,
-    //   price,
-    //   swap,
-    //   donate,
-    //   amount,
-    //   tags,
-    //   imagesCount,
-    // };
+    const { images } = req.body;
+    if (!images) error(400, 'Images not provided');
+    if (images.length < 1) error(400, 'Images length smaller than one');
+    if (images.length > 10) error(400, 'Images length bigger than 10');
+
     res.send(await createPlant(req.body));
   },
 
