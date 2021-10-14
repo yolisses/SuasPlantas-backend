@@ -50,6 +50,6 @@ export class User extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Timestamp;
 
-    @DeleteDateColumn()
+    @DeleteDateColumn({ select: false })
     deletedAt?: Date;
 }
