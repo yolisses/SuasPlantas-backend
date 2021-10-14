@@ -1,9 +1,6 @@
 import { verify } from 'jsonwebtoken';
 import { error } from 'utils/error';
 
-// const secret = process.env.AUTH_SECRET;
-const secret = '42'
-
 export async function decodeToken(token: string): Promise<any | void> {
     if (!token) {
         error(401, 'No token provided');
@@ -19,10 +16,15 @@ export async function decodeToken(token: string): Promise<any | void> {
         error(401, 'Malformatted token');
     }
 
-    verify(tokenValue, secret, (err, decoded) => {
-        if (err) {
-            error(401, '' + err);
-        }
-        return decoded;
-    });
+    try {
+        const secret = process.env.AUTH_SECRET;
+        const decoded = await new Promise((resolve, reject) =>
+            verify(tokenValue, secret, (err, decoded) => {
+                if (err) return reject(err);
+                return resolve(decoded);
+            }));
+        return decoded
+    } catch (err) {
+        error(500, '' + err)
+    }
 }
