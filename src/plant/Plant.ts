@@ -1,3 +1,4 @@
+import { Point } from 'geojson';
 import { PlantImage } from 'image/PlantImage';
 import { Tag } from 'tag/Tag';
 import {
@@ -15,6 +16,7 @@ import {
   OneToMany,
   DeleteDateColumn,
   ManyToOne,
+  Index,
 
 } from 'typeorm';
 import { User } from 'user/User';
@@ -51,6 +53,19 @@ export class Plant extends BaseEntity {
 
   @Column({ nullable: true })
   description?: string;
+
+  @Column()
+  state: string
+
+  @Column()
+  city: string
+
+  @Column({
+    type: 'geography',
+    spatialFeatureType: 'Point',
+  })
+  @Index({ spatial: true })
+  location: Point;
 
   @BeforeUpdate()
   @BeforeInsert()
