@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-// eslint-disable-next-line consistent-return
 export function authMiddleware(req, res, next) {
   const secret = process.env.AUTH_SECRET;
   const authHeader = req.headers.authorization;
