@@ -2,7 +2,6 @@ import { getUser } from "./getUser";
 import { removeUser } from "./removeUser";
 
 export const UserController = {
-
     async getOne(req, res) {
         const { id } = req.params;
         const plant = await getUser(id);
