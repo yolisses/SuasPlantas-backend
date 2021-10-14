@@ -23,6 +23,12 @@ export class User extends BaseEntity {
     @Column({ nullable: true })
     description?: string
 
+    @Column({ nullable: true })
+    instagramUsername?: string
+
+    @Column({ nullable: true })
+    whatsappNumber?: number
+
     @CreateDateColumn()
     createdAt: Timestamp;
 
