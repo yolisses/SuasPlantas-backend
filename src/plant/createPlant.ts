@@ -15,7 +15,7 @@ interface IPlantCreationDTO {
 }
 
 export async function createPlant(plant: IPlantCreationDTO, userId: number) {
-  const { name, description, amount, price, swap, donate, tags, images } = plant
+  const { name, description, amount, price, swap, donate } = plant
 
   const result = Plant.create({ name, description, amount, price, swap, donate });
 
@@ -28,7 +28,11 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   );
   result.images = imagesInstances;
 
-  result.user = await User.findOne(userId)
+  const user = await User.findOneOrFail(userId)
+  result.user = user
+  result.city = user.city
+  result.state = user.state
+  result.location = user.location
 
   if (plant.tags) {
     const tags: Tag[] = await Tag.findByIds(plant.tags);

@@ -39,16 +39,16 @@ export class User extends BaseEntity {
     @Column()
     city: string
 
-    @OneToMany(() => Plant, (plant) => plant.user)
-    plants: Plant[];
-
     @Column({
-        nullable: true,
         type: 'geography',
         spatialFeatureType: 'Point',
     })
     @Index({ spatial: true })
     location: Point;
+
+    @OneToMany(() => Plant, (plant) => plant.user)
+    plants: Plant[];
+
 
     @CreateDateColumn()
     createdAt: Timestamp;
