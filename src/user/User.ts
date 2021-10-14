@@ -6,6 +6,7 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     Entity,
+    Index,
     OneToMany,
     PrimaryGeneratedColumn,
     Timestamp,
@@ -37,10 +38,10 @@ export class User extends BaseEntity {
 
     @Column({
         nullable: true,
-        srid: 4326,
         type: 'geography',
         spatialFeatureType: 'Point',
     })
+    @Index({ spatial: true })
     location: Point;
 
     @CreateDateColumn()
