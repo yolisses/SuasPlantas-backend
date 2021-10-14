@@ -1,9 +1,11 @@
+import { Plant } from "plant/Plant";
 import {
     BaseEntity,
     Column,
     CreateDateColumn,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
     Timestamp,
     UpdateDateColumn
@@ -28,6 +30,9 @@ export class User extends BaseEntity {
 
     @Column({ nullable: true })
     whatsappNumber?: number
+
+    @OneToMany(() => Plant, (plant) => plant.user)
+    plants: Plant[];
 
     @CreateDateColumn()
     createdAt: Timestamp;

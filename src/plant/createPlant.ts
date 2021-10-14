@@ -1,5 +1,6 @@
 import { PlantImage } from 'image/PlantImage';
 import { Tag } from 'tag/Tag';
+import { User } from 'user/User';
 import { Plant } from './Plant';
 
 interface IPlantCreationDTO {
@@ -13,7 +14,7 @@ interface IPlantCreationDTO {
   images: string[]
 }
 
-export async function createPlant(plant: IPlantCreationDTO) {
+export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   const { name, description, amount, price, swap, donate, tags, images } = plant
 
   const result = Plant.create({ name, description, amount, price, swap, donate });
@@ -26,6 +27,8 @@ export async function createPlant(plant: IPlantCreationDTO) {
     }),
   );
   result.images = imagesInstances;
+
+  result.user = await User.findOne(userId)
 
   if (plant.tags) {
     const tags: Tag[] = await Tag.findByIds(plant.tags);
