@@ -14,16 +14,18 @@ images:string[]
 }
 
 export async function createPlant(plant:IPlantCreationDTO) {
-  const result = await Plant.create(plant);
+const {name, description, amount, price, swap, donate, tags, images}= plant
 
-  const images: PlantImage[] = await Promise.all(
+  const result = Plant.create({name, description, amount, price, swap, donate});
+
+  const imagesInstances: PlantImage[] = await Promise.all(
     plant.images.map((uri) => {
       const image = PlantImage.create();
       image.uri = uri;
       return image.save();
     }),
   );
-  result.images = images;
+  result.images = imagesInstances;
 
   if (plant.tags) {
     const tags: Tag[] = await Tag.findByIds(plant.tags);
