@@ -41,6 +41,7 @@
    "scripts": {
       "start": "ts-node -r tsconfig-paths/register src/app.ts",
       "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts",
-      "test": "jest"
+      "test": "jest",
+      "getGoogleToken": "node ./dev/googleSignIn/requiredServer.js"
    }
 }
