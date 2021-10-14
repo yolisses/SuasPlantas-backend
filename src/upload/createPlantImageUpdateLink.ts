@@ -1,4 +1,4 @@
-import { s3 } from '../vendor/s3.js';
+import { s3 } from 'vendor/s3.js';
 
 const bucketName = process.env.AWS_BUCKET_NAME;
 
