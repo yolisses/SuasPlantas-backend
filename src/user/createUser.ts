@@ -5,6 +5,7 @@ import { User } from './User';
 interface IUserCreationDTO {
     email: string
     name: string
+    image: string
     state: string
     city: string
     location: Point

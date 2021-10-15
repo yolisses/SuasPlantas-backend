@@ -15,7 +15,7 @@ export async function signIn(googleToken: string, ip: string) {
     } catch (err) {
         error(400, err.message);
     }
-    const { email, name } = payload
+    const { email, name, picture } = payload
     let user: User = await getUserByEmail(email)
 
 
@@ -26,7 +26,7 @@ export async function signIn(googleToken: string, ip: string) {
             type: 'Point',
             coordinates: [latitude, longitude]
         }
-        user = await createUser({ name, email, location, state, city })
+        user = await createUser({ name, email, location, state, city, image: picture })
     }
     return user
 }

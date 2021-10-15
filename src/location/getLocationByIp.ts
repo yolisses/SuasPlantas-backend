@@ -14,37 +14,40 @@ interface Response {
 }
 
 export async function getLocationByIp(ip: string) {
-  const devIp = ip && ip !== '127.0.0.1' && ip !== '::ffff:127.0.0.1' ? ip : '181.192.105.255'
+  let res
+  const apiKey = process.env.IP_GEOLOCATION_API_KEY;
   try {
-
-    const apiKey = process.env.IP_GEOLOCATION_API_KEY;
-    const res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${devIp}&fields=state_prov,city,latitude,longitude`);
-    console.error(res.data)
-    const {
-      city,
-      town,
-      state,
-      village,
-      latitude,
-      longitude,
-      state_prov,
-      city_district,
-    } = res.data as Response;
-    return {
-      latitude,
-      longitude,
-      city:
-        city
-        || town
-        || village
-        || city_district,
-      state:
-        state
-        || state_prov
-    }
+    res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}&fields=state_prov,city,latitude,longitude`);
   } catch (err) {
     console.error(err)
-    error(500, 'ip location failed: ' + err.message)
+    try {
+      res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${'181.192.105.255'}&fields=state_prov,city,latitude,longitude`);
+    } catch (err) {
+      console.error(err)
+      error(500, 'ip location failed: ' + err.message)
+    }
+  }
+  const {
+    city,
+    town,
+    state,
+    village,
+    latitude,
+    longitude,
+    state_prov,
+    city_district,
+  } = res.data as Response;
+  return {
+    latitude,
+    longitude,
+    city:
+      city
+      || town
+      || village
+      || city_district,
+    state:
+      state
+      || state_prov
   }
   return null;
 }
