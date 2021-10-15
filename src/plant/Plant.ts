@@ -81,7 +81,7 @@ export class Plant extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Timestamp;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({ select: false })
   deletedAt?: Date;
 
   @ManyToMany(() => Tag)
