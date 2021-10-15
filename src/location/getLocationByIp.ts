@@ -1,30 +1,33 @@
-import axios from 'axios';
-import { error } from 'utils/error';
-
+import axios from "axios";
+import { error } from "utils/error";
 
 interface Response {
-  city?: string
-  town?: string
-  village?: string
-  city_district?: string
-  state?: string
-  state_prov?: string
-  latitude: number
-  longitude: number
+  city?: string;
+  town?: string;
+  village?: string;
+  city_district?: string;
+  state?: string;
+  state_prov?: string;
+  latitude: number;
+  longitude: number;
 }
 
 export async function getLocationByIp(ip: string) {
-  let res
+  let res;
   const apiKey = process.env.IP_GEOLOCATION_API_KEY;
   try {
-    res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}&fields=state_prov,city,latitude,longitude`);
+    res = await axios.get(
+      `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}&fields=state_prov,city,latitude,longitude`
+    );
   } catch (err) {
-    console.error(err)
+    console.error(err);
     try {
-      res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${'181.192.105.255'}&fields=state_prov,city,latitude,longitude`);
+      res = await axios.get(
+        `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${"181.192.105.255"}&fields=state_prov,city,latitude,longitude`
+      );
     } catch (err) {
-      console.error(err)
-      error(500, 'ip location failed: ' + err.message)
+      console.error(err);
+      error(500, "ip location failed: " + err.message);
     }
   }
   const {
@@ -40,14 +43,8 @@ export async function getLocationByIp(ip: string) {
   return {
     latitude,
     longitude,
-    city:
-      city
-      || town
-      || village
-      || city_district,
-    state:
-      state
-      || state_prov
-  }
+    city: city || town || village || city_district,
+    state: state || state_prov,
+  };
   return null;
 }
