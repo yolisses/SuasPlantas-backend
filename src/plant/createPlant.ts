@@ -1,6 +1,7 @@
 import { PlantImage } from 'image/PlantImage';
 import { Tag } from 'tag/Tag';
 import { User } from 'user/User';
+import { error } from 'utils/error';
 import { Plant } from './Plant';
 
 interface IPlantCreationDTO {
@@ -15,15 +16,18 @@ interface IPlantCreationDTO {
 }
 
 export async function createPlant(plant: IPlantCreationDTO, userId: number) {
-  const { name, description, amount, price, swap, donate } = plant
+  const { name, description, amount, price, swap, donate, images } = plant
 
   const result = Plant.create({ name, description, amount, price, swap, donate });
 
+  if (!images) error(400, 'Images not provided');
+  if (images.length < 1) error(400, 'Images length smaller than one');
+  if (images.length > 10) error(400, 'Images length bigger than 10');
   const imagesInstances: PlantImage[] = await Promise.all(
-    plant.images.map((uri) => {
+    plant.images.map(async (uri) => {
       const image = PlantImage.create();
       image.uri = uri;
-      return image.save();
+      return await image.save();
     }),
   );
   result.images = imagesInstances;
@@ -39,5 +43,5 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
     result.tags = tags;
   }
 
-  return result.save();
+  return await result.save();
 }
