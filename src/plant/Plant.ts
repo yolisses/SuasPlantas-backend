@@ -17,6 +17,7 @@ import {
   DeleteDateColumn,
   ManyToOne,
   Index,
+  JoinColumn,
 
 } from 'typeorm';
 import { User } from 'user/User';
