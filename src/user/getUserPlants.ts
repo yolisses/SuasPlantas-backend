@@ -1,8 +1,11 @@
 import { Plant } from "plant/Plant";
 
 export async function getUserPlants(id: number) {
-    return Plant.createQueryBuilder('plant')
-        .where('plant.userId = :id', { id })
-        .orderBy('plant.createdAt', 'DESC')
-        .getMany()
+    return Plant.find({
+        where: { user: id },
+        order: { createdAt: -1 },
+        relations: ['images'],
+        loadEagerRelations: true,
+        loadRelationIds: true
+    })
 }
