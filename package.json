@@ -45,6 +45,6 @@
       "start": "ts-node -r tsconfig-paths/register src/app.ts",
       "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts",
       "test": "jest",
-      "getGoogleToken": "node ./dev/googleSignIn/requiredServer.js"
+      "devServer": "nodemon ./dev/devServer.js"
    }
 }

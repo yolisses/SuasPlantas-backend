@@ -13,10 +13,12 @@ import {
     UpdateDateColumn
 } from "typeorm";
 
+export type UserId = number
+
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id: number
+    id: UserId
 
     @Column()
     name: string

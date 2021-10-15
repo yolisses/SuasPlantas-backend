@@ -6,5 +6,5 @@ export const awsConfig = {
   region,
   accessKeyId,
   secretAccessKey,
-  signatureVersion: 'v4',
+  signatureVersion: "v4",
 };
