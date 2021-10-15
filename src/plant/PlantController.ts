@@ -1,5 +1,3 @@
-import { getPlantImageUploadLink } from "upload/getPlantImageUploadLink copy";
-import { error } from "utils/error";
 import { createPlant } from "./createPlant";
 import { getAllPlants } from "./getAllPlants";
 import { getPlant } from "./getPlant";
