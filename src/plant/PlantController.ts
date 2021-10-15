@@ -1,6 +1,6 @@
 import { createPlant } from "./createPlant";
 import { getAllPlants } from "./getAllPlants";
-import { getPlant } from "./getPlant";
+import { findPlant } from "./findPlant";
 import { createPlantImageUpdateLink } from "./getPlantImageUploadLink";
 import { getPlants } from "./getPlants";
 import { removePlant } from "./removePlant";
@@ -19,7 +19,7 @@ export const PlantController = {
 
   async getOne(req, res) {
     const { id } = req.params;
-    const plant = await getPlant(id);
+    const plant = await findPlant(id);
     res.send(plant);
   },
 
