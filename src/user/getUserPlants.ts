@@ -1,6 +1,6 @@
 import { Plant } from "plant/Plant";
 
-const take = 2;
+const take = 3;
 export async function getUserPlants(id: number, page: number) {
   const skip = page * take;
 
