@@ -1,6 +1,6 @@
-import { Point } from 'geojson';
-import { PlantImage } from 'image/PlantImage';
-import { Tag } from 'tag/Tag';
+import { Point } from "geojson";
+import { PlantImage } from "image/PlantImage";
+import { Tag } from "tag/Tag";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -18,13 +18,12 @@ import {
   ManyToOne,
   Index,
   JoinColumn,
-
-} from 'typeorm';
-import { User } from 'user/User';
+} from "typeorm";
+import { User } from "user/User";
 
 @Entity()
 export class Plant extends BaseEntity {
-  @PrimaryGeneratedColumn({ type: 'int' })
+  @PrimaryGeneratedColumn({ type: "int" })
   id: number;
 
   @Column()
@@ -33,14 +32,14 @@ export class Plant extends BaseEntity {
   @Column({
     scale: 2,
     precision: 6,
-    type: 'decimal',
+    type: "decimal",
     unsigned: true,
     nullable: true,
   })
   price: number;
 
   @Column({
-    type: 'int',
+    type: "int",
     unsigned: true,
     nullable: true,
   })
@@ -56,14 +55,17 @@ export class Plant extends BaseEntity {
   description?: string;
 
   @Column()
-  state: string
+  state: string;
 
   @Column()
-  city: string
+  city: string;
+
+  @Column()
+  card: string;
 
   @Column({
-    type: 'geography',
-    spatialFeatureType: 'Point',
+    type: "geography",
+    spatialFeatureType: "Point",
   })
   @Index({ spatial: true })
   location: Point;
@@ -72,7 +74,7 @@ export class Plant extends BaseEntity {
   @BeforeInsert()
   checkAvailabilities() {
     if (!this.price && !this.swap && !this.donate) {
-      throw new Error('Plant with no price or swap or donate');
+      throw new Error("Plant with no price or swap or donate");
     }
   }
 

@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk';
-import { awsConfig } from './awsConfig.js';
+import { Lambda } from "aws-sdk";
+import { awsConfig } from "./awsConfig";
 
-export const lambda = new AWS.Lambda(awsConfig);
+export const lambda = new Lambda(awsConfig);
