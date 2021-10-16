@@ -11,6 +11,7 @@ export async function createPlantImageUpdateLink(userId: UserId) {
     Key: key,
     Expires: oneHour,
     Bucket: bucketName,
+    ContentType: "image/webp",
     Metadata: { userId: "" + userId },
   };
 
