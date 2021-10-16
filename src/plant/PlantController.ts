@@ -4,11 +4,23 @@ import { findPlant } from "./findPlant";
 import { createPlantImageUpdateLink } from "./getPlantImageUploadLink";
 import { getPlants } from "./getPlants";
 import { removePlant } from "./removePlant";
+import { error } from "utils/error";
+
+function optionalBoolean(value) {
+  if (value === "true") return true;
+  if (value === "false") return false;
+  return undefined;
+}
 
 export const PlantController = {
   async get(req, res) {
-    const { page } = req.query;
-    const plants = await getPlants({ page });
+    const { sell, swap, page } = req.query;
+    const plants = await getPlants({
+      sell: optionalBoolean(sell),
+      swap: optionalBoolean(swap),
+      page: Number(page),
+    });
+
     res.send(plants);
   },
 

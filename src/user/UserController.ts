@@ -22,7 +22,8 @@ export const UserController = {
 
   async getPlants(req, res) {
     const { id } = req.params;
-    const plants = await getUserPlants(id);
+    const { page } = req.query;
+    const plants = await getUserPlants(id, Number(page));
     return res.send(plants);
   },
 
