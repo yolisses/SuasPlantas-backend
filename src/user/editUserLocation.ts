@@ -8,21 +8,25 @@ interface EditUserLocationProps {
   userId: UserId;
   location: ILocation;
 }
+interface EditUserLocationResult {
+  user: User;
+  locationFound: boolean;
+}
 
 export async function editUserLocation({
   userId,
   location,
-}: EditUserLocationProps) {
+}: EditUserLocationProps): Promise<EditUserLocationResult> {
   const user = await User.findOne(userId);
-  if (!user) error(404, "User not found");
-  user.location = getPoint(location);
+  let locationFound = true;
   try {
     const { city, state } = await getLocationByCoordinates(location);
     user.city = city;
     user.state = state;
+    user.location = getPoint(location);
     user.save();
-    return user;
   } catch (err) {
-    error(400, "" + err);
+    locationFound = false;
   }
+  return { user, locationFound };
 }

@@ -41,7 +41,7 @@ export const UserController = {
     if (longitude === undefined || longitude === null)
       error(400, "Longitude not provided");
     const location = { latitude, longitude };
-    const user = await editUserLocation({ userId, location });
-    return res.send(user);
+    const result = await editUserLocation({ userId, location });
+    return res.send(result);
   },
 };
