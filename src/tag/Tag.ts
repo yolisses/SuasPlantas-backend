@@ -1,10 +1,7 @@
-import {
-  Entity, BaseEntity, PrimaryColumn,
-} from 'typeorm';
-import { ITag } from './TagInterface';
+import { Entity, BaseEntity, PrimaryColumn } from "typeorm";
 
 @Entity()
-export class Tag extends BaseEntity implements ITag {
-    @PrimaryColumn()
-      name: string;
+export class Tag extends BaseEntity {
+  @PrimaryColumn()
+  name: string;
 }
