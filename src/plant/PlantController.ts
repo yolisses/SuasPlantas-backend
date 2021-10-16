@@ -1,10 +1,11 @@
 import { createPlant } from "./createPlant";
 import { getAllPlants } from "./getAllPlants";
 import { findPlant } from "./findPlant";
-import { createPlantImageUpdateLink } from "./getPlantImageUploadLink";
+import { getPlantImageUpdateLink } from "./getPlantImageUploadLink";
 import { getPlants } from "./getPlants";
 import { removePlant } from "./removePlant";
-import { error } from "utils/error";
+import * as uuid from "uuid-random";
+import { getRemoteUri } from "./getRemoteUri";
 
 function optionalBoolean(value) {
   if (value === "true") return true;
@@ -48,7 +49,9 @@ export const PlantController = {
 
   async getImageUploadLink(req, res) {
     const { userId } = req;
-    const link = await createPlantImageUpdateLink(userId);
-    res.send(link);
+    const key = `uploads/${uuid()}.webp`;
+    const sendLink = await getPlantImageUpdateLink(key, userId);
+    const remoteUri = getRemoteUri(key);
+    res.send({ sendLink, remoteUri });
   },
 };
