@@ -1,7 +1,9 @@
 import { PlantImage } from "image/PlantImage";
 import { Tag } from "tag/Tag";
+import { createCard } from "upload/createCard";
 import { User } from "user/User";
 import { error } from "utils/error";
+import { getUriByKey } from "./getUriByKey";
 import { Plant } from "./Plant";
 
 interface IPlantCreationDTO {
@@ -31,13 +33,17 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   if (images.length < 1) error(400, "Images length smaller than one");
   if (images.length > 10) error(400, "Images length bigger than 10");
   const imagesInstances: PlantImage[] = await Promise.all(
-    plant.images.map(async (uri) => {
+    plant.images.map(async (key) => {
       const image = PlantImage.create();
-      image.uri = uri;
+      image.uri = getUriByKey(key.replace("uploads", "compressed"));
       return await image.save();
     })
   );
   result.images = imagesInstances;
+
+  await createCard(images[0]);
+  const card = getUriByKey(images[0].replace("uploads", "cards"));
+  result.card = card;
 
   const user = await User.findOneOrFail(userId);
   result.user = user;

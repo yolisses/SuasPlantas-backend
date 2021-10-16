@@ -51,7 +51,6 @@ export const PlantController = {
     const { userId } = req;
     const key = `uploads/${uuid()}.webp`;
     const sendLink = await getPlantImageUpdateLink(key, userId);
-    const remoteUri = getRemoteUri(key);
-    res.send({ sendLink, remoteUri });
+    res.send({ sendLink, key });
   },
 };
