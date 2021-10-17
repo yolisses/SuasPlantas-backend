@@ -15,11 +15,12 @@ function optionalBoolean(value) {
 
 export const PlantController = {
   async get(req, res) {
-    const { sell, swap, page } = req.query;
+    const { sell, swap, donate, page } = req.query;
     const plants = await getPlants({
       sell: optionalBoolean(sell),
       swap: optionalBoolean(swap),
-      page: Number(page),
+      donate: optionalBoolean(donate),
+      page: Number(page) || 0,
     });
 
     res.send(plants);

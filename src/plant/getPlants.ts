@@ -1,26 +1,30 @@
-import { FindConditions } from "typeorm";
+import { PlantImage } from "image/PlantImage";
 import { Plant } from "./Plant";
 
 interface GetPlantsParams {
   page: number;
   sell?: boolean;
   swap?: boolean;
+  donate?: boolean;
 }
-const take = 2;
-export async function getPlants({ page, sell, swap }: GetPlantsParams) {
+const take = 1000;
+export async function getPlants({ page, swap, donate }: GetPlantsParams) {
+  const query = Plant.createQueryBuilder("plant");
+
+  if (swap || donate) {
+    query.where({ swap, donate });
+    if (swap) query.orWhere({ swap });
+    if (donate) query.orWhere({ donate });
+  }
+
   const skip = page * take;
+  query
+    .skip(skip)
+    .take(take)
+    .addSelect("user")
+    .orderBy("plant.createdAt", "DESC");
 
-  const where: FindConditions<Plant> = {};
-
-  const data = await Plant.findAndCount({
-    take,
-    skip,
-    where,
-    order: { createdAt: -1 },
-    relations: ["images"],
-    loadEagerRelations: true,
-    loadRelationIds: true,
-  });
+  const data = await query.getManyAndCount();
 
   const totalPages = Math.ceil(data[1] / take);
   const nextPage = page < totalPages ? page + 1 : null;
