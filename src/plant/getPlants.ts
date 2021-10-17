@@ -37,7 +37,9 @@ export async function getPlants({
 
   if (text) {
     query.where(
-      "to_tsvector('portuguese', plant.name) || to_tsvector('portuguese', plant.description) @@ to_tsquery('portuguese', :text)",
+      "to_tsvector('portuguese', plant.name) ||" +
+        " to_tsvector('portuguese', plant.description)" +
+        " @@ to_tsquery('portuguese', :text)",
       { text }
     );
   }
