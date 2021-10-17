@@ -1,3 +1,4 @@
+import { IsNull, Not } from "typeorm";
 import { UserId } from "user/User";
 import { Plant } from "./Plant";
 
@@ -12,6 +13,7 @@ interface GetPlantsParams {
 }
 export async function getPlants({
   tags,
+  sell,
   swap,
   donate,
   userId,
@@ -20,10 +22,11 @@ export async function getPlants({
 }: GetPlantsParams) {
   const query = Plant.createQueryBuilder("plant");
 
-  if (swap || donate) {
-    query.where({ swap, donate });
+  if (swap || donate || sell) {
+    query.where({ swap, donate, price: null });
     if (swap) query.orWhere({ swap });
     if (donate) query.orWhere({ donate });
+    if (sell) query.orWhere({ price: Not(IsNull()) });
   }
 
   if (userId) {
