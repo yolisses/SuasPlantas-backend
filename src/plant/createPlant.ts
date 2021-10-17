@@ -1,3 +1,4 @@
+import { validTags } from "data/validTags";
 import { PlantImage } from "image/PlantImage";
 import { Tag } from "tag/Tag";
 import { createCard } from "upload/createCard";
@@ -52,7 +53,8 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   result.location = user.location;
 
   if (plant.tags) {
-    const tags: Tag[] = await Tag.findByIds(plant.tags);
+    const validatedTags = plant.tags.filter((tag) => validTags.has(tag));
+    const tags: Tag[] = await Tag.findByIds(validatedTags);
     result.tags = tags;
   }
 
