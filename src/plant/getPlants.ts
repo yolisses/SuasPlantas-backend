@@ -7,6 +7,7 @@ interface GetPlantsParams {
   take?: number;
   tags?: string[];
   sell?: boolean;
+  text?: string;
   swap?: boolean;
   userId?: UserId;
   donate?: boolean;
@@ -15,6 +16,7 @@ export async function getPlants({
   tags,
   sell,
   swap,
+  text,
   donate,
   userId,
   page = 0,
@@ -31,6 +33,13 @@ export async function getPlants({
 
   if (userId) {
     query.where({ userId });
+  }
+
+  if (text) {
+    query.where(
+      "to_tsvector('portuguese', plant.name) || to_tsvector('portuguese', plant.description) @@ to_tsquery('portuguese', :text)",
+      { text }
+    );
   }
 
   if (tags && tags.length) {
