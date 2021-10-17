@@ -19,7 +19,7 @@ import {
   Index,
   JoinColumn,
 } from "typeorm";
-import { User } from "user/User";
+import { User, UserId } from "user/User";
 
 @Entity()
 export class Plant extends BaseEntity {
@@ -93,6 +93,9 @@ export class Plant extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.plants, { nullable: false })
   user: User;
+
+  @Column()
+  userId: UserId;
 
   @OneToMany(() => PlantImage, (image) => image.plant)
   images: PlantImage[];
