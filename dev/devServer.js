@@ -29,4 +29,4 @@ app.get('/s3-send-image' ,(req, res)=>{
 })
 
 app.listen(port);
-console.log('Server started at http://192.168.10.23:' + port);
+console.log('Server started at http://localhost:' + port);
