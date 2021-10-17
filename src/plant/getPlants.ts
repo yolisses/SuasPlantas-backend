@@ -21,6 +21,8 @@ export async function getPlants({ page, swap, donate }: GetPlantsParams) {
   query
     .skip(skip)
     .take(take)
+    .loadRelationIdAndMap("images", "plant.images")
+    .loadRelationIdAndMap("tags", "plant.tags")
     .addSelect("user")
     .orderBy("plant.createdAt", "DESC");
 
