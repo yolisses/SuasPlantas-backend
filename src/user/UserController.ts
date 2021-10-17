@@ -1,8 +1,8 @@
+import { getPlants } from "plant/getPlants";
 import { error } from "utils/error";
 import { editUser } from "./editUser";
 import { editUserLocation } from "./editUserLocation";
 import { getUser } from "./getUser";
-import { getUserPlants } from "./getUserPlants";
 import { removeUser } from "./removeUser";
 
 export const UserController = {
@@ -21,9 +21,13 @@ export const UserController = {
   },
 
   async getPlants(req, res) {
-    const { id } = req.params;
+    const { userId } = req.params;
     const { page } = req.query;
-    const plants = await getUserPlants(id, Number(page));
+    const plants = await getPlants({
+      userId,
+      take: 3,
+      page: Number(page) || 0,
+    });
     return res.send(plants);
   },
 

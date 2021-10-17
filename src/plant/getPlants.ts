@@ -1,20 +1,42 @@
-import { PlantImage } from "image/PlantImage";
+import { UserId } from "user/User";
 import { Plant } from "./Plant";
 
 interface GetPlantsParams {
   page: number;
+  take?: number;
+  tags?: string[];
   sell?: boolean;
   swap?: boolean;
+  userId?: UserId;
   donate?: boolean;
 }
-const take = 1000;
-export async function getPlants({ page, swap, donate }: GetPlantsParams) {
+export async function getPlants({
+  tags,
+  swap,
+  donate,
+  userId,
+  page = 0,
+  take = 20,
+}: GetPlantsParams) {
   const query = Plant.createQueryBuilder("plant");
 
   if (swap || donate) {
     query.where({ swap, donate });
     if (swap) query.orWhere({ swap });
     if (donate) query.orWhere({ donate });
+  }
+
+  if (userId) {
+    query.where({ userId });
+  }
+
+  if (tags && tags.length) {
+    query
+      .leftJoin("plant.tags", "tag")
+      .leftJoinAndSelect("plant.tags", "tagSelect")
+      .where("tag.name LIKE ANY (:searchQuery)", {
+        searchQuery: tags,
+      });
   }
 
   const skip = page * take;
