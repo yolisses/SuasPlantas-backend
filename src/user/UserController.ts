@@ -13,10 +13,8 @@ export const UserController = {
   },
 
   async remove(req, res) {
-    const { id } = req.params;
     const { userId } = req;
-    if (userId !== id) error(403, "Unauthorized user trying to delete");
-    await removeUser(id);
+    await removeUser(userId);
     return res.send();
   },
 
