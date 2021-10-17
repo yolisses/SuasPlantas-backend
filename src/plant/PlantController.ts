@@ -5,7 +5,6 @@ import { getPlantImageUpdateLink } from "./getPlantImageUploadLink";
 import { getPlants } from "./getPlants";
 import { removePlant } from "./removePlant";
 import * as uuid from "uuid-random";
-import { getRemoteUri } from "./getRemoteUri";
 
 function optionalBoolean(value) {
   if (value === "true") return true;
