@@ -5,6 +5,7 @@ import { getPlantImageUpdateLink } from "./getPlantImageUploadLink";
 import { getPlants } from "./getPlants";
 import { removePlant } from "./removePlant";
 import * as uuid from "uuid-random";
+import { editPlant } from "./editPlant";
 
 function optionalBoolean(value) {
   if (value === "true") return true;
@@ -40,6 +41,11 @@ export const PlantController = {
   async create(req, res) {
     const { userId } = req;
     res.send(await createPlant(req.body, userId));
+  },
+
+  async edit(req, res) {
+    const { userId } = req;
+    res.send(await editPlant(req.body, userId));
   },
 
   async remove(req, res) {
