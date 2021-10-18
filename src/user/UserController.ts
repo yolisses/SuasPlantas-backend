@@ -23,7 +23,7 @@ export const UserController = {
     const { page } = req.query;
     const plants = await getPlants({
       userId,
-      take: 3,
+      take: 21,
       page: Number(page) || 0,
     });
     return res.send(plants);
