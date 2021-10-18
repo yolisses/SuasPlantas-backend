@@ -14,6 +14,6 @@ plantsRoutes.get(
 // Should be after the more specifics
 plantsRoutes.get("/:id", PlantController.getOne);
 
-plantsRoutes.delete("/:id", PlantController.remove);
-plantsRoutes.patch("/:plantId", authMiddleware, PlantController.edit);
 plantsRoutes.post("/", authMiddleware, PlantController.create);
+plantsRoutes.delete("/:id", authMiddleware, PlantController.remove);
+plantsRoutes.patch("/:plantId", authMiddleware, PlantController.edit);
