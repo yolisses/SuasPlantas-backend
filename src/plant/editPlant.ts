@@ -1,5 +1,5 @@
 import { Tag } from "tag/Tag";
-import { Plant } from "./Plant";
+import { Plant, PlantId } from "./Plant";
 import { User } from "user/User";
 import { validTags } from "data/validTags";
 
@@ -10,13 +10,14 @@ interface IPlantCreationDTO {
   price?: number;
   amount?: number;
   donate: boolean;
+  plantId: PlantId;
   description: string;
 }
 
 export async function editPlant(plant: IPlantCreationDTO, userId: number) {
   const { name, description, amount, price, swap, donate } = plant;
 
-  const result = Plant.create({
+  const result = Plant.find({
     name,
     description,
     amount,

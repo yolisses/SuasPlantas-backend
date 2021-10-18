@@ -17,14 +17,15 @@ import {
   DeleteDateColumn,
   ManyToOne,
   Index,
-  JoinColumn,
 } from "typeorm";
 import { User, UserId } from "user/User";
+
+export type PlantId = number;
 
 @Entity()
 export class Plant extends BaseEntity {
   @PrimaryGeneratedColumn({ type: "int" })
-  id: number;
+  id: PlantId;
 
   @Column()
   name: string;
