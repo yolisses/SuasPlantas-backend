@@ -97,6 +97,6 @@ export class Plant extends BaseEntity {
   @Column()
   userId: UserId;
 
-  @OneToMany(() => PlantImage, (image) => image.plant)
+  @OneToMany(() => PlantImage, (image) => image.plant, { onDelete: "CASCADE" })
   images: PlantImage[];
 }
