@@ -10,21 +10,26 @@ interface IPlantCreationDTO {
   price?: number;
   amount?: number;
   donate: boolean;
-  plantId: PlantId;
   description: string;
 }
 
-export async function editPlant(plant: IPlantCreationDTO, userId: number) {
+export async function editPlant(
+  plantId: PlantId,
+  plant: IPlantCreationDTO,
+  userId: number
+) {
   const { name, description, amount, price, swap, donate } = plant;
 
-  const result = Plant.find({
-    name,
-    description,
-    amount,
-    price,
-    swap,
-    donate,
-  });
+  const result = await Plant.findOneOrFail(plantId);
+
+  // const result = Plant.find({
+  //   name,
+  //   description,
+  //   amount,
+  //   price,
+  //   swap,
+  //   donate,
+  // });
 
   const user = await User.findOneOrFail(userId);
   result.user = user;

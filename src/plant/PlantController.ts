@@ -45,7 +45,8 @@ export const PlantController = {
 
   async edit(req, res) {
     const { userId } = req;
-    res.send(await editPlant(req.body, userId));
+    const { plantId } = req.params;
+    res.send(await editPlant(plantId, req.body, userId));
   },
 
   async remove(req, res) {
