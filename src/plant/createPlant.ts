@@ -23,11 +23,11 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
 
   const result = Plant.create({
     name,
-    description,
-    amount,
-    price,
     swap,
+    price,
+    amount,
     donate,
+    description,
   });
 
   if (!images) error(400, "Images not provided");
