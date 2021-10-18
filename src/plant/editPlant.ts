@@ -2,6 +2,7 @@ import { Tag } from "tag/Tag";
 import { Plant, PlantId } from "./Plant";
 import { User } from "user/User";
 import { validTags } from "data/validTags";
+import { error } from "utils/error";
 
 interface IPlantCreationDTO {
   name: string;
@@ -14,13 +15,15 @@ interface IPlantCreationDTO {
 }
 
 export async function editPlant(
+  userId: number,
   plantId: PlantId,
-  plant: IPlantCreationDTO,
-  userId: number
+  plant: IPlantCreationDTO
 ) {
   const { name, description, amount, price, swap, donate } = plant;
 
   const result = await Plant.findOneOrFail(plantId);
+
+  if (result.userId !== userId) error(403, "Plant edit by unauthorized user");
 
   // const result = Plant.find({
   //   name,
