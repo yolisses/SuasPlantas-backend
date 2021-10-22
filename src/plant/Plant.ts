@@ -1,5 +1,6 @@
 import { Point } from "geojson";
 import { PlantImage } from "image/PlantImage";
+import { Like } from "like/Like";
 import { Tag } from "tag/Tag";
 import {
   Entity,
@@ -94,6 +95,9 @@ export class Plant extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.plants, { nullable: false })
   user: User;
+
+  @OneToMany(() => Like, (like) => like.plant)
+  likes: Like[];
 
   @Column()
   userId: UserId;

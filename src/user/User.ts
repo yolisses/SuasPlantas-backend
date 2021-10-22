@@ -1,4 +1,5 @@
 import { Point } from "geojson";
+import { Like } from "like/Like";
 import { Plant } from "plant/Plant";
 import {
   BaseEntity,
@@ -53,6 +54,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Plant, (plant) => plant.user)
   plants: Plant[];
+
+  @OneToMany(() => Like, (like) => like.user)
+  likes: Like[];
 
   @CreateDateColumn()
   createdAt: Timestamp;
