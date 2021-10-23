@@ -1,20 +1,19 @@
 {
-   "compilerOptions": {
-      "lib": [
-         "es5",
-         "es6"
-      ],
-      "target": "es2017",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "outDir": "./build",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "sourceMap": true,
-      "baseUrl": "./src",
-      "typeRoots": [
-        "./src/@types",
-        "node_modules/@types"
-      ],
-   }
+  "compilerOptions": {
+    // Garante que arquivos .d.ts são criados pelo tsc, mas não arquivos .js
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    // Garante que o Babel pode transpilar de maneira segura os arquivos no projeto TypeScript
+    "isolatedModules": true,
+    "lib": ["es5", "es6"],
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "baseUrl": "./src",
+    "typeRoots": ["./src/@types", "node_modules/@types"]
+  }
 }

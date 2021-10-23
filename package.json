@@ -5,9 +5,18 @@
    "type": "module",
    "description": "Awesome project developed with TypeORM.",
    "devDependencies": {
+      "@babel/cli": "^7.15.7",
+      "@babel/core": "^7.15.8",
+      "@babel/node": "^7.15.8",
+      "@babel/plugin-proposal-class-properties": "^7.14.5",
+      "@babel/plugin-proposal-decorators": "^7.15.8",
+      "@babel/preset-env": "^7.15.8",
+      "@babel/preset-typescript": "^7.15.0",
       "@types/node": "^16.10.4",
       "@typescript-eslint/eslint-plugin": "^5.0.0",
       "@typescript-eslint/parser": "^5.0.0",
+      "babel-plugin-transform-typescript-metadata": "^0.3.2",
+      "babel-plugin-tsconfig-paths": "^1.0.2",
       "eslint": "^8.0.0",
       "eslint-config-airbnb-base": "^14.2.1",
       "eslint-import-resolver-typescript": "^2.5.0",
@@ -46,6 +55,7 @@
       "start": "ts-node -r tsconfig-paths/register src/app.ts",
       "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts",
       "test": "jest",
+      "build": "babel src --extensions \".js,.ts,.mjs,.cjs\" --out-dir dist --copy-files ",
       "devServer": "nodemon ./dev/devServer.js"
    }
 }
