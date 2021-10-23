@@ -1,4 +1,6 @@
-import { sign } from 'jsonwebtoken';
+// Ridiculously necessary
+import * as jwt from "jsonwebtoken";
+const { sign } = jwt;
 
 export function generateToken(params = {}) {
   const secret = process.env.AUTH_SECRET;
