@@ -1,6 +1,6 @@
-import { IsNull, Not } from "typeorm";
-import { UserId } from "user/User";
-import { Plant } from "./Plant";
+import { IsNull, Not } from 'typeorm';
+import { UserId } from 'user/User';
+import { Plant } from './Plant';
 
 interface GetPlantsParams {
   page: number;
@@ -22,7 +22,7 @@ export async function getPlants({
   page = 0,
   take = 20,
 }: GetPlantsParams) {
-  const query = Plant.createQueryBuilder("plant");
+  const query = Plant.createQueryBuilder('plant');
 
   if (swap || donate || sell) {
     query.where({ swap, donate, price: null });
@@ -37,18 +37,18 @@ export async function getPlants({
 
   if (text) {
     query.where(
-      "to_tsvector('portuguese', plant.name) ||" +
-        " to_tsvector('portuguese', plant.description)" +
-        " @@ to_tsquery('portuguese', :text)",
-      { text }
+      "to_tsvector('portuguese', plant.name) ||"
+        + " to_tsvector('portuguese', plant.description)"
+        + " @@ to_tsquery('portuguese', :text)",
+      { text },
     );
   }
 
   if (tags && tags.length) {
     query
-      .leftJoin("plant.tags", "tag")
-      .leftJoinAndSelect("plant.tags", "tagSelect")
-      .where("tag.name LIKE ANY (:searchQuery)", {
+      .leftJoin('plant.tags', 'tag')
+      .leftJoinAndSelect('plant.tags', 'tagSelect')
+      .where('tag.name LIKE ANY (:searchQuery)', {
         searchQuery: tags,
       });
   }
@@ -57,10 +57,10 @@ export async function getPlants({
   query
     .skip(skip)
     .take(take)
-    .loadRelationIdAndMap("images", "plant.images")
-    .loadRelationIdAndMap("tags", "plant.tags")
-    .addSelect("user")
-    .orderBy("plant.createdAt", "DESC");
+    .loadRelationIdAndMap('images', 'plant.images')
+    .loadRelationIdAndMap('tags', 'plant.tags')
+    .addSelect('user')
+    .orderBy('plant.createdAt', 'DESC');
 
   const data = await query.getManyAndCount();
 

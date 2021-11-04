@@ -1,6 +1,6 @@
-import { Point } from "geojson";
-import { Like } from "like/Like";
-import { Plant } from "plant/Plant";
+import { Point } from 'geojson';
+import { Like } from 'like/Like';
+import { Plant } from 'plant/Plant';
 import {
   BaseEntity,
   Column,
@@ -12,58 +12,58 @@ import {
   PrimaryGeneratedColumn,
   Timestamp,
   UpdateDateColumn,
-} from "typeorm";
+} from 'typeorm';
 
 export type UserId = number;
 
-@Entity({ name: "users" })
+@Entity({ name: 'users' })
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: UserId;
+    id: UserId;
 
   @Column()
-  name: string;
+    name: string;
 
   @Column({ unique: true })
-  email: string;
+    email: string;
 
   @Column()
-  image: string;
+    image: string;
 
   @Column({ nullable: true })
-  description?: string;
+    description?: string;
 
   @Column({ nullable: true })
-  instagramUsername?: string;
+    instagramUsername?: string;
 
   @Column({ nullable: true })
-  whatsappNumber?: number;
+    whatsappNumber?: number;
 
   @Column()
-  state: string;
+    state: string;
 
   @Column()
-  city: string;
+    city: string;
 
   @Column({
-    type: "geography",
-    spatialFeatureType: "Point",
+    type: 'geography',
+    spatialFeatureType: 'Point',
   })
   @Index({ spatial: true })
-  location: Point;
+    location: Point;
 
   @OneToMany(() => Plant, (plant) => plant.user)
-  plants: Plant[];
+    plants: Plant[];
 
   @OneToMany(() => Like, (like) => like.user)
-  likes: Like[];
+    likes: Like[];
 
   @CreateDateColumn()
-  createdAt: Timestamp;
+    createdAt: Timestamp;
 
   @UpdateDateColumn()
-  updatedAt: Timestamp;
+    updatedAt: Timestamp;
 
   @DeleteDateColumn({ select: false })
-  deletedAt?: Date;
+    deletedAt?: Date;
 }
