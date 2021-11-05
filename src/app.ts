@@ -1,10 +1,10 @@
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 dotenv.config();
 import "reflect-metadata";
 import "express-async-errors";
 import { createConnection } from "typeorm";
-import * as express from "express";
-import { errorMiddleware } from "errorMiddleware";
+import express from "express";
+import { errorMiddleware } from "./errorMiddleware";
 import { routes } from "./routes";
 
 createConnection()

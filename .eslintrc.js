@@ -16,6 +16,7 @@ module.exports = {
     'jest',
     '@typescript-eslint',
   ],
+  ignorePatterns: ['**/dist/*'],
   rules: {
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',

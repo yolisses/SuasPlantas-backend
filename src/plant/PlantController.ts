@@ -4,7 +4,7 @@ import { findPlant } from "./findPlant";
 import { getPlantImageUpdateLink } from "./getPlantImageUploadLink";
 import { getPlants } from "./getPlants";
 import { removePlant } from "./removePlant";
-import * as uuid from "uuid-random";
+import uuid from "uuid-random";
 import { editPlant } from "./editPlant";
 
 function optionalBoolean(value) {

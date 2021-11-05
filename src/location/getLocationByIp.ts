@@ -27,7 +27,7 @@ export async function getLocationByIp(ip: string) {
       );
     } catch (err) {
       console.error(err);
-      error(500, "ip location failed: " + err.message);
+      error(500, `ip location failed: ${err.message}`);
     }
   }
   const {

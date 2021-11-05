@@ -2,8 +2,14 @@
    "name": "PlantesBackend",
    "version": "0.0.1",
    "license": "UNLICENSED",
-   "type": "module",
    "description": "Awesome project developed with TypeORM.",
+   "scripts": {
+      "start": "node ./dist/app.js",
+      "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts",
+      "test": "jest",
+      "build":"tsc --build",
+      "devServer": "nodemon ./dev/devServer.js"
+   },
    "devDependencies": {
       "@types/node": "^16.10.4",
       "@typescript-eslint/eslint-plugin": "^5.0.0",
@@ -43,11 +49,5 @@
       "ts-node-dev": "^1.1.8",
       "typeorm": "0.2.38",
       "uuid-random": "^1.3.2"
-   },
-   "scripts": {
-      "start": "ts-node -r tsconfig-paths/register src/app.ts",
-      "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts",
-      "test": "jest",
-      "devServer": "nodemon ./dev/devServer.js"
    }
 }
