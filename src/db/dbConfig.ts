@@ -12,6 +12,7 @@ export const dbConfig:ConnectionOptions = {
   type: process.env.DATABASE_TYPE as 'postgres',
   port: parseInt(process.env.DATABASE_PORT, 10),
   host: process.env.DATABASE_HOST,
+  ssl: process.env.DATABASE_SSL.toLocaleLowerCase() === 'true',
 
   synchronize: true,
   logging: false,
