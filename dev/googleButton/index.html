@@ -11,9 +11,10 @@
   <p id="response"></p>
   <script>
     const responseDiv = document.querySelector('#response')
-    function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-      responseDiv.innerHTML = JSON.stringify(googleUser.$b.id_token)
+    function onSuccess(user) {
+      console.log('Logged in as: ' + user.getBasicProfile().getName());
+      let { access_token } = user.getAuthResponse(true);
+      responseDiv.innerHTML = JSON.stringify(user.getAuthResponse(true).id_token)
     }
     function onFailure(error) {
       console.log(error);

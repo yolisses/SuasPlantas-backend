@@ -1,4 +1,7 @@
 {
+    "scripts": {
+        "dev":"node ./devServer.js"
+    },
     "type": "commonjs",
     "dependencies": {
         "cors": "^2.8.5"

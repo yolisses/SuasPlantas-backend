@@ -1,11 +1,11 @@
-import { createUser } from "user/createUser";
-import { getUserByEmail } from "user/getUserByEmail";
-import { User } from "user/User";
-import { error } from "utils/error";
-import { verifyGoogleToken } from "./verifyGoogleToken";
-import { TokenPayload } from "google-auth-library";
-import { getLocationByIp } from "location/getLocationByIp";
-import { getPoint } from "location/getPoint";
+import { createUser } from 'user/createUser';
+import { getUserByEmail } from 'user/getUserByEmail';
+import { User } from 'user/User';
+import { error } from 'utils/error';
+import { TokenPayload } from 'google-auth-library';
+import { getLocationByIp } from 'location/getLocationByIp';
+import { getPoint } from 'location/getPoint';
+import { verifyGoogleToken } from './verifyGoogleToken';
 
 export async function signIn(googleToken: string, ip: string) {
   let payload: TokenPayload;
@@ -19,7 +19,9 @@ export async function signIn(googleToken: string, ip: string) {
 
   if (!user) {
     const locationData = await getLocationByIp(ip);
-    const { latitude, longitude, state, city } = locationData;
+    const {
+      latitude, longitude, state, city,
+    } = locationData;
     const location = getPoint({ latitude, longitude });
     user = await createUser({
       name,
