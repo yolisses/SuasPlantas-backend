@@ -1,9 +1,10 @@
 /* eslint-disable import/first */
+import 'reflect-metadata';
+import 'regenerator-runtime';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-import 'reflect-metadata';
 import 'express-async-errors';
 import { createConnection } from 'typeorm';
 import express from 'express';
