@@ -7,11 +7,15 @@
       "start": "node ./dist/app.js",
       "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts",
       "test": "jest",
-      "build": "tsc --build",
+      "build": "babel src -d dist --extensions '.ts,.tsx'",
       "devServer": "nodemon ./dev/devServer.js"
    },
    "devDependencies": {
+      "@babel/cli": "^7.16.0",
       "@babel/core": "^7.16.0",
+      "@babel/plugin-proposal-decorators": "^7.16.0",
+      "@babel/preset-env": "^7.16.0",
+      "@babel/preset-typescript": "^7.16.0",
       "@types/node": "^16.10.4",
       "@typescript-eslint/eslint-plugin": "^5.0.0",
       "@typescript-eslint/parser": "^5.0.0",
