@@ -21,6 +21,7 @@ createConnection(dbConfig)
 
     app.use(errorMiddleware);
 
-    app.listen(3000, () => console.info('Server running on http://localhost:3000'));
+    const port = parseInt(process.env.PORT, 10);
+    app.listen(port, () => console.info(`Server running on http://localhost:${port}`));
   })
   .catch((error) => console.log(error));
