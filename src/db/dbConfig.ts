@@ -10,7 +10,7 @@ import {
 import { Image } from '../image/Image';
 import { Like } from '../like/Like';
 import { Plant } from '../plant/Plant';
-import { Tag } from '../tag/Tag';
+import { Tag } from '../plant/Tag';
 import { User } from '../user/User';
 
 export const dbConfig: ConnectionOptions = {

@@ -1,6 +1,6 @@
 import { validateLength } from 'utils/validateLength';
 import { Image } from '../image/Image';
-import { Tag } from '../tag/Tag';
+import { Tag } from './Tag';
 import { createCard } from '../upload/createCard';
 import { User } from '../user/User';
 import { error } from '../utils/error';
