@@ -1,6 +1,6 @@
 merge dev pages with the current server (in dev env only)
 use session authentication
-merge data folder
+    X merge data folder
     X organize env variables
 rename plant image to image
 fix missing typeorm types
