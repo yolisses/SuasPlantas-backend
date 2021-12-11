@@ -1,0 +1,22 @@
+merge dev pages with the current server (in dev env only)
+use session authentication
+merge data folder
+organize env variables
+rename plant image to image
+fix missing typeorm types
+use decorators to routes, controllers and so on
+check if there is a http errors pack out there
+add some minimum tests to make sure it's testable
+add class validators
+remove validations from create service
+look for a standard pagination
+make sure tags are automatically and statically created
+fix or hide eslint errors
+check if the external API's are good options
+look for how to enforce not null or undefined req values
+fix build
+dissolve src folder if possible
+fix security vulnerabilities in CORS and CSRF
+use docker-compose with env variables
+make the db as pluggable as util
+make functions services and controllers standard
