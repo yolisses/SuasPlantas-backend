@@ -23,6 +23,8 @@ createConnection(dbConfig)
     app.use(errorMiddleware);
 
     const port = parseInt(PORT, 10);
+    // eslint-disable-next-line no-console
     app.listen(port, () => console.info(`Server running on http://localhost:${port}`));
   })
-  .catch((error) => console.log(error));
+  // eslint-disable-next-line no-console
+  .catch((error) => console.error(error));

@@ -1,4 +1,4 @@
-import uuid from "uuid-random";
+import uuid from 'uuid-random';
 
 export function generateImageName() {
   return `${uuid()}.webp`;

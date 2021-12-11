@@ -1,4 +1,4 @@
-import { Point } from "geojson";
+import { Point } from 'geojson';
 
 interface GetPointParams {
   latitude: number;
@@ -7,7 +7,7 @@ interface GetPointParams {
 
 export function getPoint({ latitude, longitude }: GetPointParams): Point {
   return {
-    type: "Point",
+    type: 'Point',
     coordinates: [latitude, longitude],
   };
 }

@@ -1,4 +1,3 @@
-
 import { Point } from 'geojson';
 import { User } from './User';
 
@@ -12,8 +11,8 @@ interface IUserCreationDTO {
 }
 
 export async function createUser(user: IUserCreationDTO): Promise<User> {
-    const newUser = User.create(user)
-    await newUser.save()
+  const newUser = User.create(user);
+  await newUser.save();
 
-    return newUser
+  return newUser;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from 'axios';
 import { IP_GEOLOCATION_API_KEY } from '../env/env';
 import { error } from '../utils/error';
@@ -47,5 +48,4 @@ export async function getLocationByIp(ip: string) {
     city: city || town || village || city_district,
     state: state || state_prov,
   };
-  return null;
 }

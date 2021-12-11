@@ -9,6 +9,7 @@ export async function createCard(key) {
         FunctionName: CREATE_CARD_LAMBDA_FUNCTION,
         Payload: payload,
       },
+      // eslint-disable-next-line no-console
       (err) => console.error(err),
     )
     .promise();
