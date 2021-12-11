@@ -6,9 +6,6 @@ import { validateFound } from '../../utils/validateFound';
 export async function giveLikeToItemService(plantId: PlantId, userId: UserId) {
   const plant = await Plant.findOne(plantId);
   validateFound({ plant });
-  const like = await Like.create({
-    userId,
-    plantId,
-  }).save();
+  const like = await Like.create({ userId, plantId }).save();
   return like;
 }
