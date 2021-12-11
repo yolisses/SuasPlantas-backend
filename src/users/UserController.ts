@@ -53,12 +53,12 @@ export const UserController = {
     const { ip } = req;
     const { googleToken } = req.body;
     const user = await signIn(googleToken, ip);
-    const token = generateToken({ id: user.id });
-    res.cookie('auth_login_token', token, {
-      httpOnly: true,
-      secure: NODE_ENV !== 'development',
-    });
+    // const token = generateToken({ id: user.id });
+    // res.cookie('auth_login_token', token, {
+    //   httpOnly: true,
+    //   secure: NODE_ENV !== 'development',
+    // });
 
-    return res.send({ user, token });
+    // return res.send({ user, token });
   },
 };

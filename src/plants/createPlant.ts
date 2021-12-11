@@ -9,8 +9,9 @@ import { getPoint } from '../location/getPoint';
 import { getLocationByIp } from '../location/getLocationByIp';
 import { Plant } from './Plant';
 import { PlantInput } from './PlantInput';
+import { UserId } from '../users/User';
 
-export async function createPlant(plantInput:PlantInput) {
+export async function createPlant(plantInput:PlantInput, userId:UserId) {
   const {
     state, city, latitude, longitude,
   } = await getLocationByIp('oie');
