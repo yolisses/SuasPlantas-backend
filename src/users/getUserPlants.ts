@@ -8,10 +8,10 @@ export async function getUserPlants(id: number, page: number) {
     take,
     skip,
     where: { user: id },
-    order: { createdAt: -1 },
     relations: ['images'],
-    loadEagerRelations: true,
     loadRelationIds: true,
+    loadEagerRelations: true,
+    order: { createdAt: -1 },
   });
 
   const totalPages = Math.ceil(data[1] / take);
