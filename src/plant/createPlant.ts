@@ -1,9 +1,9 @@
-import { validTags } from 'plant/validTags';
-import { Image } from 'image/Image';
-import { Tag } from 'tag/Tag';
-import { createCard } from 'upload/createCard';
-import { User } from 'user/User';
-import { error } from 'utils/error';
+import { Image } from '../image/Image';
+import { Tag } from '../tag/Tag';
+import { createCard } from '../upload/createCard';
+import { User } from '../user/User';
+import { error } from '../utils/error';
+import { validTags } from '../plant/validTags';
 import { getUriByKey } from './getUriByKey';
 import { Plant } from './Plant';
 

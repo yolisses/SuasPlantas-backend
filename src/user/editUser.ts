@@ -1,5 +1,5 @@
-import { error } from "utils/error";
-import { User, UserId } from "./User";
+import { error } from '../utils/error';
+import { User, UserId } from './User';
 
 interface IUserCreationDTO {
   name: string;
@@ -10,10 +10,12 @@ interface IUserCreationDTO {
 
 export async function editUser(
   userId: UserId,
-  { name, description, instagramUsername, whatsappNumber }: IUserCreationDTO
+  {
+    name, description, instagramUsername, whatsappNumber,
+  }: IUserCreationDTO,
 ): Promise<User> {
   const user = await User.findOne(userId);
-  if (!user) error(404, "User not found");
+  if (!user) error(404, 'User not found');
   if (name) {
     user.name = name;
   }

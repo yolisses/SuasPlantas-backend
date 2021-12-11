@@ -1,6 +1,6 @@
-import axios from "axios";
-import { IP_GEOLOCATION_API_KEY } from "env/env";
-import { error } from "utils/error";
+import axios from 'axios';
+import { IP_GEOLOCATION_API_KEY } from '../env/env';
+import { error } from '../utils/error';
 
 interface Response {
   city?: string;
@@ -18,13 +18,13 @@ export async function getLocationByIp(ip: string) {
   const apiKey = IP_GEOLOCATION_API_KEY;
   try {
     res = await axios.get(
-      `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}&fields=state_prov,city,latitude,longitude`
+      `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}&fields=state_prov,city,latitude,longitude`,
     );
   } catch (err) {
     console.error(err);
     try {
       res = await axios.get(
-        `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${"181.192.105.255"}&fields=state_prov,city,latitude,longitude`
+        `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${'181.192.105.255'}&fields=state_prov,city,latitude,longitude`,
       );
     } catch (err) {
       console.error(err);

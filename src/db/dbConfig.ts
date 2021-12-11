@@ -1,3 +1,4 @@
+import { ConnectionOptions } from 'typeorm';
 import {
   DB_HOST,
   DB_NAME,
@@ -5,13 +6,12 @@ import {
   DB_PORT,
   DB_SSL,
   DB_USER,
-} from 'env/env';
-import { Image } from 'image/Image';
-import { Like } from 'like/Like';
-import { Plant } from 'plant/Plant';
-import { Tag } from 'tag/Tag';
-import { ConnectionOptions } from 'typeorm';
-import { User } from 'user/User';
+} from '../env/env';
+import { Image } from '../image/Image';
+import { Like } from '../like/Like';
+import { Plant } from '../plant/Plant';
+import { Tag } from '../tag/Tag';
+import { User } from '../user/User';
 
 export const dbConfig: ConnectionOptions = {
   database: DB_NAME,

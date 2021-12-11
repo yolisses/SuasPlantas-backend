@@ -1,7 +1,4 @@
-import { Tag } from 'tag/Tag';
-import { User } from 'user/User';
-import { validTags } from 'plant/validTags';
-import { error } from 'utils/error';
+import { error } from '../utils/error';
 import { Plant, PlantId } from './Plant';
 
 interface IPlantCreationDTO {

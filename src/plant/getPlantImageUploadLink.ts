@@ -1,6 +1,6 @@
-import { AWS_BUCKET_NAME } from "env/env";
-import { UserId } from "user/User";
-import { s3 } from "vendor/s3";
+import { AWS_BUCKET_NAME } from '../env/env';
+import { UserId } from '../user/User';
+import { s3 } from '../vendor/s3';
 
 export async function getPlantImageUpdateLink(key: string, userId: UserId) {
   const bucketName = AWS_BUCKET_NAME;
@@ -10,9 +10,9 @@ export async function getPlantImageUpdateLink(key: string, userId: UserId) {
     Key: key,
     Expires: oneHour,
     Bucket: bucketName,
-    ContentType: "image/webp",
+    ContentType: 'image/webp',
     Metadata: { userId: `${userId}` },
   };
 
-  return s3.getSignedUrlPromise("putObject", params);
+  return s3.getSignedUrlPromise('putObject', params);
 }

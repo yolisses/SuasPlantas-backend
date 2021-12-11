@@ -1,4 +1,4 @@
-import { error } from 'utils/error';
+import { error } from '../utils/error';
 import { User } from './User';
 
 export async function getUser(id: number) {

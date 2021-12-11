@@ -1,10 +1,10 @@
-import { createUser } from 'user/createUser';
-import { getUserByEmail } from 'user/getUserByEmail';
-import { User } from 'user/User';
-import { error } from 'utils/error';
 import { TokenPayload } from 'google-auth-library';
-import { getLocationByIp } from 'location/getLocationByIp';
-import { getPoint } from 'location/getPoint';
+import { createUser } from '../user/createUser';
+import { getUserByEmail } from '../user/getUserByEmail';
+import { User } from '../user/User';
+import { error } from '../utils/error';
+import { getLocationByIp } from '../location/getLocationByIp';
+import { getPoint } from '../location/getPoint';
 import { verifyGoogleToken } from './verifyGoogleToken';
 
 export async function signIn(googleToken: string, ip: string) {

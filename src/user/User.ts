@@ -1,6 +1,4 @@
 import { Point } from 'geojson';
-import { Like } from 'like/Like';
-import { Plant } from 'plant/Plant';
 import {
   BaseEntity,
   Column,
@@ -13,6 +11,8 @@ import {
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
+import { Like } from '../like/Like';
+import { Plant } from '../plant/Plant';
 
 export type UserId = number;
 

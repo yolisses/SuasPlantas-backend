@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { removeLikeOnPlantService } from "./removeLikeOnPlantService";
+import { Request, Response } from 'express';
+import { removeLikeOnPlantService } from './removeLikeOnPlantService';
 
 export async function removeLikeOnPlantController(req: Request, res: Response) {
   const { plantId } = req.params;

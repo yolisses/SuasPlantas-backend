@@ -1,16 +1,16 @@
 /* eslint-disable import/first */
-import "reflect-metadata";
-import "regenerator-runtime";
+import 'reflect-metadata';
+import 'regenerator-runtime';
 
-import "express-async-errors";
-import { createConnection } from "typeorm";
-import express from "express";
-import { dbConfig } from "db/dbConfig";
-import { corsOptions } from "corsOptions";
-import cors from "cors";
-import { errorMiddleware } from "./errorMiddleware";
-import { routes } from "./routes";
-import { PORT } from "env/env";
+import 'express-async-errors';
+import { createConnection } from 'typeorm';
+import express from 'express';
+import cors from 'cors';
+import { corsOptions } from './corsOptions';
+import { dbConfig } from './db/dbConfig';
+import { errorMiddleware } from './errorMiddleware';
+import { routes } from './routes';
+import { PORT } from './env/env';
 
 createConnection(dbConfig)
   .then(async () => {
@@ -23,8 +23,6 @@ createConnection(dbConfig)
     app.use(errorMiddleware);
 
     const port = parseInt(PORT, 10);
-    app.listen(port, () =>
-      console.info(`Server running on http://localhost:${port}`)
-    );
+    app.listen(port, () => console.info(`Server running on http://localhost:${port}`));
   })
   .catch((error) => console.log(error));

@@ -1,9 +1,9 @@
-import { getPlants } from "plant/getPlants";
-import { error } from "utils/error";
-import { editUser } from "./editUser";
-import { editUserLocation } from "./editUserLocation";
-import { getUser } from "./getUser";
-import { removeUser } from "./removeUser";
+import { getPlants } from '../plant/getPlants';
+import { error } from '../utils/error';
+import { editUser } from './editUser';
+import { editUserLocation } from './editUserLocation';
+import { getUser } from './getUser';
+import { removeUser } from './removeUser';
 
 export const UserController = {
   async getOne(req, res) {
@@ -38,10 +38,8 @@ export const UserController = {
   async editLocation(req, res) {
     const { userId } = req;
     const { latitude, longitude } = req.body;
-    if (longitude === undefined || longitude === null)
-      error(400, "Latitude not provided");
-    if (longitude === undefined || longitude === null)
-      error(400, "Longitude not provided");
+    if (longitude === undefined || longitude === null) { error(400, 'Latitude not provided'); }
+    if (longitude === undefined || longitude === null) { error(400, 'Longitude not provided'); }
     const location = { latitude, longitude };
     const result = await editUserLocation({ userId, location });
     return res.send(result);

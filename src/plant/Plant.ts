@@ -1,7 +1,4 @@
 import { Point } from 'geojson';
-import { Image } from 'image/Image';
-import { Like } from 'like/Like';
-import { Tag } from 'tag/Tag';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -19,7 +16,10 @@ import {
   ManyToOne,
   Index,
 } from 'typeorm';
-import { User, UserId } from 'user/User';
+import { User, UserId } from '../user/User';
+import { Tag } from '../tag/Tag';
+import { Like } from '../like/Like';
+import { Image } from '../image/Image';
 
 export type PlantId = number;
 

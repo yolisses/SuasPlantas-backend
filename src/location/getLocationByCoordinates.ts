@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOCATIONIQ_API_KEY } from 'env/env';
+import { LOCATIONIQ_API_KEY } from '../env/env';
 import { ILocation } from './Location';
 
 interface Address {

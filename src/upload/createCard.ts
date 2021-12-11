@@ -1,5 +1,5 @@
-import { CREATE_CARD_LAMBDA_FUNCTION } from "env/env";
-import { lambda } from "vendor/lambda";
+import { CREATE_CARD_LAMBDA_FUNCTION } from '../env/env';
+import { lambda } from '../vendor/lambda';
 
 export async function createCard(key) {
   const payload = JSON.stringify({ key });
@@ -9,7 +9,7 @@ export async function createCard(key) {
         FunctionName: CREATE_CARD_LAMBDA_FUNCTION,
         Payload: payload,
       },
-      (err) => console.error(err)
+      (err) => console.error(err),
     )
     .promise();
 }

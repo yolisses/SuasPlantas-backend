@@ -1,4 +1,3 @@
-import { Plant, PlantId } from 'plant/Plant';
 import {
   Column,
   Entity,
@@ -11,7 +10,8 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { User, UserId } from 'user/User';
+import { User, UserId } from '../user/User';
+import { Plant, PlantId } from '../plant/Plant';
 
 type LikeId = number;
 

@@ -1,21 +1,23 @@
-import { createPlant } from "./createPlant";
-import { getAllPlants } from "./getAllPlants";
-import { findPlant } from "./findPlant";
-import { getPlantImageUpdateLink } from "./getPlantImageUploadLink";
-import { getPlants } from "./getPlants";
-import { removePlant } from "./removePlant";
-import uuid from "uuid-random";
-import { editPlant } from "./editPlant";
+import uuid from 'uuid-random';
+import { createPlant } from './createPlant';
+import { getAllPlants } from './getAllPlants';
+import { findPlant } from './findPlant';
+import { getPlantImageUpdateLink } from './getPlantImageUploadLink';
+import { getPlants } from './getPlants';
+import { removePlant } from './removePlant';
+import { editPlant } from './editPlant';
 
 function optionalBoolean(value) {
-  if (value === "true") return true;
-  if (value === "false") return false;
+  if (value === 'true') return true;
+  if (value === 'false') return false;
   return undefined;
 }
 
 export const PlantController = {
   async get(req, res) {
-    const { sell, swap, donate, page, ...rest } = req.query;
+    const {
+      sell, swap, donate, page, ...rest
+    } = req.query;
     const plants = await getPlants({
       sell: optionalBoolean(sell),
       swap: optionalBoolean(swap),

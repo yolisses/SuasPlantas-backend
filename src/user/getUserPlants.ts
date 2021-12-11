@@ -1,4 +1,4 @@
-import { Plant } from "plant/Plant";
+import { Plant } from '../plant/Plant';
 
 const take = 3;
 export async function getUserPlants(id: number, page: number) {
@@ -9,7 +9,7 @@ export async function getUserPlants(id: number, page: number) {
     skip,
     where: { user: id },
     order: { createdAt: -1 },
-    relations: ["images"],
+    relations: ['images'],
     loadEagerRelations: true,
     loadRelationIds: true,
   });

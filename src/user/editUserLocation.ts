@@ -1,6 +1,6 @@
-import { getLocationByCoordinates } from 'location/getLocationByCoordinates';
-import { getPoint } from 'location/getPoint';
-import { ILocation } from 'location/Location';
+import { getLocationByCoordinates } from '../location/getLocationByCoordinates';
+import { getPoint } from '../location/getPoint';
+import { ILocation } from '../location/Location';
 import { User, UserId } from './User';
 
 interface EditUserLocationProps {

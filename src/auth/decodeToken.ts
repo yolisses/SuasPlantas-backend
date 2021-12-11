@@ -1,6 +1,6 @@
-import { AUTH_SECRET } from 'env/env';
 import { verify } from 'jsonwebtoken';
-import { error } from 'utils/error';
+import { error } from '../utils/error';
+import { AUTH_SECRET } from '../env/env';
 
 export async function decodeToken(token: string): Promise<any | void> {
   if (!token) {
