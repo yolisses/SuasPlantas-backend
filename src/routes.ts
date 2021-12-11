@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { pingRoutes } from './utils/ping';
 import { authRoutes } from './auth/authRoutes';
-import { likeRoutes } from './like/likeRoutes';
+import { likeRoutes } from './plant/like/likeRoutes';
 import { userRoutes } from './user/userRoutes';
 import { plantsRoutes } from './plant/plantRoutes';
 

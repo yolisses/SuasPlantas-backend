@@ -10,8 +10,9 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { User, UserId } from '../user/User';
-import { Plant, PlantId } from '../plant/Plant';
+
+import { User, UserId } from '../../user/User';
+import { Plant, PlantId } from '../Plant';
 
 type LikeId = number;
 

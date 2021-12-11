@@ -8,7 +8,7 @@ import {
   DB_USER,
 } from '../env/env';
 import { Image } from '../image/Image';
-import { Like } from '../like/Like';
+import { Like } from '../plant/like/Like';
 import { Plant } from '../plant/Plant';
 import { Tag } from '../plant/Tag';
 import { User } from '../user/User';

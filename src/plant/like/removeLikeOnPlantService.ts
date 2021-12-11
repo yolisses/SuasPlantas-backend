@@ -1,6 +1,6 @@
-import { PlantId } from '../plant/Plant';
-import { UserId } from '../user/User';
-import { error } from '../utils/error';
+import { PlantId } from '../Plant';
+import { UserId } from '../../user/User';
+import { error } from '../../utils/error';
 import { Like } from './Like';
 
 export async function removeLikeOnPlantService(

@@ -11,7 +11,7 @@ import {
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
-import { Like } from '../like/Like';
+import { Like } from '../plant/like/Like';
 import { Plant } from '../plant/Plant';
 
 export type UserId = number;
