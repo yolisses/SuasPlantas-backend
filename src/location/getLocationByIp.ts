@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable camelcase */
 import axios from 'axios';
 import { IP_GEOLOCATION_API_KEY } from '../env/env';

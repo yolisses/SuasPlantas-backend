@@ -1,4 +1,3 @@
-
 import { Plant } from '../plants/Plant';
 
 const take = 3;

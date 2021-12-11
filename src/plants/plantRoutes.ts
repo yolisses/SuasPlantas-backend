@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { PlantController } from './PlantController';
-import { authMiddleware } from '../auth/authMiddleware';
 
 export const plantsRoutes = Router();
 

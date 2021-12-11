@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { authMiddleware } from '../../auth/authMiddleware';
 import { giveLikeToPlantController } from './giveLikeToPlantController';
 import { removeLikeOnPlantController } from './removeLikeOnPlantController';
 

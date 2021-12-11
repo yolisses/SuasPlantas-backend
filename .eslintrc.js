@@ -18,8 +18,9 @@ module.exports = {
   ],
   ignorePatterns: ['**/dist/*'],
   rules: {
-    'import/prefer-default-export': 'off',
-    'import/extensions': 'off',
-    'import/no-unresolved': 'off',
+    'import/extensions': 0,
+    'import/no-unresolved': 0,
+    'class-methods-use-this': 0,
+    'import/prefer-default-export': 0,
   },
 };

@@ -1,16 +1,15 @@
+import { Like } from './Like';
 import { PlantId } from '../Plant';
 import { UserId } from '../../users/User';
-import { error } from '../../utils/error';
-import { Like } from './Like';
+import { validateFound } from '../../utils/validateFound';
+import { validateOwner } from '../../utils/validateOwner';
 
 export async function removeLikeOnPlantService(
   userId: UserId,
   plantId: PlantId,
 ) {
   const like = await Like.findOne({ where: { userId, plantId } });
-  if (like) {
-    if (like.userId !== userId) error(403, 'Unauthorized like remotion');
-    await like.softRemove();
-    return like;
-  }
+  validateFound({ like });
+  validateOwner({ like }, userId);
+  await like.softRemove();
 }
