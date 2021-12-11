@@ -19,10 +19,12 @@ export async function decodeToken(token: string): Promise<any | void> {
 
   try {
     const secret = AUTH_SECRET;
-    const decoded = await new Promise((resolve, reject) => verify(tokenValue, secret, (err, decoded) => {
-      if (err) return reject(err);
-      return resolve(decoded);
-    }));
+    const decoded = await new Promise(
+      (resolve, reject) => verify(tokenValue, secret, (err, value) => {
+        if (err) return reject(err);
+        return resolve(value);
+      }),
+    );
     return decoded;
   } catch (err) {
     error(500, `${err}`);
