@@ -7,10 +7,15 @@ import { getLocationByIp } from '../location/getLocationByIp';
 import { getPoint } from '../location/getPoint';
 import { verifyGoogleToken } from './verifyGoogleToken';
 
-export async function signIn(googleToken: string, ip: string) {
+interface SignInParams{
+accessToken :string
+ip:string
+}
+
+export async function signIn({ accessToken, ip }:SignInParams) {
   let payload: TokenPayload;
   try {
-    payload = await verifyGoogleToken(googleToken);
+    payload = await verifyGoogleToken(accessToken);
   } catch (err) {
     error(400, err.message);
   }
