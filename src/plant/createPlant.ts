@@ -1,3 +1,4 @@
+import { validateLength } from 'utils/validateLength';
 import { Image } from '../image/Image';
 import { Tag } from '../tag/Tag';
 import { createCard } from '../upload/createCard';
@@ -33,8 +34,8 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   });
 
   if (!images) error(400, 'Images not provided');
-  if (images.length < 1) error(400, 'Images length smaller than one');
-  if (images.length > 10) error(400, 'Images length bigger than 10');
+  validateLength('Images', images, 1, 10);
+
   const imagesInstances: Image[] = await Promise.all(
     plant.images.map(async (key) => {
       const image = Image.create();

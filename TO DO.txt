@@ -11,7 +11,7 @@ add class validators
 remove validations from create service
 look for a standard pagination
 make sure tags are automatically and statically created
-fix or hide eslint errors
+    ~ fix or hide eslint errors
 check if the external API's are good options
 look for how to enforce not null or undefined req values
     X fix build
