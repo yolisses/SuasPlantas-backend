@@ -4,7 +4,6 @@ import {
   DB_PASSWORD,
   DB_PORT,
   DB_SSL,
-  DB_TYPE,
   DB_USER,
 } from 'env/env';
 import { Image } from 'image/Image';
@@ -18,7 +17,7 @@ export const dbConfig: ConnectionOptions = {
   database: DB_NAME,
   username: DB_USER,
   password: DB_PASSWORD,
-  type: DB_TYPE as 'postgres',
+  type: 'postgres',
   port: parseInt(DB_PORT, 10),
   host: DB_HOST,
   ssl: DB_SSL.toLocaleLowerCase() === 'true',
