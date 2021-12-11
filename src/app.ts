@@ -2,21 +2,38 @@
 import 'reflect-metadata';
 import 'regenerator-runtime';
 
-import 'express-async-errors';
-import { createConnection } from 'typeorm';
-import express from 'express';
 import cors from 'cors';
-import { corsOptions } from './corsOptions';
-import { dbConfig } from './db/dbConfig';
-import { errorMiddleware } from './errorMiddleware';
+import 'express-async-errors';
+import express from 'express';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import { createConnection } from 'typeorm';
 import { routes } from './routes';
-import { PORT } from './env/env';
+import { dbConfig } from './db/dbConfig';
+import { corsOptions } from './corsOptions';
+import { AUTH_SECRET, PORT } from './env/env';
+import { errorMiddleware } from './errorMiddleware';
+import { oneWeekInMilliseconds } from './utils/oneWeekInMilliseconds';
 
 createConnection(dbConfig)
   .then(async () => {
     // create express app
     const app = express();
+
+    app.use(session({
+      resave: false,
+      secret: AUTH_SECRET,
+      saveUninitialized: true,
+      cookie: {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'none',
+        domain: 'plantes.vercel.app',
+        maxAge: oneWeekInMilliseconds,
+      },
+    }));
     app.use(cors(corsOptions));
+    app.use(cookieParser());
     app.use(express.json());
     app.use(routes);
 
