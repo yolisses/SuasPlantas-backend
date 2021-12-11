@@ -7,7 +7,7 @@ import {
   DB_SSL,
   DB_USER,
 } from '../env/env';
-import { Image } from '../image/Image';
+import { Image } from '../upload/Image';
 import { Like } from '../plant/like/Like';
 import { Plant } from '../plant/Plant';
 import { Tag } from '../plant/Tag';

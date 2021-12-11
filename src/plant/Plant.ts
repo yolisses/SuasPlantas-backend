@@ -19,7 +19,7 @@ import {
 import { User, UserId } from '../user/User';
 import { Tag } from './Tag';
 import { Like } from './like/Like';
-import { Image } from '../image/Image';
+import { Image } from '../upload/Image';
 
 export type PlantId = number;
 
