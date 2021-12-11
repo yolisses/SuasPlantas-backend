@@ -1,5 +1,5 @@
 import { validTags } from 'plant/validTags';
-import { PlantImage } from 'image/PlantImage';
+import { Image } from 'image/Image';
 import { Tag } from 'tag/Tag';
 import { createCard } from 'upload/createCard';
 import { User } from 'user/User';
@@ -35,9 +35,9 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   if (!images) error(400, 'Images not provided');
   if (images.length < 1) error(400, 'Images length smaller than one');
   if (images.length > 10) error(400, 'Images length bigger than 10');
-  const imagesInstances: PlantImage[] = await Promise.all(
+  const imagesInstances: Image[] = await Promise.all(
     plant.images.map(async (key) => {
-      const image = PlantImage.create();
+      const image = Image.create();
       image.uri = getUriByKey(key.replace('uploads', 'compressed'));
       return await image.save();
     }),

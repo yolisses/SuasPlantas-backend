@@ -1,7 +1,7 @@
-import { Point } from "geojson";
-import { PlantImage } from "image/PlantImage";
-import { Like } from "like/Like";
-import { Tag } from "tag/Tag";
+import { Point } from 'geojson';
+import { Image } from 'image/Image';
+import { Like } from 'like/Like';
+import { Tag } from 'tag/Tag';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -18,90 +18,90 @@ import {
   DeleteDateColumn,
   ManyToOne,
   Index,
-} from "typeorm";
-import { User, UserId } from "user/User";
+} from 'typeorm';
+import { User, UserId } from 'user/User';
 
 export type PlantId = number;
 
 @Entity()
 export class Plant extends BaseEntity {
-  @PrimaryGeneratedColumn({ type: "int" })
-  id: PlantId;
+  @PrimaryGeneratedColumn({ type: 'int' })
+    id: PlantId;
 
   @Column()
-  name: string;
+    name: string;
 
   @Column({
     scale: 2,
     precision: 6,
-    type: "decimal",
+    type: 'decimal',
     unsigned: true,
     nullable: true,
   })
-  price: number;
+    price: number;
 
   @Column({
-    type: "int",
+    type: 'int',
     unsigned: true,
     nullable: true,
   })
-  amount?: number;
+    amount?: number;
 
   @Column({ default: false })
-  swap: boolean;
+    swap: boolean;
 
   @Column({ default: false })
-  donate: boolean;
+    donate: boolean;
 
   @Column({ nullable: true })
-  description?: string;
+    description?: string;
 
   @Column()
-  state: string;
+    state: string;
 
   @Column()
-  city: string;
+    city: string;
 
   @Column()
-  card: string;
+    card: string;
 
   @Column({
-    type: "geography",
-    spatialFeatureType: "Point",
+    type: 'geography',
+    spatialFeatureType: 'Point',
   })
   @Index({ spatial: true })
-  location: Point;
+    location: Point;
 
   @BeforeUpdate()
   @BeforeInsert()
   checkAvailabilities() {
     if (!this.price && !this.swap && !this.donate) {
-      throw new Error("Plant with no price or swap or donate");
+      throw new Error('Plant with no price or swap or donate');
     }
   }
 
   @CreateDateColumn()
-  createdAt: Timestamp;
+    createdAt: Timestamp;
 
   @UpdateDateColumn()
-  updatedAt: Timestamp;
+    updatedAt: Timestamp;
 
   @DeleteDateColumn({ select: false })
-  deletedAt?: Date;
+    deletedAt?: Date;
 
   @ManyToMany(() => Tag)
   @JoinTable()
-  tags: Tag[];
+    tags: Tag[];
 
   @ManyToOne(() => User, (user) => user.plants, { nullable: false })
-  user: User;
+    user: User;
 
   @OneToMany(() => Like, (like) => like.plant)
-  likes: Like[];
+    likes: Like[];
 
   @Column()
-  userId: UserId;
+    userId: UserId;
 
-  @OneToMany(() => PlantImage, (image) => image.plant, { onDelete: "CASCADE" })
-  images: PlantImage[];
+  @OneToMany(() => Image, (image) => image.plant, { onDelete: 'CASCADE' })
+    images: Image[];
 }

@@ -4,7 +4,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class PlantImage extends BaseEntity {
+export class Image extends BaseEntity {
   @PrimaryColumn()
     uri: string;
 
