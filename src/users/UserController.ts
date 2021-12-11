@@ -5,8 +5,6 @@ import { editUserLocation } from './editUserLocation';
 import { getUser } from './getUser';
 import { removeUser } from './removeUser';
 
-import { NODE_ENV } from '../env/env';
-import { generateToken } from '../auth/generateToken';
 import { signIn } from './signIn';
 import { validateProvided } from '../utils/validateProvided';
 
