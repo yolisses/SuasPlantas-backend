@@ -6,7 +6,7 @@ import {
   DB_PORT,
   DB_SSL,
   DB_USER,
-} from '../env/env';
+} from './env';
 import { Image } from '../upload/Image';
 import { Like } from '../plants/like/Like';
 import { Plant } from '../plants/Plant';

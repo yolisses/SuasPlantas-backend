@@ -1,4 +1,4 @@
-import { CREATE_CARD_LAMBDA_FUNCTION } from '../env/env';
+import { CREATE_CARD_LAMBDA_FUNCTION } from '../config/env';
 import { lambda } from '../vendor/lambda';
 
 export async function createCard(key) {

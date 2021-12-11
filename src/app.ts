@@ -9,9 +9,9 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import { createConnection } from 'typeorm';
 import { routes } from './routes';
-import { dbConfig } from './db/dbConfig';
+import { dbConfig } from './config/dbConfig';
 import { corsOptions } from './corsOptions';
-import { AUTH_SECRET, PORT } from './env/env';
+import { AUTH_SECRET, PORT } from './config/env';
 import { errorMiddleware } from './errorMiddleware';
 import { oneWeekInMilliseconds } from './utils/oneWeekInMilliseconds';
 

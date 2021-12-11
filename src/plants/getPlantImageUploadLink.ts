@@ -1,4 +1,4 @@
-import { AWS_BUCKET_NAME } from '../env/env';
+import { AWS_BUCKET_NAME } from '../config/env';
 import { UserId } from '../users/User';
 import { s3 } from '../vendor/s3';
 
