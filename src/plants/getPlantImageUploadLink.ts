@@ -1,5 +1,5 @@
 import { AWS_BUCKET_NAME } from '../env/env';
-import { UserId } from '../user/User';
+import { UserId } from '../users/User';
 import { s3 } from '../vendor/s3';
 
 export async function getPlantImageUpdateLink(key: string, userId: UserId) {

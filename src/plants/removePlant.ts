@@ -1,4 +1,4 @@
-import { UserId } from '../user/User';
+import { UserId } from '../users/User';
 import { error } from '../utils/error';
 import { Plant, PlantId } from './Plant';
 

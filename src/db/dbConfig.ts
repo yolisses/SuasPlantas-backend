@@ -11,7 +11,7 @@ import { Image } from '../upload/Image';
 import { Like } from '../plants/like/Like';
 import { Plant } from '../plants/Plant';
 import { Tag } from '../plants/Tag';
-import { User } from '../user/User';
+import { User } from '../users/User';
 
 export const dbConfig: ConnectionOptions = {
   database: DB_NAME,

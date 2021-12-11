@@ -1,5 +1,5 @@
 import { Plant, PlantId } from '../Plant';
-import { UserId } from '../../user/User';
+import { UserId } from '../../users/User';
 import { error } from '../../utils/error';
 import { Like } from './Like';
 

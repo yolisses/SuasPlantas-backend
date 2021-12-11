@@ -1,7 +1,7 @@
 import { TokenPayload } from 'google-auth-library';
-import { createUser } from '../user/createUser';
-import { getUserByEmail } from '../user/getUserByEmail';
-import { User } from '../user/User';
+import { createUser } from '../users/createUser';
+import { getUserByEmail } from '../users/getUserByEmail';
+import { User } from '../users/User';
 import { error } from '../utils/error';
 import { getLocationByIp } from '../location/getLocationByIp';
 import { getPoint } from '../location/getPoint';

@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { pingRoutes } from './utils/ping';
 import { authRoutes } from './auth/authRoutes';
 import { likeRoutes } from './plants/like/likeRoutes';
-import { userRoutes } from './user/userRoutes';
+import { userRoutes } from './users/userRoutes';
 import { plantsRoutes } from './plants/plantRoutes';
 
 export const routes = Router();

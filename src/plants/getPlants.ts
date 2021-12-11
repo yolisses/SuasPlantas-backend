@@ -1,5 +1,5 @@
 import { IsNull, Not } from 'typeorm';
-import { UserId } from '../user/User';
+import { UserId } from '../users/User';
 import { Plant } from './Plant';
 
 interface GetPlantsParams {

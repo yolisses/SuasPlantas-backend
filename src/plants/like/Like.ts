@@ -11,7 +11,7 @@ import {
   Unique,
 } from 'typeorm';
 
-import { User, UserId } from '../../user/User';
+import { User, UserId } from '../../users/User';
 import { Plant, PlantId } from '../Plant';
 
 type LikeId = number;

@@ -2,7 +2,7 @@ import { validateLength } from '../utils/validateLength';
 import { Image } from '../upload/Image';
 import { Tag } from './Tag';
 import { createCard } from '../upload/createCard';
-import { User } from '../user/User';
+import { User } from '../users/User';
 import { error } from '../utils/error';
 import { validTags } from './validTags';
 import { getUriByKey } from './getUriByKey';
