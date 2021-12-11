@@ -1,9 +1,14 @@
+import { Response } from 'express';
 import { getPlants } from '../plants/getPlants';
 import { error } from '../utils/error';
 import { editUser } from './editUser';
 import { editUserLocation } from './editUserLocation';
 import { getUser } from './getUser';
 import { removeUser } from './removeUser';
+
+import { NODE_ENV } from '../env/env';
+import { generateToken } from '../auth/generateToken';
+import { signIn } from './signIn';
 
 export const UserController = {
   async getOne(req, res) {
@@ -43,5 +48,18 @@ export const UserController = {
     const location = { latitude, longitude };
     const result = await editUserLocation({ userId, location });
     return res.send(result);
+  },
+
+  async signIn(req, res: Response) {
+    const { ip } = req;
+    const { googleToken } = req.body;
+    const user = await signIn(googleToken, ip);
+    const token = generateToken({ id: user.id });
+    res.cookie('auth_login_token', token, {
+      httpOnly: true,
+      secure: NODE_ENV !== 'development',
+    });
+
+    return res.send({ user, token });
   },
 };
