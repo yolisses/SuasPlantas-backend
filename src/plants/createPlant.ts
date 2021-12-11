@@ -1,65 +1,21 @@
-import { validateLength } from '../utils/validateLength';
-import { Image } from '../upload/Image';
-import { Tag } from './Tag';
-import { createCard } from '../upload/createCard';
-import { User } from '../users/User';
-import { error } from '../utils/error';
-import { validTags } from './validTags';
-import { getUriByKey } from './getUriByKey';
+// Responsibilities
+// create and save a plant
+// use the compressed images instead of uploaded ones
+// call card image creation
+// set current user as owner
+// set location
+
+import { getPoint } from '../location/getPoint';
+import { getLocationByIp } from '../location/getLocationByIp';
 import { Plant } from './Plant';
+import { PlantInput } from './PlantInput';
 
-interface IPlantCreationDTO {
-  name: string;
-  description: string;
-  amount?: number;
-  price?: number;
-  swap: boolean;
-  donate: boolean;
-  tags: string[];
-  images: string[];
-}
-
-export async function createPlant(plant: IPlantCreationDTO, userId: number) {
+export async function createPlant(plantInput:PlantInput) {
   const {
-    name, description, amount, price, swap, donate, images,
-  } = plant;
-
-  const result = Plant.create({
-    name,
-    swap,
-    price,
-    amount,
-    donate,
-    description,
-  });
-
-  if (!images) error(400, 'Images not provided');
-  validateLength('Images', images, 1, 10);
-
-  const imagesInstances: Image[] = await Promise.all(
-    plant.images.map(async (key) => {
-      const image = Image.create();
-      image.uri = getUriByKey(key.replace('uploads', 'compressed'));
-      return await image.save();
-    }),
-  );
-  result.images = imagesInstances;
-
-  await createCard(images[0]);
-  const card = getUriByKey(images[0].replace('uploads', 'cards'));
-  result.card = card;
-
-  const user = await User.findOneOrFail(userId);
-  result.user = user;
-  result.city = user.city;
-  result.state = user.state;
-  result.location = user.location;
-
-  if (plant.tags) {
-    const validatedTags = plant.tags.filter((tag) => validTags.has(tag));
-    const tags: Tag[] = await Tag.findByIds(validatedTags);
-    result.tags = tags;
-  }
-
-  return await result.save();
+    state, city, latitude, longitude,
+  } = await getLocationByIp('oie');
+  const location = getPoint({ latitude, longitude });
+  return Plant.create({
+    ...plantInput, state, city, location, tags: [], images: [], card: 'massa.png',
+  }).save();
 }
