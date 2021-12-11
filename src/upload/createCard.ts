@@ -1,3 +1,4 @@
+import { CREATE_CARD_LAMBDA_FUNCTION } from "env/env";
 import { lambda } from "vendor/lambda";
 
 export async function createCard(key) {
@@ -5,7 +6,7 @@ export async function createCard(key) {
   await lambda
     .invoke(
       {
-        FunctionName: process.env.CREATE_CARD_LAMBDA_FUNCTION,
+        FunctionName: CREATE_CARD_LAMBDA_FUNCTION,
         Payload: payload,
       },
       (err) => console.error(err)

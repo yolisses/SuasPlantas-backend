@@ -1,7 +1,7 @@
 merge dev pages with the current server (in dev env only)
 use session authentication
 merge data folder
-organize env variables
+    X organize env variables
 rename plant image to image
 fix missing typeorm types
 use decorators to routes, controllers and so on

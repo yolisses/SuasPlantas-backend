@@ -1,4 +1,5 @@
 import axios from "axios";
+import { LOCATIONIQ_API_KEY } from "env/env";
 import { ILocation } from "./ILocation";
 
 interface Address {
@@ -13,7 +14,7 @@ export async function getLocationByCoordinates({
   latitude,
   longitude,
 }: ILocation) {
-  const apiKey = process.env.LOCATIONIQ_API_KEY;
+  const apiKey = LOCATIONIQ_API_KEY;
   const res = await axios.get(
     `https://us1.locationiq.com/v1/reverse.php?key=${apiKey}&lat=${latitude}&lon=${longitude}&accept-language=pt&format=json`
   );

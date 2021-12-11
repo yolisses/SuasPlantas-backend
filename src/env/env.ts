@@ -1,0 +1,27 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
+export const {
+  PORT,
+  NODE_ENV,
+  AUTH_SECRET,
+
+  DB_NAME,
+  DB_USER,
+  DB_PASSWORD,
+  DB_TYPE,
+  DB_PORT,
+  DB_HOST,
+  DB_SSL,
+
+  LOCATIONIQ_API_KEY,
+  IP_GEOLOCATION_API_KEY,
+  AWS_BUCKET_NAME,
+  AWS_BUCKET_PATH,
+  CREATE_CARD_LAMBDA_FUNCTION,
+
+  AWS_REGION,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
+} = procces.env;

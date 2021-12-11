@@ -1,5 +1,5 @@
-const bucketPath = process.env.AWS_BUCKET_PATH;
+import { AWS_BUCKET_PATH } from "env/env";
 
 export function getRemoteUri(key: string) {
-  return bucketPath + key;
+  return AWS_BUCKET_PATH + key;
 }

@@ -1,9 +1,6 @@
 /* eslint-disable import/first */
 import "reflect-metadata";
 import "regenerator-runtime";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 import "express-async-errors";
 import { createConnection } from "typeorm";
@@ -13,6 +10,7 @@ import { corsOptions } from "corsOptions";
 import cors from "cors";
 import { errorMiddleware } from "./errorMiddleware";
 import { routes } from "./routes";
+import { PORT } from "env/env";
 
 createConnection(dbConfig)
   .then(async () => {
@@ -24,7 +22,7 @@ createConnection(dbConfig)
 
     app.use(errorMiddleware);
 
-    const port = parseInt(process.env.PORT, 10);
+    const port = parseInt(PORT, 10);
     app.listen(port, () =>
       console.info(`Server running on http://localhost:${port}`)
     );
