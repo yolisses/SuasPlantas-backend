@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["typeorm"]
+  "cSpell.words": ["typeorm"],
+  "files.exclude": {
+    ".idea/": true,
+    ".next/": true,
+    "env": true,
+    "node_modules": true,
+    "yarn-error.log": true,
+    "dist": true
+  }
 }
