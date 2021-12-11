@@ -9,5 +9,5 @@ export async function editPlant(
 
   if (plant.userId !== userId) error(403, 'Plant edit by unauthorized user');
 
-  return await plant.save();
+  return plant.save();
 }
