@@ -27,9 +27,9 @@ export async function getLocationByIp(ip: string) {
       res = await axios.get(
         `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${'181.192.105.255'}&fields=state_prov,city,latitude,longitude`,
       );
-    } catch (err) {
-      console.error(err);
-      error(500, `ip location failed: ${err.message}`);
+    } catch (finalErr) {
+      console.error(finalErr);
+      error(500, `ip location failed: ${finalErr.message}`);
     }
   }
   const {
