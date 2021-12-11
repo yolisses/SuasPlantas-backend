@@ -20,6 +20,7 @@ import { User, UserId } from '../users/User';
 import { Tag } from './Tag';
 import { Like } from './like/Like';
 import { Image } from '../upload/Image';
+import { error } from '../utils/error';
 
 export type PlantId = number;
 
@@ -76,7 +77,7 @@ export class Plant extends BaseEntity {
   @BeforeInsert()
   checkAvailabilities() {
     if (!this.price && !this.swap && !this.donate) {
-      throw new Error('Plant with no price or swap or donate');
+      error(400, 'Plant with no price or swap or donate');
     }
   }
 

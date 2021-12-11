@@ -1,6 +1,5 @@
 import { Response } from 'express';
 import { getPlants } from '../plants/getPlants';
-import { error } from '../utils/error';
 import { editUser } from './editUser';
 import { editUserLocation } from './editUserLocation';
 import { getUser } from './getUser';
@@ -9,6 +8,7 @@ import { removeUser } from './removeUser';
 import { NODE_ENV } from '../env/env';
 import { generateToken } from '../auth/generateToken';
 import { signIn } from './signIn';
+import { validateProvided } from '../utils/validateProvided';
 
 export const UserController = {
   async getOne(req, res) {
@@ -43,8 +43,7 @@ export const UserController = {
   async editLocation(req, res) {
     const { userId } = req;
     const { latitude, longitude } = req.body;
-    if (longitude === undefined || longitude === null) { error(400, 'Latitude not provided'); }
-    if (longitude === undefined || longitude === null) { error(400, 'Longitude not provided'); }
+    validateProvided({ latitude, longitude });
     const location = { latitude, longitude };
     const result = await editUserLocation({ userId, location });
     return res.send(result);

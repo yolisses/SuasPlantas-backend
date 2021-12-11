@@ -1,11 +1,11 @@
 import { Plant, PlantId } from '../Plant';
 import { UserId } from '../../users/User';
-import { error } from '../../utils/error';
 import { Like } from './Like';
+import { validateFound } from '../../utils/validateFound';
 
 export async function giveLikeToItemService(plantId: PlantId, userId: UserId) {
   const plant = await Plant.findOne(plantId);
-  if (!plant) error(404, `Plant not found: ${plantId}`);
+  validateFound({ plant });
   const like = await Like.create({
     userId,
     plantId,

@@ -1,4 +1,4 @@
-import { error } from '../utils/error';
+import { validateOwner } from '../utils/validateOwner';
 import { Plant, PlantId } from './Plant';
 
 export async function editPlant(
@@ -6,8 +6,6 @@ export async function editPlant(
   plantId: PlantId,
 ) {
   const plant = await Plant.findOneOrFail(plantId);
-
-  if (plant.userId !== userId) error(403, 'Plant edit by unauthorized user');
-
+  validateOwner({ plant }, userId);
   return plant.save();
 }

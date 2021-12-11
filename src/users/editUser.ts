@@ -1,4 +1,4 @@
-import { error } from '../utils/error';
+import { validateFound } from '../utils/validateFound';
 import { User, UserId } from './User';
 
 interface IUserCreationDTO {
@@ -15,7 +15,7 @@ export async function editUser(
   }: IUserCreationDTO,
 ): Promise<User> {
   const user = await User.findOne(userId);
-  if (!user) error(404, 'User not found');
+  validateFound({ user });
   if (name) {
     user.name = name;
   }
