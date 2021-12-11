@@ -1,8 +1,8 @@
-import { Tag } from "tag/Tag";
-import { Plant, PlantId } from "./Plant";
-import { User } from "user/User";
-import { validTags } from "data/validTags";
-import { error } from "utils/error";
+import { Tag } from 'tag/Tag';
+import { User } from 'user/User';
+import { validTags } from 'plant/validTags';
+import { error } from 'utils/error';
+import { Plant, PlantId } from './Plant';
 
 interface IPlantCreationDTO {
   name: string;
@@ -17,11 +17,13 @@ interface IPlantCreationDTO {
 export async function editPlant(
   userId: number,
   plantId: PlantId,
-  { name, description, amount, price, swap, donate }: IPlantCreationDTO
+  {
+    name, description, amount, price, swap, donate,
+  }: IPlantCreationDTO,
 ) {
   const plant = await Plant.findOneOrFail(plantId);
 
-  if (plant.userId !== userId) error(403, "Plant edit by unauthorized user");
+  if (plant.userId !== userId) error(403, 'Plant edit by unauthorized user');
 
   return await plant.save();
 }

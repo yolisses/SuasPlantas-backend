@@ -1,11 +1,11 @@
-import { validTags } from "data/validTags";
-import { PlantImage } from "image/PlantImage";
-import { Tag } from "tag/Tag";
-import { createCard } from "upload/createCard";
-import { User } from "user/User";
-import { error } from "utils/error";
-import { getUriByKey } from "./getUriByKey";
-import { Plant } from "./Plant";
+import { validTags } from 'plant/validTags';
+import { PlantImage } from 'image/PlantImage';
+import { Tag } from 'tag/Tag';
+import { createCard } from 'upload/createCard';
+import { User } from 'user/User';
+import { error } from 'utils/error';
+import { getUriByKey } from './getUriByKey';
+import { Plant } from './Plant';
 
 interface IPlantCreationDTO {
   name: string;
@@ -19,7 +19,9 @@ interface IPlantCreationDTO {
 }
 
 export async function createPlant(plant: IPlantCreationDTO, userId: number) {
-  const { name, description, amount, price, swap, donate, images } = plant;
+  const {
+    name, description, amount, price, swap, donate, images,
+  } = plant;
 
   const result = Plant.create({
     name,
@@ -30,20 +32,20 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
     description,
   });
 
-  if (!images) error(400, "Images not provided");
-  if (images.length < 1) error(400, "Images length smaller than one");
-  if (images.length > 10) error(400, "Images length bigger than 10");
+  if (!images) error(400, 'Images not provided');
+  if (images.length < 1) error(400, 'Images length smaller than one');
+  if (images.length > 10) error(400, 'Images length bigger than 10');
   const imagesInstances: PlantImage[] = await Promise.all(
     plant.images.map(async (key) => {
       const image = PlantImage.create();
-      image.uri = getUriByKey(key.replace("uploads", "compressed"));
+      image.uri = getUriByKey(key.replace('uploads', 'compressed'));
       return await image.save();
-    })
+    }),
   );
   result.images = imagesInstances;
 
   await createCard(images[0]);
-  const card = getUriByKey(images[0].replace("uploads", "cards"));
+  const card = getUriByKey(images[0].replace('uploads', 'cards'));
   result.card = card;
 
   const user = await User.findOneOrFail(userId);
