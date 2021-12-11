@@ -1,4 +1,4 @@
-import { validateLength } from 'utils/validateLength';
+import { validateLength } from '../utils/validateLength';
 import { Image } from '../image/Image';
 import { Tag } from './Tag';
 import { createCard } from '../upload/createCard';

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { pingRoutes } from './ping/ping';
+import { pingRoutes } from './utils/ping';
 import { authRoutes } from './auth/authRoutes';
 import { likeRoutes } from './like/likeRoutes';
 import { userRoutes } from './user/userRoutes';
