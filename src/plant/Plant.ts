@@ -28,7 +28,7 @@ export class Plant extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
     id: PlantId;
 
-  @Column()
+  @Column({ nullable: false })
     name: string;
 
   @Column({
