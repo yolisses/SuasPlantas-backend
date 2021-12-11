@@ -20,7 +20,7 @@ export const dbConfig: ConnectionOptions = {
   type: 'postgres',
   port: parseInt(DB_PORT, 10),
   host: DB_HOST,
-  ssl: DB_SSL.toLocaleLowerCase() === 'true',
+  ssl: DB_SSL.toLowerCase() === 'true',
 
   synchronize: true,
   logging: false,
