@@ -39,8 +39,7 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   const imagesInstances: Image[] = await Promise.all(
     plant.images.map(async (key) => {
       const image = Image.create();
-      image.uri = getUriByKey(key.replace('upl
-      oads', 'compressed'));
+      image.uri = getUriByKey(key.replace('uploads', 'compressed'));
       return await image.save();
     }),
   );
