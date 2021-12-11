@@ -8,9 +8,9 @@ import {
   DB_USER,
 } from '../env/env';
 import { Image } from '../upload/Image';
-import { Like } from '../plant/like/Like';
-import { Plant } from '../plant/Plant';
-import { Tag } from '../plant/Tag';
+import { Like } from '../plants/like/Like';
+import { Plant } from '../plants/Plant';
+import { Tag } from '../plants/Tag';
 import { User } from '../user/User';
 
 export const dbConfig: ConnectionOptions = {

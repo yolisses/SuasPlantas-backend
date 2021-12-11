@@ -1,4 +1,5 @@
-import { Plant } from '../plant/Plant';
+
+import { Plant } from '../plants/Plant';
 
 const take = 3;
 export async function getUserPlants(id: number, page: number) {

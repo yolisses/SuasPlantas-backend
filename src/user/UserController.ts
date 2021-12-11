@@ -1,4 +1,4 @@
-import { getPlants } from '../plant/getPlants';
+import { getPlants } from '../plants/getPlants';
 import { error } from '../utils/error';
 import { editUser } from './editUser';
 import { editUserLocation } from './editUserLocation';

@@ -1,7 +1,7 @@
 import {
   BaseEntity, Entity, ManyToOne, PrimaryColumn,
 } from 'typeorm';
-import { Plant } from '../plant/Plant';
+import { Plant } from '../plants/Plant';
 
 @Entity()
 export class Image extends BaseEntity {

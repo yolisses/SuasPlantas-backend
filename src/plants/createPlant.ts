@@ -4,7 +4,7 @@ import { Tag } from './Tag';
 import { createCard } from '../upload/createCard';
 import { User } from '../user/User';
 import { error } from '../utils/error';
-import { validTags } from '../plant/validTags';
+import { validTags } from './validTags';
 import { getUriByKey } from './getUriByKey';
 import { Plant } from './Plant';
 
@@ -39,7 +39,8 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   const imagesInstances: Image[] = await Promise.all(
     plant.images.map(async (key) => {
       const image = Image.create();
-      image.uri = getUriByKey(key.replace('uploads', 'compressed'));
+      image.uri = getUriByKey(key.replace('upl
+      oads', 'compressed'));
       return await image.save();
     }),
   );
