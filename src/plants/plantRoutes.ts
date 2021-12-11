@@ -8,12 +8,12 @@ plantsRoutes.get('/', PlantController.get);
 plantsRoutes.get('/all', PlantController.getAll);
 plantsRoutes.get(
   '/image-link',
-  authMiddleware,
+
   PlantController.getImageUploadLink,
 );
 // Should be after the more specifics
 plantsRoutes.get('/:id', PlantController.getOne);
 
-plantsRoutes.post('/', authMiddleware, PlantController.create);
-plantsRoutes.delete('/:id', authMiddleware, PlantController.remove);
-plantsRoutes.patch('/:plantId', authMiddleware, PlantController.edit);
+plantsRoutes.post('/', PlantController.create);
+plantsRoutes.delete('/:id', PlantController.remove);
+plantsRoutes.patch('/:plantId', PlantController.edit);
