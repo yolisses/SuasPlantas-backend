@@ -17,6 +17,6 @@ look for how to enforce not null or undefined req values
 fix build
 dissolve src folder if possible
 fix security vulnerabilities in CORS and CSRF
-use docker-compose with env variables
+    X use docker-compose with env variables
 make the db as pluggable as util
 make functions services and controllers standard
