@@ -1,6 +1,6 @@
 import uuid from 'uuid-random';
+import { Request } from 'express';
 import { createPlant } from './createPlant';
-import { getAllPlants } from './getAllPlants';
 import { findPlant } from './findPlant';
 import { getPlantImageUpdateLink } from './getPlantImageUploadLink';
 import { getPlants } from './getPlants';
@@ -25,12 +25,6 @@ export const PlantController = {
       page: Number(page) || 0,
       ...rest,
     });
-
-    res.send(plants);
-  },
-
-  async getAll(req, res) {
-    const plants = await getAllPlants();
     res.send(plants);
   },
 
@@ -40,8 +34,8 @@ export const PlantController = {
     res.send(plant);
   },
 
-  async create(req, res) {
-    const { userId } = req;
+  async create(req:Request, res) {
+    const { userId } = req.session;
     res.send(await createPlant(req.body, userId));
   },
 

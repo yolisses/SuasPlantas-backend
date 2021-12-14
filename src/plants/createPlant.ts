@@ -17,6 +17,13 @@ export async function createPlant(plantInput:PlantInput, userId:UserId) {
   } = await getLocationByIp('oie');
   const location = getPoint({ latitude, longitude });
   return Plant.create({
-    ...plantInput, state, city, location, tags: [], images: [], card: 'massa.png',
+    ...plantInput,
+    state,
+    city,
+    location,
+    tags: [],
+    images: [],
+    card: 'massa.png',
+    userId,
   }).save();
 }

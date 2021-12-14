@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request } from 'express';
 import { getPlants } from '../plants/getPlants';
 import { editUser } from './editUser';
 import { editUserLocation } from './editUserLocation';
@@ -47,10 +47,12 @@ export const UserController = {
     return res.send(result);
   },
 
-  async signIn(req, res: Response) {
+  async signIn(req:Request, res) {
     const { ip } = req;
     const { accessToken } = req.body;
     const user = await signIn({ accessToken, ip });
+    req.session.userId = user.id;
+    req.session.user = user;
     return res.send({ user });
   },
 };

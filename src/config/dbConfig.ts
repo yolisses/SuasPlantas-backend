@@ -7,11 +7,12 @@ import {
   DB_SSL,
   DB_USER,
 } from './env';
-import { Image } from '../upload/Image';
-import { Like } from '../plants/like/Like';
-import { Plant } from '../plants/Plant';
 import { Tag } from '../plants/Tag';
 import { User } from '../users/User';
+import { Image } from '../upload/Image';
+import { Plant } from '../plants/Plant';
+import { Like } from '../plants/like/Like';
+import { Session } from '../signIn/Session';
 
 export const dbConfig: ConnectionOptions = {
   database: DB_NAME,
@@ -25,5 +26,5 @@ export const dbConfig: ConnectionOptions = {
   synchronize: true,
   logging: false,
 
-  entities: [Plant, User, Tag, Image, Like],
+  entities: [Plant, User, Tag, Image, Like, Session],
 };

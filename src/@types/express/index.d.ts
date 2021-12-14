@@ -1,6 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-declare namespace Express {
-    export interface Request {
-        userId: number
-    }
+import { User, UserId } from '../../users/User';
+
+declare module 'express-session' {
+  export interface SessionData {
+    user: User;
+    userId:UserId
+  }
 }

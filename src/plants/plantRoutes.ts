@@ -4,7 +4,6 @@ import { PlantController } from './PlantController';
 export const plantsRoutes = Router();
 
 plantsRoutes.get('/', PlantController.get);
-plantsRoutes.get('/all', PlantController.getAll);
 plantsRoutes.get(
   '/image-link',
 
