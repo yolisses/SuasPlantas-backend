@@ -11,8 +11,14 @@ import { validateProvided } from '../utils/validateProvided';
 export const UserController = {
   async getOne(req, res) {
     const { id } = req.params;
-    const plant = await getUser(id);
-    return res.send(plant);
+    const user = await getUser(id);
+    return res.send(user);
+  },
+
+  async me(req: Request, res) {
+    const { userId } = req.session;
+    const user = await getUser(userId);
+    return res.send(user);
   },
 
   async remove(req, res) {
