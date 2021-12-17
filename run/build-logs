@@ -1,1 +1,1 @@
-heroku logs --tail -a plantes-back
+heroku logs --tail -a suasplantas
