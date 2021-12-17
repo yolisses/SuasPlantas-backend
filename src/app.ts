@@ -20,18 +20,17 @@ import { oneWeekInMilliseconds } from './utils/oneWeekInMilliseconds';
 
 createConnection(dbConfig)
   .then(async (connection) => {
-    // create express app
     const app = express();
 
-    // app.use(session({
-    //   resave: false,
-    //   saveUninitialized: true,
-    //   secret: AUTH_SECRET,
-    //   cookie: {
-    //     maxAge: oneWeekInMilliseconds,
-    //   },
-    //   store: new TypeormStore().connect(connection.getRepository(Session)),
-    // }));
+    app.use(session({
+      resave: false,
+      saveUninitialized: true,
+      secret: AUTH_SECRET,
+      cookie: {
+        maxAge: oneWeekInMilliseconds,
+      },
+      store: new TypeormStore().connect(connection.getRepository(Session)),
+    }));
     app.use(cors(corsOptions));
     app.use(cookieParser());
     app.use(express.json());
