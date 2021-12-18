@@ -5,8 +5,8 @@ import { createCard } from '../upload/createCard';
 import { User } from '../users/User';
 import { error } from '../utils/error';
 import { validTags } from './validTags';
-import { getUriByKey } from './getUriByKey';
 import { Plant } from './Plant';
+import { AWS_BUCKET_PATH } from '../config/env';
 
 interface IPlantCreationDTO {
   name: string;
@@ -39,14 +39,14 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   const imagesInstances: Image[] = await Promise.all(
     plant.images.map(async (key) => {
       const image = Image.create();
-      image.uri = getUriByKey(key.replace('uploads', 'compressed'));
+      image.uri = `${AWS_BUCKET_PATH}/compressed/${key}`;
       return image.save();
     }),
   );
   result.images = imagesInstances;
 
   await createCard(images[0]);
-  const card = getUriByKey(images[0].replace('uploads', 'cards'));
+  const card = `${AWS_BUCKET_PATH}/cards/${images[0]}`;
   result.card = card;
 
   const user = await User.findOneOrFail(userId);

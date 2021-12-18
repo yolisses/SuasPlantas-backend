@@ -1,5 +1,5 @@
-import { AWS_BUCKET_PATH } from '../config/env';
+import { AWS_BUCKET_PATH } from "../config/env";
 
 export function getUriByKey(key: string) {
-  return AWS_BUCKET_PATH + key;
+  return `${AWS_BUCKET_PATH}/${key}`;
 }
