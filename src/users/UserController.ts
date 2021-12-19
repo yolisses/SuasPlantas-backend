@@ -1,12 +1,13 @@
-import { Request } from 'express';
-import { getPlants } from '../plants/getPlants';
-import { editUser } from './editUser';
-import { editUserLocation } from './editUserLocation';
-import { getUser } from './getUser';
-import { removeUser } from './removeUser';
-
+import { Request, Response } from 'express';
 import { signIn } from './signIn';
+import { getUser } from './getUser';
+import { editUser } from './editUser';
+import { error } from '../utils/error';
+import { removeUser } from './removeUser';
+import { editUserLocation } from './editUserLocation';
+import { sessionMaxAge } from '../config/sessionConfig';
 import { validateProvided } from '../utils/validateProvided';
+import { validateAuthenticated } from '../utils/validateAuthenticated';
 
 export const UserController = {
   async getOne(req, res) {
@@ -16,6 +17,7 @@ export const UserController = {
   },
 
   async me(req: Request, res) {
+    validateAuthenticated(req);
     const { userId } = req.session;
     const user = await getUser(userId);
     return res.send(user);
@@ -25,17 +27,6 @@ export const UserController = {
     const { userId } = req;
     await removeUser(userId);
     return res.send();
-  },
-
-  async getPlants(req, res) {
-    const { userId } = req.params;
-    const { page } = req.query;
-    const plants = await getPlants({
-      userId,
-      take: 21,
-      page: Number(page) || 0,
-    });
-    return res.send(plants);
   },
 
   async edit(req, res) {
@@ -53,12 +44,30 @@ export const UserController = {
     return res.send(result);
   },
 
-  async signIn(req:Request, res) {
+  async signIn(req:Request, res:Response) {
     const { ip } = req;
     const { accessToken } = req.body;
     const user = await signIn({ accessToken, ip });
     req.session.userId = user.id;
     req.session.user = user;
+    res.cookie('authenticated', 'true', {
+      maxAge: sessionMaxAge,
+    });
     return res.send({ user });
+  },
+
+  async logout(req:Request, res:Response) {
+    try {
+      await new Promise((resolve, reject) => {
+        req.session.destroy((err) => {
+          reject(err);
+        });
+      });
+    } catch (err) {
+      console.error(err);
+      error(500, 'Unexpected error in logout');
+    }
+    res.clearCookie('authenticated');
+    return res.send('ok');
   },
 };

@@ -4,12 +4,12 @@ import { AUTH_SECRET } from './env';
 import { oneWeekInMilliseconds } from '../utils/oneWeekInMilliseconds';
 import { Session } from '../signIn/Session';
 
+export const sessionMaxAge = oneWeekInMilliseconds;
+
 export const sessionConfig = (connection) => session({
   resave: false,
-  saveUninitialized: true,
   secret: AUTH_SECRET,
-  cookie: {
-    maxAge: oneWeekInMilliseconds,
-  },
+  saveUninitialized: true,
+  cookie: { maxAge: sessionMaxAge },
   store: new TypeormStore().connect(connection.getRepository(Session)),
 });
