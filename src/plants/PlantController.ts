@@ -1,8 +1,6 @@
-import uuid from 'uuid-random';
 import { Request } from 'express';
 import { createPlant } from './createPlant';
 import { findPlant } from './findPlant';
-import { getPlantImageUpdateLink } from './getPlantImageUploadLink';
 import { getPlants } from './getPlants';
 import { removePlant } from './removePlant';
 import { editPlant } from './editPlant';
@@ -50,12 +48,5 @@ export const PlantController = {
     const { userId } = req;
     await removePlant(id, userId);
     res.send();
-  },
-
-  async getImageUploadLink(req, res) {
-    const { userId } = req;
-    const key = `uploads/${uuid()}.webp`;
-    const sendLink = await getPlantImageUpdateLink(key, userId);
-    res.send({ sendLink, key });
   },
 };

@@ -17,7 +17,7 @@ import {
   Index,
 } from 'typeorm';
 import { User, UserId } from '../users/User';
-import { Tag } from './Tag';
+import { Tag } from './tag/Tag';
 import { Like } from './like/Like';
 import { Image } from '../upload/Image';
 import { error } from '../utils/error';

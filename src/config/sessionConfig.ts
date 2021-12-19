@@ -1,0 +1,15 @@
+import session from 'express-session';
+import { TypeormStore } from 'connect-typeorm';
+import { AUTH_SECRET } from './env';
+import { oneWeekInMilliseconds } from '../utils/oneWeekInMilliseconds';
+import { Session } from '../signIn/Session';
+
+export const sessionConfig = (connection) => session({
+  resave: false,
+  saveUninitialized: true,
+  secret: AUTH_SECRET,
+  cookie: {
+    maxAge: oneWeekInMilliseconds,
+  },
+  store: new TypeormStore().connect(connection.getRepository(Session)),
+});

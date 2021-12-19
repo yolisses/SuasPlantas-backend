@@ -3,6 +3,8 @@ import {
   Column, Entity, Index, PrimaryColumn,
 } from 'typeorm';
 
+// as required by connect-typeorm
+// session attributes are dynamic
 @Entity()
 export class Session implements ISession {
   @Index()

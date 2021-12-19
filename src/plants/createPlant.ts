@@ -1,9 +1,9 @@
 import { validateLength } from '../utils/validateLength';
 import { Image } from '../upload/Image';
-import { Tag } from './Tag';
+import { Tag } from './tag/Tag';
 import { User } from '../users/User';
 import { error } from '../utils/error';
-import { validTags } from './validTags';
+import { validTags } from './tag/validTags';
 import { Plant } from './Plant';
 import { AWS_BUCKET_PATH } from '../config/env';
 

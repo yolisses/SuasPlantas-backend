@@ -7,26 +7,27 @@ import { error } from '../utils/error';
 interface Response {
   city?: string;
   town?: string;
-  village?: string;
-  city_district?: string;
   state?: string;
-  state_prov?: string;
+  village?: string;
   latitude: number;
   longitude: number;
+  state_prov?: string;
+  city_district?: string;
 }
 
-export async function getLocationByIp(ip: string) {
+export async function findLocationByIp(ip: string) {
   let res;
-  const apiKey = IP_GEOLOCATION_API_KEY;
   try {
     res = await axios.get(
-      `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}&fields=state_prov,city,latitude,longitude`,
+      `https://api.ipgeolocation.io/ipgeo?apiKey=${IP_GEOLOCATION_API_KEY}&ip=${ip}&fields=state_prov,city,latitude,longitude`,
     );
   } catch (err) {
     console.error(err);
     try {
+      // you can use default address instead
+      // but if theres some error on API it can look like just a not found
       res = await axios.get(
-        `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${'181.192.105.255'}&fields=state_prov,city,latitude,longitude`,
+        `https://api.ipgeolocation.io/ipgeo?apiKey=${IP_GEOLOCATION_API_KEY}&ip=${'181.192.105.255'}&fields=state_prov,city,latitude,longitude`,
       );
     } catch (finalErr) {
       console.error(finalErr);

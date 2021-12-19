@@ -1,4 +1,4 @@
-import { getLocationByCoordinates } from '../location/getLocationByCoordinates';
+import { findLocationByCoordinates } from '../location/findLocationByCoordinates';
 import { getPoint } from '../location/getPoint';
 import { ILocation } from '../location/Location';
 import { User, UserId } from './User';
@@ -19,7 +19,7 @@ export async function editUserLocation({
   const user = await User.findOne(userId);
   let locationFound = true;
   try {
-    const { city, state } = await getLocationByCoordinates(location);
+    const { city, state } = await findLocationByCoordinates(location);
     user.city = city;
     user.state = state;
     user.location = getPoint(location);

@@ -2,36 +2,25 @@
 import 'reflect-metadata';
 import 'regenerator-runtime';
 
-import cors from 'cors';
 import 'express-async-errors';
 import express from 'express';
-import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import { createConnection } from 'typeorm';
-import { TypeormStore } from 'connect-typeorm';
 
 import { routes } from './routes';
-import { Session } from './signIn/Session';
-import { corsOptions } from './corsOptions';
+import { PORT } from './config/env';
 import { dbConfig } from './config/dbConfig';
-import { AUTH_SECRET, PORT } from './config/env';
+import { corsConfig } from './config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
-import { oneWeekInMilliseconds } from './utils/oneWeekInMilliseconds';
+import { sessionConfig } from './config/sessionConfig';
 
 createConnection(dbConfig)
   .then(async (connection) => {
     const app = express();
 
-    app.use(session({
-      resave: false,
-      saveUninitialized: true,
-      secret: AUTH_SECRET,
-      cookie: {
-        maxAge: oneWeekInMilliseconds,
-      },
-      store: new TypeormStore().connect(connection.getRepository(Session)),
-    }));
-    app.use(cors(corsOptions));
+    // don't change the order unless strictly necessary
+    app.use(sessionConfig(connection));
+    app.use(corsConfig);
     app.use(cookieParser());
     app.use(express.json());
     app.use(routes);

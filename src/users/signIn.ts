@@ -1,8 +1,7 @@
 import { createUser } from './createUser';
-import { getUserByEmail } from './getUserByEmail';
-import { User } from './User';
-import { getLocationByIp } from '../location/getLocationByIp';
 import { getPoint } from '../location/getPoint';
+import { getUserByEmail } from './getUserByEmail';
+import { findLocationByIp } from '../location/findLocationByIp';
 import { validateWithGoogle } from '../signIn/validateWithGoogle';
 
 interface SignInParams{
@@ -13,10 +12,10 @@ ip:string
 export async function signIn({ accessToken, ip }:SignInParams) {
   const { email, name, picture } = await validateWithGoogle(accessToken);
 
-  let user: User = await getUserByEmail(email);
+  let user = await getUserByEmail(email);
 
   if (!user) {
-    const locationData = await getLocationByIp(ip);
+    const locationData = await findLocationByIp(ip);
     const {
       latitude, longitude, state, city,
     } = locationData;

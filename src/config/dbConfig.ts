@@ -1,6 +1,6 @@
 import { ConnectionOptions } from 'typeorm';
 import { DATABASE_URL } from './env';
-import { Tag } from '../plants/Tag';
+import { Tag } from '../plants/tag/Tag';
 import { User } from '../users/User';
 import { Image } from '../upload/Image';
 import { Plant } from '../plants/Plant';
