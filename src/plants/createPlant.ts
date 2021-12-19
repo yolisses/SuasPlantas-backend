@@ -1,7 +1,6 @@
 import { validateLength } from '../utils/validateLength';
 import { Image } from '../upload/Image';
 import { Tag } from './Tag';
-import { createCard } from '../upload/createCard';
 import { User } from '../users/User';
 import { error } from '../utils/error';
 import { validTags } from './validTags';
@@ -36,18 +35,17 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   if (!images) error(400, 'Images not provided');
   validateLength('Images', images, 1, 10);
 
+  const card = `${AWS_BUCKET_PATH}/${images[0]}`;
+  result.card = card;
+
   const imagesInstances: Image[] = await Promise.all(
     plant.images.map(async (key) => {
       const image = Image.create();
-      image.uri = `${AWS_BUCKET_PATH}/compressed/${key}`;
+      image.uri = `${AWS_BUCKET_PATH}/${key}`;
       return image.save();
     }),
   );
   result.images = imagesInstances;
-
-  await createCard(images[0]);
-  const card = `${AWS_BUCKET_PATH}/cards/${images[0]}`;
-  result.card = card;
 
   const user = await User.findOneOrFail(userId);
   result.user = user;
