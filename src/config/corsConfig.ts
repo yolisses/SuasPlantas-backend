@@ -1,22 +1,15 @@
 import cors from 'cors';
 
-const whitelist = {
-  'https://suasplantas.com': true,
-  'https://suasplantas.com.br': true,
-  'http://localhost:3000': true,
-  'https://localhost:3000': true,
-  undefined: true,
-};
-
-export const corsConfig = cors({
-  origin(origin, callback) {
-    if (whitelist[origin]) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+export const corsConfig = cors(
+  {
+    credentials: true,
+    origin: [
+      'http://localhost:3000',
+      'https://localhost:3000',
+      'http://localhost:4000',
+      'https://localhost:4000',
+      'https://suasplantas.com',
+      'https://suasplantas.com.br',
+    ],
   },
-  allowedHeaders: ['X-Request', 'content-type'],
-  credentials: true,
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-});
+);
