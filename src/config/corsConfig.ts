@@ -10,6 +10,8 @@ export const corsConfig = cors(
       'https://localhost:4000',
       'https://suasplantas.com',
       'https://suasplantas.com.br',
+      'https://www.suasplantas.com',
+      'https://www.suasplantas.com.br',
     ],
   },
 );
