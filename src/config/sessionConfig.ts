@@ -10,6 +10,9 @@ export const sessionConfig = (connection) => session({
   resave: false,
   secret: AUTH_SECRET,
   saveUninitialized: true,
-  cookie: { maxAge: sessionMaxAge },
+  cookie: {
+    maxAge: sessionMaxAge,
+    sameSite: 'none',
+  },
   store: new TypeormStore().connect(connection.getRepository(Session)),
 });

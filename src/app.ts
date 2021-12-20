@@ -8,20 +8,22 @@ import cookieParser from 'cookie-parser';
 import { createConnection } from 'typeorm';
 
 import { routes } from './routes';
-import { PORT } from './config/env';
+import { AUTH_SECRET, PORT } from './config/env';
 import { dbConfig } from './config/dbConfig';
 import { corsConfig } from './config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
 import { sessionConfig } from './config/sessionConfig';
+import { crossDomainCookiesMiddleware } from './config/crossDomainCookiesMiddleware';
 
 createConnection(dbConfig)
   .then(async (connection) => {
     const app = express();
 
     // don't change the order unless strictly necessary
+    app.use(crossDomainCookiesMiddleware);
     app.use(sessionConfig(connection));
     app.use(corsConfig);
-    app.use(cookieParser());
+    app.use(cookieParser(AUTH_SECRET));
     app.use(express.json());
     app.use(routes);
     app.use(errorMiddleware);
