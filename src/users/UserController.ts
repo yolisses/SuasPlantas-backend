@@ -52,6 +52,8 @@ export const UserController = {
     req.session.user = user;
     res.cookie('authenticated', 'true', {
       maxAge: sessionMaxAge,
+      sameSite: 'none',
+      secure: true,
     });
     return res.send({ user });
   },

@@ -13,6 +13,7 @@ export const sessionConfig = (connection) => session({
   cookie: {
     maxAge: sessionMaxAge,
     sameSite: 'none',
+    secure: true,
   },
   store: new TypeormStore().connect(connection.getRepository(Session)),
 });
