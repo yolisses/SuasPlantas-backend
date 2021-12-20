@@ -57,17 +57,11 @@ export const UserController = {
   },
 
   async logout(req:Request, res:Response) {
-    try {
-      await new Promise((resolve, reject) => {
-        req.session.destroy((err) => {
-          reject(err);
-        });
-      });
-    } catch (err) {
-      console.error(err);
-      error(500, 'Unexpected error in logout');
-    }
-    res.clearCookie('authenticated');
-    return res.send('ok');
+    req.session.destroy((err) => {
+      if (err) { error(500, 'Unexpected error in logout'); }
+      res.clearCookie('authenticated');
+      res.clearCookie('connect.sid');
+      return res.end();
+    });
   },
 };

@@ -10,7 +10,6 @@ const whitelist = {
 
 export const corsConfig = cors({
   origin(origin, callback) {
-    console.log({ origin });
     if (whitelist[origin]) {
       callback(null, true);
     } else {
