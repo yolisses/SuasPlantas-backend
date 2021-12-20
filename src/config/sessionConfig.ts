@@ -12,6 +12,7 @@ export const sessionConfig = (connection) => session({
   saveUninitialized: true,
   cookie: {
     maxAge: sessionMaxAge,
+    sameSite: 'none',
   },
   store: new TypeormStore().connect(connection.getRepository(Session)),
 });
