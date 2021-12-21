@@ -20,7 +20,6 @@ createConnection(dbConfig)
 
     // don't change the order unless strictly necessary
     app.use(corsConfig);
-    app.use(sessionConfig(connection));
     app.use((req, res, next) => {
       console.log(req.headers.origin);
       res.header('Access-Control-Allow-Credentials', 'true');
@@ -29,6 +28,7 @@ createConnection(dbConfig)
       res.header('Access-Control-Allow-Headers', 'Content-Type, *');
       next();
     });
+    app.use(sessionConfig(connection));
     app.use(cookieParser(AUTH_SECRET));
     app.use(express.json());
     app.use(routes);
