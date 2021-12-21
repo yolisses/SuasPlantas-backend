@@ -23,7 +23,8 @@ createConnection(dbConfig)
     app.use(sessionConfig(connection));
     app.use((req, res, next) => {
       res.header('Access-Control-Allow-Credentials', 'true');
-      res.header('Access-Control-Allow-Origin', 'https://suasplantas.com, https://suasplantas.com.br');
+      res.header('Access-Control-Allow-Origin', 'https://suasplantas.com');
+      res.header('Access-Control-Allow-Origin', 'https://suasplantas.com.br');
       res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
       res.header('Access-Control-Allow-Headers', 'Content-Type, *');
       next();
