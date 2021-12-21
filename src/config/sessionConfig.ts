@@ -12,10 +12,12 @@ export const sessionConfig = (connection) => session({
   secret: AUTH_SECRET,
   saveUninitialized: false,
   cookie: {
-    maxAge: sessionMaxAge,
-    sameSite: 'none',
+    path: '/',
     secure: !isDev,
-    domain: 'https://suasplantas.com',
+    httpOnly: true,
+    sameSite: 'none',
+    maxAge: sessionMaxAge,
+    domain: 'suasplantas.com',
   },
   store: new TypeormStore().connect(connection.getRepository(Session)),
 });
