@@ -15,6 +15,7 @@ export const sessionConfig = (connection) => session({
     maxAge: sessionMaxAge,
     sameSite: 'none',
     secure: !isDev,
+    domain: 'suasplantas.com',
   },
   store: new TypeormStore().connect(connection.getRepository(Session)),
 });
