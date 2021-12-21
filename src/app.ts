@@ -20,14 +20,16 @@ createConnection(dbConfig)
 
     // don't change the order unless strictly necessary
     app.use(corsConfig);
-    // app.use((req, res, next) => {
-    //   console.log(req.headers.origin);
-    //   res.header('Access-Control-Allow-Credentials', 'true');
-    //   res.header('Access-Control-Allow-Origin', req.headers.origin);
-    //   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-    //   res.header('Access-Control-Allow-Headers', 'Content-Type, *');
-    //   next();
-    // });
+    app.use((req, res, next) => {
+      console.log(req.headers.origin);
+      res.header('Access-Control-Allow-Credentials', 'true');
+      res.header('Access-Control-Allow-Origin', req.headers.origin);
+      res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, *');
+      next();
+    });
+    // heroku https
+    app.set('trust proxy', 1);
     app.use(sessionConfig(connection));
     app.use(cookieParser(AUTH_SECRET));
     app.use(express.json());
