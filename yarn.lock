@@ -3263,6 +3263,11 @@ follow-redirects@^1.14.4:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.4.tgz#838fdf48a8bbdd79e52ee51fb1c94e3ed98b9379"
   integrity sha512-zwGkiSXC1MUJG/qmeIFH2HBJx9u0V46QGUe3YR1fXG8bXQxq7fLj0RjLZQ5nubr9qNJUZrH+xUcwXEoXNpfS+g==
 
+force-ssl-heroku@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/force-ssl-heroku/-/force-ssl-heroku-1.0.2.tgz#52850323066ba789dc330feccd7817c7cebb2680"
+  integrity sha1-UoUDIwZrp4ncMw/szXgXx867JoA=
+
 form-data@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-3.0.1.tgz#ebd53791b78356a99af9a300d4282c4d5eb9755f"

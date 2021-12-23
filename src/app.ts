@@ -5,6 +5,7 @@ import 'regenerator-runtime';
 import 'express-async-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import forceSslHeroku from 'force-ssl-heroku';
 import { createConnection } from 'typeorm';
 
 import { routes } from './routes';
@@ -19,6 +20,7 @@ createConnection(dbConfig)
     const app = express();
 
     // don't change the order unless strictly necessary
+    app.use(forceSslHeroku);
     app.use(corsConfig);
     app.use(sessionConfig(connection));
     app.use((req, res, next) => {
