@@ -12,7 +12,7 @@ export const sessionConfig = (connection) => session({
   saveUninitialized: false,
   cookie: {
     maxAge: sessionMaxAge,
-    domain: '.suasplantas.com',
+    domain: 'suasplantas.com',
   },
   store: new TypeormStore().connect(connection.getRepository(Session)),
 });
