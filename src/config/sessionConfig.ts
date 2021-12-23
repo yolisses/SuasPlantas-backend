@@ -11,8 +11,6 @@ export const sessionConfig = (connection) => session({
   secret: AUTH_SECRET,
   saveUninitialized: false,
   cookie: {
-    secure: true,
-    httpOnly: true,
     maxAge: sessionMaxAge,
     domain: '.suasplantas.com',
   },
