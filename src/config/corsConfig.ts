@@ -2,6 +2,7 @@ import cors from 'cors';
 
 export const corsConfig = cors(
   {
+    exposedHeaders: 'Authorization',
     credentials: true,
     origin: [
       'http://localhost:3000',
