@@ -7,6 +7,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import { createConnection } from 'typeorm';
 
+import signature from 'cookie-signature';
 import { routes } from './routes';
 import { AUTH_SECRET, PORT } from './config/env';
 import { dbConfig } from './config/dbConfig';
@@ -20,8 +21,19 @@ createConnection(dbConfig)
 
     // don't change the order unless strictly necessary
     app.use(corsConfig);
+    app.use((req, res, next) => {
+      const connectSid = req.header('Authorization');
+      console.log(connectSid);
+      req.headers.cookie = `connect.sid=${connectSid}`;
+      next();
+    });
     app.use(sessionConfig(connection));
-    app.use(cookieParser(AUTH_SECRET));
+    app.use((req, res, next) => {
+      const connectSid = `s:${signature.sign(req.sessionID, AUTH_SECRET)}`;
+      console.log(connectSid);
+      res.setHeader('Authorization', connectSid);
+      next();
+    });
     app.use(express.json());
     app.use(routes);
     app.use(errorMiddleware);
