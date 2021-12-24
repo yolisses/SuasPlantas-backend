@@ -4,7 +4,6 @@ import 'regenerator-runtime';
 
 import 'express-async-errors';
 import express from 'express';
-import cookieParser from 'cookie-parser';
 import { createConnection } from 'typeorm';
 
 import signature from 'cookie-signature';
