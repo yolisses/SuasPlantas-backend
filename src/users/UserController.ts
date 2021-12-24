@@ -49,14 +49,12 @@ export const UserController = {
     const { accessToken } = req.body;
     const user = await signIn({ accessToken, ip });
     req.session.userId = user.id;
-    return res.send({ user });
+    return res.send(user);
   },
 
   async logout(req:Request, res:Response) {
     req.session.destroy((err) => {
       if (err) { error(500, 'Unexpected error in logout'); }
-      res.clearCookie('authenticated');
-      res.clearCookie('connect.sid');
       return res.end();
     });
   },

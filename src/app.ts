@@ -22,14 +22,12 @@ createConnection(dbConfig)
     app.use(corsConfig);
     app.use((req, res, next) => {
       const connectSid = req.header('Authorization');
-      console.log(connectSid);
       req.headers.cookie = `connect.sid=${connectSid}`;
       next();
     });
     app.use(sessionConfig(connection));
     app.use((req, res, next) => {
       const connectSid = `s:${signature.sign(req.sessionID, AUTH_SECRET)}`;
-      console.log(connectSid);
       res.setHeader('Authorization', connectSid);
       next();
     });
