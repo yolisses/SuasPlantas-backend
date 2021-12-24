@@ -6,7 +6,7 @@ import { oneHourInMinutes } from '../utils/oneHourInMinutes';
 
 export async function generateUploadLink(userId: UserId) {
   const params = {
-    Key: uuid(),
+    Key: `uploads/${uuid()}`,
     Expires: oneHourInMinutes,
     Bucket: AWS_BUCKET_NAME,
     Metadata: { userId: `${userId}` },
