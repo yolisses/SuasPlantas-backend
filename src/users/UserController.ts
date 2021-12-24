@@ -49,12 +49,6 @@ export const UserController = {
     const { accessToken } = req.body;
     const user = await signIn({ accessToken, ip });
     req.session.userId = user.id;
-    req.session.user = user;
-    res.cookie('authenticated', 'true', {
-      maxAge: sessionMaxAge,
-      sameSite: 'none',
-      secure: true,
-    });
     return res.send({ user });
   },
 
