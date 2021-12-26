@@ -13,6 +13,7 @@ export const corsConfig = cors(
       'https://suasplantas.com.br',
       'https://www.suasplantas.com',
       'https://www.suasplantas.com.br',
+      'https://suasplantas-git-stage-yowlisses.vercel.app',
     ],
   },
 );
