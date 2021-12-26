@@ -41,7 +41,7 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   const imagesInstances: Image[] = await Promise.all(
     plant.images.map(async (key) => {
       const image = Image.create();
-      image.uri = `${AWS_BUCKET_PATH}/${key}`;
+      image.uri = `${AWS_BUCKET_PATH}/uploads/${key}`;
       return image.save();
     }),
   );
