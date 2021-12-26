@@ -35,7 +35,7 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   if (!images) error(400, 'Images not provided');
   validateLength('Images', images, 1, 10);
 
-  const card = `${AWS_BUCKET_PATH}/${images[0]}`;
+  const card = `${AWS_BUCKET_PATH}/uploads/${images[0]}`;
   result.card = card;
 
   const imagesInstances: Image[] = await Promise.all(
