@@ -5,7 +5,6 @@ import { editUser } from './editUser';
 import { error } from '../utils/error';
 import { removeUser } from './removeUser';
 import { editUserLocation } from './editUserLocation';
-import { sessionMaxAge } from '../config/sessionConfig';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 
