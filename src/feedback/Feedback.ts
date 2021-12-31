@@ -16,16 +16,16 @@ export class Feedback extends BaseEntity {
 @PrimaryGeneratedColumn({ type: 'int' })
   id: FeedbackId;
 
-@Column()
+@Column({ nullable: true })
   name: string;
 
-@Column()
+@Column({ nullable: true })
   email: string;
 
-@Column({ type: 'int' })
+@Column({ type: 'int', nullable: true })
   rating: number;
 
-@Column()
+@Column({ nullable: true })
   message: string;
 
 @Column()
