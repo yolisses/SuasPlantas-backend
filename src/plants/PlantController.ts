@@ -4,6 +4,7 @@ import { findPlant } from './findPlant';
 import { getPlants } from './getPlants';
 import { removePlant } from './removePlant';
 import { editPlant } from './editPlant';
+import { getPlantsSitemap } from './getPlantsSitemap';
 
 function optionalBoolean(value) {
   if (value === 'true') return true;
@@ -47,5 +48,11 @@ export const PlantController = {
     const { userId } = req.session;
     await removePlant(id, userId);
     res.send();
+  },
+
+  async sitemap(req, res) {
+    const result = await getPlantsSitemap();
+    console.log(result);
+    res.send(result);
   },
 };
