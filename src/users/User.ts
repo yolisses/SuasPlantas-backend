@@ -1,3 +1,4 @@
+import { Feedback } from 'aws-sdk/clients/guardduty';
 import { Point } from 'geojson';
 import {
   BaseEntity,
@@ -57,6 +58,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Like, (like) => like.user)
     likes: Like[];
+
+  @OneToMany(() => Plant, (plant) => plant.user)
+    feedbacks: Feedback[];
 
   @CreateDateColumn()
     createdAt: Timestamp;
