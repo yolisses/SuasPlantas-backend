@@ -38,14 +38,13 @@ export const PlantController = {
   },
 
   async edit(req, res) {
-    const { userId } = req;
-    const { plantId } = req.params;
-    res.send(await editPlant(userId, plantId));
+    const { userId } = req.session;
+    res.send(await editPlant(req.body, userId));
   },
 
   async remove(req, res) {
     const { id } = req.params;
-    const { userId } = req;
+    const { userId } = req.session;
     await removePlant(id, userId);
     res.send();
   },

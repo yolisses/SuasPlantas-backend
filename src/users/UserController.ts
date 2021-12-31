@@ -23,19 +23,19 @@ export const UserController = {
   },
 
   async remove(req, res) {
-    const { userId } = req;
+    const { userId } = req.session;
     await removeUser(userId);
     return res.send();
   },
 
   async edit(req, res) {
-    const { userId } = req;
+    const { userId } = req.session;
     const user = await editUser(userId, req.body);
     return res.send(user);
   },
 
   async editLocation(req, res) {
-    const { userId } = req;
+    const { userId } = req.session;
     const { latitude, longitude } = req.body;
     validateProvided({ latitude, longitude });
     const location = { latitude, longitude };

@@ -8,4 +8,4 @@ plantsRoutes.get('/:id', PlantController.getOne);
 
 plantsRoutes.post('/', PlantController.create);
 plantsRoutes.delete('/:id', PlantController.remove);
-plantsRoutes.patch('/:plantId', PlantController.edit);
+plantsRoutes.patch('/', PlantController.edit);
