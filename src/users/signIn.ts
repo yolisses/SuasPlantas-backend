@@ -3,14 +3,21 @@ import { getPoint } from '../location/getPoint';
 import { getUserByEmail } from './getUserByEmail';
 import { findLocationByIp } from '../location/findLocationByIp';
 import { validateWithGoogle } from '../signIn/validateWithGoogle';
+import { validateWithFacebook } from '../signIn/validateWithFacebook';
 
 interface SignInParams{
 accessToken :string
+provider:'google'|'facebook'
 ip:string
 }
 
-export async function signIn({ accessToken, ip }:SignInParams) {
-  const { email, name, picture } = await validateWithGoogle(accessToken);
+const validateWith = {
+  google: validateWithGoogle,
+  facebook: validateWithFacebook,
+} as const;
+
+export async function signIn({ accessToken, provider, ip }:SignInParams) {
+  const { email, name, picture } = await validateWith[provider](accessToken);
 
   let user = await getUserByEmail(email);
 
