@@ -23,8 +23,9 @@ export async function editUserLocation({
     user.city = city;
     user.state = state;
     user.location = getPoint(location);
-    user.save();
+    await user.save();
   } catch (err) {
+    console.log(err);
     locationFound = false;
   }
   return { user, locationFound };
