@@ -4,7 +4,7 @@ import { User, UserId } from './User';
 interface IUserCreationDTO {
   name: string;
   instagramUsername?: string;
-  whatsappNumber?: number;
+  whatsappNumber?: string;
   description: string;
 }
 

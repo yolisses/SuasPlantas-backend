@@ -38,7 +38,7 @@ export class User extends BaseEntity {
     instagramUsername?: string;
 
   @Column({ nullable: true })
-    whatsappNumber?: number;
+    whatsappNumber?: string;
 
   @Column()
     state: string;
