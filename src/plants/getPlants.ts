@@ -20,7 +20,7 @@ export async function getPlants({
   donate,
   userId,
   page = 0,
-  take = 20,
+  take = 50,
 }: GetPlantsParams) {
   const query = Plant.createQueryBuilder('plant');
 
