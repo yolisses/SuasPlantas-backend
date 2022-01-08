@@ -10,3 +10,6 @@ plantsRoutes.get('/:id', PlantController.getOne);
 plantsRoutes.post('/', PlantController.create);
 plantsRoutes.delete('/:id', PlantController.remove);
 plantsRoutes.patch('/', PlantController.edit);
+
+plantsRoutes.post('/:id/like', PlantController.like);
+plantsRoutes.delete('/:id/like', PlantController.dislike);

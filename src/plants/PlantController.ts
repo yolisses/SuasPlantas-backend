@@ -5,6 +5,8 @@ import { getPlants } from './getPlants';
 import { removePlant } from './removePlant';
 import { editPlant } from './editPlant';
 import { getPlantsSitemap } from './getPlantsSitemap';
+import { likePlant } from './likePlant';
+import { dislikePlant } from './dislikePlant';
 
 function optionalBoolean(value) {
   if (value === 'true') return true;
@@ -54,5 +56,19 @@ export const PlantController = {
     const result = await getPlantsSitemap();
     console.log(result);
     res.send(result);
+  },
+
+  async like(req, res) {
+    const { id } = req.params;
+    const { userId } = req.session;
+    const like = await likePlant(id, userId);
+    res.send(like);
+  },
+
+  async dislike(req, res) {
+    const { id } = req.params;
+    const { userId } = req.session;
+    const like = await dislikePlant(id, userId);
+    res.send(like);
   },
 };

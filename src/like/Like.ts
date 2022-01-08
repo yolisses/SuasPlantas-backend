@@ -34,12 +34,8 @@ export class Like extends BaseEntity {
   @Column()
     plantId: PlantId;
 
+  @Unique(['plantId', 'userId'])
+
   @CreateDateColumn()
     createdAt: Timestamp;
-
-  @UpdateDateColumn()
-    updatedAt: Timestamp;
-
-  @DeleteDateColumn({ select: false })
-    deletedAt?: Date;
 }
