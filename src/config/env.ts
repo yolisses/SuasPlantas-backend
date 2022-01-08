@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import { isDev } from '../utils/isDev';
 
 dotenv.config();
 
@@ -25,7 +24,9 @@ const {
   DATABASE_URL: DATABASE_PROD_URL,
 } = process.env;
 
-const useStageDB = false;
+// imported isDev is not initialized
+const isDev = NODE_ENV === 'development';
+const useStageDB = true;
 
 function getDataBaseUrl() {
   if (isDev) {

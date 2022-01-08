@@ -10,9 +10,9 @@ import { Feedback } from '../feedback/Feedback';
 
 export const dbConfig: ConnectionOptions = {
   type: 'postgres',
-  ssl: !DB_SSL ? undefined : {
+  ssl: DB_SSL ? {
     rejectUnauthorized: false,
-  },
+  } : undefined,
   url: DATABASE_URL,
 
   synchronize: true,
