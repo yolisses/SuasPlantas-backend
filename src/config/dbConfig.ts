@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
-import { DATABASE_URL } from './env';
+import { DATABASE_URL, DB_SSL } from './env';
 import { Tag } from '../plants/tag/Tag';
 import { User } from '../users/User';
 import { Image } from '../upload/Image';
@@ -10,7 +10,7 @@ import { Feedback } from '../feedback/Feedback';
 
 export const dbConfig: ConnectionOptions = {
   type: 'postgres',
-  ssl: {
+  ssl: !DB_SSL ? undefined : {
     rejectUnauthorized: false,
   },
   url: DATABASE_URL,
