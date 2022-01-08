@@ -25,8 +25,15 @@ const {
   DATABASE_URL: DATABASE_PROD_URL,
 } = process.env;
 
-const useStageDB = true;
+const useStageDB = false;
 
-export const DATABASE_URL = DATABASE_PROD_URL || useStageDB ? DATABASE_STAGE_URL : DATABASE_DEV_URL;
+function getDataBaseUrl() {
+  if (isDev) {
+    return useStageDB ? DATABASE_STAGE_URL : DATABASE_DEV_URL;
+  }
+  return DATABASE_PROD_URL;
+}
 
-export const DB_SSL = useStageDB;
+export const DATABASE_URL = getDataBaseUrl();
+
+export const DB_SSL = isDev ? useStageDB : true;
