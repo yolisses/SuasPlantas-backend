@@ -11,8 +11,8 @@ import {
   Unique,
 } from 'typeorm';
 
-import { User, UserId } from '../../users/User';
-import { Plant, PlantId } from '../Plant';
+import { User, UserId } from '../users/User';
+import { Plant, PlantId } from '../plants/Plant';
 
 type LikeId = number;
 
@@ -29,7 +29,7 @@ export class Like extends BaseEntity {
     userId: UserId;
 
   @ManyToOne(() => Plant, (plant) => plant.likes, { nullable: false })
-    plant: User;
+    plant: Plant;
 
   @Column()
     plantId: PlantId;

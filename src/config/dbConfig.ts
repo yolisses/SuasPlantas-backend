@@ -1,10 +1,10 @@
 import { ConnectionOptions } from 'typeorm';
 import { DATABASE_URL, DB_SSL } from './env';
-import { Tag } from '../plants/tag/Tag';
+import { Like } from '../like/Like';
 import { User } from '../users/User';
 import { Image } from '../upload/Image';
+import { Tag } from '../plants/tag/Tag';
 import { Plant } from '../plants/Plant';
-import { Like } from '../plants/like/Like';
 import { Session } from '../signIn/Session';
 import { Feedback } from '../feedback/Feedback';
 
