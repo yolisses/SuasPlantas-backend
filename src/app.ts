@@ -21,20 +21,10 @@ createConnection(dbConfig)
     // don't change the order unless strictly necessary
     app.use(corsConfig);
     app.use((req:Request, res:Response, next) => {
-      const connectSid = req.header('Authorization');
-      console.log('from cookie', req?.cookies);
-      console.log('from header', connectSid);
-      if (connectSid) {
-        req.headers.cookie = `connect.sid=${connectSid}`;
-      }
+      console.log('from cookie', req.headers.cookie);
       next();
     });
     app.use(sessionConfig(connection));
-    app.use((req, res, next) => {
-      const connectSid = `s:${signature.sign(req.sessionID, AUTH_SECRET)}`;
-      res.setHeader('Authorization', connectSid);
-      next();
-    });
     app.use(express.json());
     app.use(routes);
     app.use(errorMiddleware);
