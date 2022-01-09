@@ -6,9 +6,8 @@ import 'express-async-errors';
 import express, { Request, Response } from 'express';
 import { createConnection } from 'typeorm';
 
-import signature from 'cookie-signature';
 import { routes } from './routes';
-import { AUTH_SECRET, PORT } from './config/env';
+import { PORT } from './config/env';
 import { dbConfig } from './config/dbConfig';
 import { errorMiddleware } from './errorMiddleware';
 import { sessionConfig } from './config/sessionConfig';
