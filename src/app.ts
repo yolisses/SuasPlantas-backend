@@ -23,7 +23,6 @@ createConnection(dbConfig)
     app.use((req:Request, res:Response, next) => {
       const connectSid = req.header('Authorization');
       console.log('from cookie', req?.cookies);
-      console.log('from cookie', req?.cookies['connect.sid']);
       console.log('from header', connectSid);
       if (connectSid) {
         req.headers.cookie = `connect.sid=${connectSid}`;
