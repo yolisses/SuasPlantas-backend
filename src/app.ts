@@ -6,8 +6,9 @@ import 'express-async-errors';
 import express, { Request, Response } from 'express';
 import { createConnection } from 'typeorm';
 
+import signature from 'cookie-signature';
 import { routes } from './routes';
-import { PORT } from './config/env';
+import { AUTH_SECRET, PORT } from './config/env';
 import { dbConfig } from './config/dbConfig';
 import { errorMiddleware } from './errorMiddleware';
 import { sessionConfig } from './config/sessionConfig';
@@ -20,10 +21,20 @@ createConnection(dbConfig)
     // don't change the order unless strictly necessary
     app.use(corsConfig);
     app.use((req:Request, res:Response, next) => {
-      console.log('from cookie', req.headers.cookie);
+      const connectSid = req.header('Authorization');
+      console.log('from cookie', req?.cookies);
+      console.log('from header', connectSid);
+      if (connectSid) {
+        req.headers.cookie = `connect.sid=${connectSid}`;
+      }
       next();
     });
     app.use(sessionConfig(connection));
+    app.use((req, res, next) => {
+      const connectSid = `s:${signature.sign(req.sessionID, AUTH_SECRET)}`;
+      res.setHeader('Authorization', connectSid);
+      next();
+    });
     app.use(express.json());
     app.use(routes);
     app.use(errorMiddleware);
