@@ -31,7 +31,8 @@ export const PlantController = {
 
   async getOne(req, res) {
     const { id } = req.params;
-    const plant = await findPlant(id);
+    const { userId } = req.session;
+    const plant = await findPlant(id, userId);
     res.send(plant);
   },
 

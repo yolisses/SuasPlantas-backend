@@ -22,7 +22,9 @@ createConnection(dbConfig)
     app.use(corsConfig);
     app.use((req, res, next) => {
       const connectSid = req.header('Authorization');
-      req.headers.cookie = `connect.sid=${connectSid}`;
+      if (connectSid) {
+        req.headers.cookie = `connect.sid=${connectSid}`;
+      }
       next();
     });
     app.use(sessionConfig(connection));

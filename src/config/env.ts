@@ -26,7 +26,7 @@ const {
 
 // imported isDev is not initialized
 const isDev = NODE_ENV === 'development';
-const useStageDB = true;
+const useStageDB = false;
 
 function getDataBaseUrl() {
   if (isDev) {

@@ -105,4 +105,6 @@ export class Plant extends BaseEntity {
 
   @OneToMany(() => Image, (image) => image.plant, { onDelete: 'CASCADE' })
     images: Image[];
+
+  liked?:boolean;
 }
