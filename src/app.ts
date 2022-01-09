@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import 'regenerator-runtime';
 
 import 'express-async-errors';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { createConnection } from 'typeorm';
 
 import signature from 'cookie-signature';
@@ -20,10 +20,10 @@ createConnection(dbConfig)
 
     // don't change the order unless strictly necessary
     app.use(corsConfig);
-    app.use((req, res, next) => {
+    app.use((req:Request, res:Response, next) => {
       const connectSid = req.header('Authorization');
-      console.log('from cookie', req.headers.cookie);
-      console.log('from cookie', req.headers.cookie['connect.sid']);
+      console.log('from cookie', req?.cookies);
+      console.log('from cookie', req?.cookies['connect.sid']);
       console.log('from header', connectSid);
       if (connectSid) {
         req.headers.cookie = `connect.sid=${connectSid}`;
