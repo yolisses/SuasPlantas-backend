@@ -8,10 +8,8 @@ export async function findPlant(plantId: PlantId, userId:UserId) {
     relations: ['user', 'images', 'tags'],
   });
   validateFound({ plant });
-  console.log(userId);
   if (userId) {
     const like = await Like.findOne({ where: { plantId, userId } });
-    console.log(like);
     plant.liked = !!like;
   }
   return plant;
