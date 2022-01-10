@@ -32,7 +32,7 @@ export const PlantController = {
   async getOne(req, res) {
     const { id } = req.params;
     const { userId } = req.session;
-    const plant = await findPlant(id, userId);
+    const plant = await findPlant(Number(id), userId);
     res.send(plant);
   },
 
