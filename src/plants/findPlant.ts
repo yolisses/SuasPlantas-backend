@@ -11,7 +11,7 @@ export async function findPlant(plantId: PlantId, userId:UserId) {
     const user = await User.findOne(userId, {
       loadRelationIds: { relations: ['likedPlants'] },
     });
-    if (user.likedPlants.indexOf(plantId as any)) {
+    if (user.likedPlants.indexOf(plantId as any) !== -1) {
       plant.liked = true;
     }
   }
