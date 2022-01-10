@@ -18,7 +18,6 @@ import {
 } from 'typeorm';
 import { User, UserId } from '../users/User';
 import { Tag } from './tag/Tag';
-import { Like } from '../like/Like';
 import { Image } from '../upload/Image';
 import { error } from '../utils/error';
 
@@ -97,8 +96,9 @@ export class Plant extends BaseEntity {
   @ManyToOne(() => User, (user) => user.plants, { nullable: false })
     user: User;
 
-  @OneToMany(() => Like, (like) => like.plant)
-    likes: Like[];
+  @ManyToMany(() => User, (user) => user.plants, { nullable: false })
+  @JoinTable()
+    likedBy: User[];
 
   @Column()
     userId: UserId;

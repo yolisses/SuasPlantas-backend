@@ -1,6 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
 import { DATABASE_URL, DB_SSL } from './env';
-import { Like } from '../like/Like';
 import { User } from '../users/User';
 import { Image } from '../upload/Image';
 import { Tag } from '../plants/tag/Tag';
@@ -18,5 +17,5 @@ export const dbConfig: ConnectionOptions = {
   synchronize: true,
   logging: false,
 
-  entities: [Plant, User, Tag, Image, Like, Session, Feedback],
+  entities: [Plant, User, Tag, Image, Session, Feedback],
 };

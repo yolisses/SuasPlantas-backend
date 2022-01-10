@@ -7,12 +7,13 @@ import {
   DeleteDateColumn,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
-import { Like } from '../like/Like';
 import { Plant } from '../plants/Plant';
 
 export type UserId = number;
@@ -56,8 +57,9 @@ export class User extends BaseEntity {
   @OneToMany(() => Plant, (plant) => plant.user)
     plants: Plant[];
 
-  @OneToMany(() => Like, (like) => like.user)
-    likes: Like[];
+  @ManyToMany(() => Plant, (plant) => plant.likedBy)
+  @JoinTable()
+    likedPlants: Plant[];
 
   @OneToMany(() => Plant, (plant) => plant.user)
     feedbacks: Feedback[];

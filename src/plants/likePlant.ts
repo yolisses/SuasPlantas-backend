@@ -1,12 +1,14 @@
-import { QueryFailedError } from 'typeorm';
-import { Like } from '../like/Like';
-import { UserId } from '../users/User';
-import { PlantId } from './Plant';
+import { getConnection } from 'typeorm';
+import { User, UserId } from '../users/User';
+import { Plant, PlantId } from './Plant';
 
 export async function likePlant(plantId:PlantId, userId:UserId) {
-  try {
-    await Like.create({ userId, plantId }).save();
-  } catch (err) {
-    if (!(err instanceof QueryFailedError)) throw err;
-  }
+  const user = await User.findOne(userId);
+  const plant = await Plant.findOne(plantId);
+
+  return getConnection()
+    .createQueryBuilder()
+    .relation(User, 'likedPlants')
+    .of(user)
+    .add(plant);
 }
