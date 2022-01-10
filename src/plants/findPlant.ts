@@ -8,8 +8,10 @@ export async function findPlant(plantId: PlantId, userId:UserId) {
   });
   validateFound({ plant });
   if (userId) {
-    const user = await User.findOne(userId, { loadRelationIds: ['likedPlants'] });
-    if (user.likedPlants.indexOf(Number(plantId)) !== -1) {
+    const user = await User.findOne(userId, {
+      loadRelationIds: { relations: ['likedPlants'] },
+    });
+    if (user.likedPlants.indexOf(plantId as any)) {
       plant.liked = true;
     }
   }
