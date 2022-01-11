@@ -1,19 +1,20 @@
-import { User, UserId } from '../users/User';
+import { UserId } from '../users/User';
+import { isOnArray } from '../utils/isOnArray';
 import { validateFound } from '../utils/validateFound';
 import { Plant, PlantId } from './Plant';
 
-export async function findPlant(plantId: PlantId, userId:UserId) {
+export async function findPlant(plantId: PlantId, userId?:UserId) {
   const plant = await Plant.findOne(plantId, {
     relations: ['user', 'images', 'tags'],
+    loadRelationIds: userId ? {
+      relations: ['likedBy'],
+    } : undefined,
   });
   validateFound({ plant });
-  if (userId) {
-    const user = await User.findOne(userId, {
-      loadRelationIds: { relations: ['likedPlants'] },
-    });
-    if (user.likedPlants.indexOf(plantId as any) !== -1) {
-      plant.liked = true;
-    }
+
+  if (userId && isOnArray(plant.likedBy, userId)) {
+    plant.liked = true;
   }
+
   return plant;
 }
