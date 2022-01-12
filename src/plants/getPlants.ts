@@ -59,8 +59,7 @@ export async function getPlants({
     .take(take)
     .loadRelationIdAndMap('images', 'plant.images')
     .loadRelationIdAndMap('tags', 'plant.tags')
-    .addSelect('user')
-    .orderBy('plant.createdAt', 'DESC');
+    .addSelect('user');
 
   const data = await query.getManyAndCount();
 

@@ -23,7 +23,11 @@ import { error } from '../utils/error';
 
 export type PlantId = number;
 
-@Entity()
+@Entity({
+  orderBy: {
+    createdAt: 'DESC',
+  },
+})
 export class Plant extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
     id: PlantId;
