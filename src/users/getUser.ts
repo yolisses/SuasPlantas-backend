@@ -9,7 +9,9 @@ export async function getUser(id: number) {
   const user = createQueryBuilder(User, 'user')
     .where('user.id = :id', { id })
     .innerJoinAndSelect('user.plants', 'plants')
-    .orderBy('plants', 'DESC')
+    .innerJoinAndSelect('user.likedPlants', 'likedPlants')
+    .addOrderBy('plants.createdAt', 'DESC')
+    .addOrderBy('likedPlants.createdAt', 'DESC')
     .getOne();
   validateFound({ user });
   return user;
