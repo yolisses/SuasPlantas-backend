@@ -1,3 +1,4 @@
+import { alsoSaw } from '../recommendation/alsoSaw';
 import { UserId } from '../users/User';
 import { isOnArray } from '../utils/isOnArray';
 import { validateFound } from '../utils/validateFound';
@@ -16,5 +17,6 @@ export async function findPlant(plantId: PlantId, userId?:UserId) {
     plant.liked = true;
   }
 
+  plant.alsoSaw = await alsoSaw(plantId);
   return plant;
 }

@@ -111,4 +111,6 @@ export class Plant extends BaseEntity {
     images: Image[];
 
   liked?:boolean;
+
+  alsoSaw?: Plant[];
 }

@@ -7,6 +7,7 @@ import { editPlant } from './editPlant';
 import { getPlantsSitemap } from './getPlantsSitemap';
 import { likePlant } from './likePlant';
 import { dislikePlant } from './dislikePlant';
+import { addView } from '../view/addView';
 
 function optionalBoolean(value) {
   if (value === 'true') return true;
@@ -34,6 +35,7 @@ export const PlantController = {
     const { userId } = req.session;
     const plant = await findPlant(Number(id), userId);
     res.send(plant);
+    if (userId) { addView(userId, plant.id); }
   },
 
   async create(req:Request, res) {
