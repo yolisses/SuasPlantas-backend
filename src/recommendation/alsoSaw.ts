@@ -12,6 +12,6 @@ left join
 on view."userId" = vplanta2."userId")as coisa group by "plantId") as ranked
 on plant.id = ranked."plantId"
 order by rank is null, rank desc
-limit 16
+limit 14
     `, [plantId]);
 }
