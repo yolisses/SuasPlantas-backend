@@ -1,6 +1,8 @@
+import { getManager } from 'typeorm';
 import { findLocationByCoordinates } from '../location/findLocationByCoordinates';
 import { getPoint } from '../location/getPoint';
 import { ILocation } from '../location/Location';
+import { Plant } from '../plants/Plant';
 import { User, UserId } from './User';
 
 interface EditUserLocationProps {
@@ -24,6 +26,11 @@ export async function editUserLocation({
     user.state = state;
     user.location = getPoint(location);
     await user.save();
+    await getManager().update(
+      Plant,
+      { userId: user.id },
+      { city, state, location: getPoint(location) },
+    );
   } catch (err) {
     console.log(err);
     locationFound = false;
