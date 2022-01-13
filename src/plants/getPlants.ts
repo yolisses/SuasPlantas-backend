@@ -24,6 +24,16 @@ export async function getPlants({
 }: GetPlantsParams) {
   const query = Plant.createQueryBuilder('plant');
 
+  query.select([
+    'plant.id',
+    'plant.name',
+    'plant.swap',
+    'plant.donate',
+    'plant.price',
+    'plant.city',
+    'plant.state',
+    'plant.card']);
+
   if (swap || donate || sell) {
     query.where({ swap, donate, price: null });
     if (swap) query.orWhere({ swap });
