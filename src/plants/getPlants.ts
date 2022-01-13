@@ -74,7 +74,7 @@ export async function getPlants({
   const data = await query.getManyAndCount();
 
   const totalPages = Math.ceil(data[1] / take);
-  const nextPage = page < totalPages ? page + 1 : null;
+  const nextPage = page < totalPages - 1 ? page + 1 : null;
   return {
     page,
     totalPages,
