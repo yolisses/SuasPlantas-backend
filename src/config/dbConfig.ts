@@ -7,6 +7,7 @@ import { Plant } from '../plants/Plant';
 import { Session } from '../signIn/Session';
 import { Feedback } from '../feedback/Feedback';
 import { View } from '../view/View';
+import { LookingFor } from '../lookingFor/LookingFor';
 
 export const dbConfig: ConnectionOptions = {
   type: 'postgres',
@@ -18,5 +19,14 @@ export const dbConfig: ConnectionOptions = {
   synchronize: true,
   logging: false,
 
-  entities: [Plant, User, Tag, Image, Session, Feedback, View],
+  entities: [
+    Plant,
+    User,
+    Tag,
+    Image,
+    Session,
+    Feedback,
+    View,
+    LookingFor,
+  ],
 };

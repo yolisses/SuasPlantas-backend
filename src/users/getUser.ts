@@ -9,6 +9,7 @@ export async function getUser(id: number) {
     .where('user.id = :id', { id })
     .leftJoinAndSelect('user.plants', 'plants')
     .leftJoinAndSelect('user.likedPlants', 'likedPlants')
+    .leftJoinAndSelect('user.lookingFors', 'lookingFors')
     .addOrderBy('plants.createdAt', 'DESC')
     .addOrderBy('likedPlants.createdAt', 'DESC')
     .getOne();

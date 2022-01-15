@@ -14,7 +14,9 @@ import {
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
+import { lookup } from 'dns/promises';
 import { Plant } from '../plants/Plant';
+import { LookingFor } from '../lookingFor/LookingFor';
 
 export type UserId = number;
 
@@ -56,6 +58,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Plant, (plant) => plant.user)
     plants: Plant[];
+
+  @OneToMany(() => LookingFor, (lookingFor) => lookingFor.user)
+    lookingFors: LookingFor[];
 
   @ManyToMany(() => Plant, (plant) => plant.likedBy)
   @JoinTable()

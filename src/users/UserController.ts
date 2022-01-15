@@ -11,7 +11,7 @@ import { validateAuthenticated } from '../utils/validateAuthenticated';
 export const UserController = {
   async getOne(req, res) {
     const { id } = req.params;
-    const user = await getUser(id);
+    const user = await getUser(Number(id));
     return res.send(user);
   },
 
