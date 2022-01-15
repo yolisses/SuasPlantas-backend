@@ -97,15 +97,14 @@ export class Plant extends BaseEntity {
   @JoinTable()
     tags: Tag[];
 
+  @Column()
+    userId: UserId;
+
   @ManyToOne(() => User, (user) => user.plants, { nullable: false })
     user: User;
 
-  @ManyToMany(() => User, (user) => user.plants, { nullable: false })
-  @JoinTable()
+  @ManyToMany(() => User, (user) => user.likedPlants, { nullable: false })
     likedBy: User[];
-
-  @Column()
-    userId: UserId;
 
   @OneToMany(() => Image, (image) => image.plant, { onDelete: 'CASCADE' })
     images: Image[];
