@@ -76,10 +76,12 @@ export async function getPlants({
   const totalPages = Math.ceil(data[1] / take);
   const nextPage = page < totalPages - 1 ? page + 1 : null;
   return {
-    page,
-    totalPages,
-    totalCount: data[1],
-    nextPage,
+    pageData: {
+      page,
+      totalPages,
+      totalCount: data[1],
+      nextPage,
+    },
     content: data[0],
   };
 }
