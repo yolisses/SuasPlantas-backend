@@ -2,16 +2,16 @@ import { Router } from 'express';
 
 import { pingRoutes } from './utils/ping';
 import { userRoutes } from './users/userRoutes';
-import { plantsRoutes } from './plants/plantRoutes';
+import { plantRoutes } from './plant/plantRoutes';
+import { questRoutes } from './quests/questsRoutes';
 import { uploadRoutes } from './upload/uploadRoutes';
 import { feedbackRoutes } from './feedback/FeedBackRoutes';
-import { lookingForRoutes } from './lookingFor/lookingForRoutes';
 
 export const routes = Router();
 
 routes.use('/ping', pingRoutes);
 routes.use('/users', userRoutes);
-routes.use('/plants', plantsRoutes);
+routes.use('/quests', questRoutes);
+routes.use('/plants', plantRoutes);
 routes.use('/upload', uploadRoutes);
 routes.use('/feedback', feedbackRoutes);
-routes.use('/looking_for', lookingForRoutes);

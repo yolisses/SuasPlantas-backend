@@ -14,13 +14,12 @@ import {
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
-import { lookup } from 'dns/promises';
-import { Plant } from '../plants/Plant';
-import { LookingFor } from '../lookingFor/LookingFor';
+import { Plant } from '../plant/Plant';
+import { Quest } from '../quests/Quest';
 
 export type UserId = number;
 
-@Entity({ name: 'users' })
+@Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
     id: UserId;
@@ -59,8 +58,8 @@ export class User extends BaseEntity {
   @OneToMany(() => Plant, (plant) => plant.user)
     plants: Plant[];
 
-  @OneToMany(() => LookingFor, (lookingFor) => lookingFor.user)
-    lookingFors: LookingFor[];
+  @OneToMany(() => Quest, (quest) => quest.user)
+    quests: Quest[];
 
   @ManyToMany(() => Plant, (plant) => plant.likedBy)
   @JoinTable()

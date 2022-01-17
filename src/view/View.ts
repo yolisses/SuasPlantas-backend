@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
 } from 'typeorm';
-import { Plant, PlantId } from '../plants/Plant';
+import { Plant, PlantId } from '../plant/Plant';
 import { User, UserId } from '../users/User';
 
 export type ViewId = number;

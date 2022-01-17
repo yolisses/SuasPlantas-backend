@@ -1,7 +1,6 @@
 import {
   BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn,
 } from 'typeorm';
-import { PlantId } from '../plants/Plant';
 import { User, UserId } from '../users/User';
 
 @Entity({
@@ -9,7 +8,7 @@ import { User, UserId } from '../users/User';
     createdAt: 'DESC',
   },
 })
-export class LookingFor extends BaseEntity {
+export class Quest extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'int' })
       id: number;
 

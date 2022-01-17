@@ -1,4 +1,4 @@
-import { PlantId } from '../plants/Plant';
+import { PlantId } from '../plant/Plant';
 import { UserId } from '../users/User';
 import { View } from './View';
 

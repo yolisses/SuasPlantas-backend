@@ -1,5 +1,5 @@
 import { getManager } from 'typeorm';
-import { Plant, PlantId } from '../plants/Plant';
+import { Plant, PlantId } from '../plant/Plant';
 
 export async function alsoSaw(plantId: PlantId):Promise<Plant[]> {
   return getManager().query(`

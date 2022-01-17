@@ -2,7 +2,7 @@ import { getManager } from 'typeorm';
 import { findLocationByCoordinates } from '../location/findLocationByCoordinates';
 import { getPoint } from '../location/getPoint';
 import { ILocation } from '../location/Location';
-import { Plant } from '../plants/Plant';
+import { Plant } from '../plant/Plant';
 import { User, UserId } from './User';
 
 interface EditUserLocationProps {
