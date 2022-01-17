@@ -5,12 +5,12 @@ export async function alsoSaw(plantId: PlantId):Promise<Plant[]> {
   return getManager().query(`
 select rank, id, name, swap, price, city, state, card from plant
 left join
-(select "plantId", count("plantId") as rank from 
- (select distinct view."userId", "plantId" from view
+(select plant_id, count(plant_id) as rank from 
+ (select distinct view.user_id, plant_id from view
   inner join
- (select distinct "userId" from view where view."plantId" = $1) as vplanta2 
-on view."userId" = vplanta2."userId")as coisa group by "plantId") as ranked
-on plant.id = ranked."plantId"
+ (select distinct user_id from view where view.plant_id = $1) as vplanta2 
+on view.user_id = vplanta2.user_id)as coisa group by plant_id) as ranked
+on plant.id = ranked.plant_id
 order by rank is null, rank desc
 limit 14
     `, [plantId]);
