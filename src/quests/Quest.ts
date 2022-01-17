@@ -1,5 +1,5 @@
 import {
-  BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn,
+  BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn,
 } from 'typeorm';
 import { User, UserId } from '../users/User';
 
@@ -15,9 +15,18 @@ export class Quest extends BaseEntity {
     @Column()
       name: string;
 
-    @ManyToOne(() => User, (user) => user.plants, { nullable: false })
+    @ManyToOne(() => User, (user) => user.quests, { nullable: false })
       user: User;
 
     @Column()
       userId: UserId;
+
+    @CreateDateColumn()
+      createdAt: Timestamp;
+
+    @UpdateDateColumn()
+      updatedAt: Timestamp;
+
+    @DeleteDateColumn({ select: false })
+      deletedAt?: Date;
 }

@@ -84,15 +84,6 @@ export class Plant extends BaseEntity {
     }
   }
 
-  @CreateDateColumn()
-    createdAt: Timestamp;
-
-  @UpdateDateColumn()
-    updatedAt: Timestamp;
-
-  @DeleteDateColumn({ select: false })
-    deletedAt?: Date;
-
   @ManyToMany(() => Tag)
   @JoinTable()
     tags: Tag[];
@@ -109,6 +100,15 @@ export class Plant extends BaseEntity {
 
   @OneToMany(() => Image, (image) => image.plant, { onDelete: 'CASCADE' })
     images: Image[];
+
+  @CreateDateColumn()
+    createdAt: Timestamp;
+
+  @UpdateDateColumn()
+    updatedAt: Timestamp;
+
+  @DeleteDateColumn({ select: false })
+    deletedAt?: Date;
 
   liked?:boolean;
 
