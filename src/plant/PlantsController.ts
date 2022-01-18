@@ -15,7 +15,7 @@ function optionalBoolean(value) {
   return undefined;
 }
 
-export const PlantController = {
+export const PlantsController = {
   async get(req, res) {
     const {
       sell, swap, donate, page, ...rest

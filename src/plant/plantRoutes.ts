@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { PlantController } from './PlantController';
+import { PlantsController } from './PlantsController';
 
 export const plantRoutes = Router();
 
-plantRoutes.get('/', PlantController.get);
-plantRoutes.get('/sitemap', PlantController.sitemap);
-plantRoutes.get('/:id', PlantController.getOne);
+plantRoutes.get('/', PlantsController.get);
+plantRoutes.get('/sitemap', PlantsController.sitemap);
+plantRoutes.get('/:id', PlantsController.getOne);
 
-plantRoutes.post('/', PlantController.create);
-plantRoutes.delete('/:id', PlantController.remove);
-plantRoutes.patch('/', PlantController.edit);
+plantRoutes.post('/', PlantsController.create);
+plantRoutes.delete('/:id', PlantsController.remove);
+plantRoutes.patch('/', PlantsController.edit);
 
-plantRoutes.post('/:id/like', PlantController.like);
-plantRoutes.delete('/:id/like', PlantController.dislike);
+plantRoutes.post('/:id/like', PlantsController.like);
+plantRoutes.delete('/:id/like', PlantsController.dislike);
