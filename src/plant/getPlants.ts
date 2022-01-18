@@ -1,4 +1,5 @@
 import { IsNull, Not } from 'typeorm';
+import { paginateResults } from '../common/paginateResults';
 import { UserId } from '../users/User';
 import { Plant } from './Plant';
 
@@ -71,17 +72,5 @@ export async function getPlants({
     .loadRelationIdAndMap('tags', 'plant.tags')
     .addSelect('user');
 
-  const data = await query.getManyAndCount();
-
-  const totalPages = Math.ceil(data[1] / take);
-  const nextPage = page < totalPages - 1 ? page + 1 : null;
-  return {
-    pageData: {
-      page,
-      totalPages,
-      totalCount: data[1],
-      nextPage,
-    },
-    content: data[0],
-  };
+  return paginateResults(query.getManyAndCount(), { page, take });
 }
