@@ -8,5 +8,5 @@ interface GetQuestsParams{
 
 export async function getQuests({ page = 0, take = 20 }:GetQuestsParams) {
   const skip = page * take;
-  return paginateResults(Quest.findAndCount({ take, skip }), { page, take });
+  return paginateResults(Quest.findAndCount({ relations: ['user'], take, skip }), { page, take });
 }
