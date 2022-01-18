@@ -8,7 +8,10 @@ export const QuestController = {
   },
 
   async get(req, res) {
-    const quests = await getQuests();
+    const quests = await getQuests({
+      ...req.query,
+      page: Number(req.query.page) || 0,
+    });
     res.send(quests);
   },
 };
