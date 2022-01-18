@@ -1,5 +1,8 @@
+import { paginateResults } from '../common/paginateResults';
 import { Quest } from './Quest';
 
-export async function getQuests() {
-  return Quest.find({});
+interface;
+
+export async function getQuests({}) {
+  return paginateResults(Quest.find({}));
 }
