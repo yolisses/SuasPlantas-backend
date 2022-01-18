@@ -1,11 +1,11 @@
-interface PageParams{
+interface PaginateResultsParams{
     page:number,
     take:number
 }
 
 export async function paginateResults<T>(
   getData:Promise<[T[], number]>,
-  { page, take }:PageParams,
+  { page, take }:PaginateResultsParams,
 ) {
   const data = await getData;
   const totalPages = Math.ceil(data[1] / take);
