@@ -69,7 +69,6 @@ export async function getPlants({
     .skip(skip)
     .take(take)
     .loadRelationIdAndMap('images', 'plant.images')
-    .loadRelationIdAndMap('tags', 'plant.tags')
     .addSelect('user');
 
   return paginateResults(query.getManyAndCount(), { page, take });
