@@ -4,6 +4,7 @@ import { getUser } from './getUser';
 import { editUser } from './editUser';
 import { error } from '../utils/error';
 import { removeUser } from './removeUser';
+import { getUserQuests } from './getUserQuests';
 import { editUserLocation } from './editUserLocation';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
@@ -56,5 +57,11 @@ export const UserController = {
       if (err) { error(500, 'Unexpected error in logout'); }
       return res.end();
     });
+  },
+
+  async getQuests(req:Request, res:Response) {
+    const { userId } = req.session;
+    const quests = await getUserQuests(userId);
+    return res.send(quests);
   },
 };

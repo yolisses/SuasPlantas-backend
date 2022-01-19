@@ -1,7 +1,18 @@
 import {
-  BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn,
+  Index,
+  Column,
+  Entity,
+  Timestamp,
+  ManyToOne,
+  BaseEntity,
+  CreateDateColumn,
+  DeleteDateColumn,
+  UpdateDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User, UserId } from '../users/User';
+
+export type QuestId = number
 
 @Entity({
   orderBy: {
@@ -10,8 +21,9 @@ import { User, UserId } from '../users/User';
 })
 export class Quest extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'int' })
-      id: number;
+      id: QuestId;
 
+    @Index({ fulltext: true })
     @Column()
       name: string;
 

@@ -5,3 +5,5 @@ export const questRoutes = Router();
 
 questRoutes.get('/', QuestController.get);
 questRoutes.post('/', QuestController.create);
+questRoutes.put('/:id', QuestController.edit);
+questRoutes.delete('/:id', QuestController.delete);

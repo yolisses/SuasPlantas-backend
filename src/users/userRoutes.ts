@@ -4,6 +4,7 @@ import { UserController } from './UserController';
 export const userRoutes = Router();
 
 userRoutes.get('/me', UserController.me);
+userRoutes.get('/me/quests', UserController.getQuests);
 userRoutes.get('/:id', UserController.getOne);
 
 userRoutes.post('/', UserController.signIn);
