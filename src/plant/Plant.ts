@@ -32,6 +32,7 @@ export class Plant extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
     id: PlantId;
 
+  @Index({ fulltext: true })
   @Column()
     name: string;
 
@@ -57,6 +58,7 @@ export class Plant extends BaseEntity {
   @Column({ default: false })
     donate: boolean;
 
+  @Index({ fulltext: true })
   @Column({ nullable: true })
     description?: string;
 
