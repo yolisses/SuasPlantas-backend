@@ -1,18 +1,18 @@
 import { Feedback } from 'aws-sdk/clients/guardduty';
 import { Point } from 'geojson';
 import {
-  BaseEntity,
+  Index,
   Column,
+  Entity,
+  JoinTable,
+  OneToMany,
+  Timestamp,
+  ManyToMany,
+  BaseEntity,
   CreateDateColumn,
   DeleteDateColumn,
-  Entity,
-  Index,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  Timestamp,
   UpdateDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Plant } from '../plant/Plant';
 import { Quest } from '../quests/Quest';
@@ -24,6 +24,7 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
     id: UserId;
 
+  @Index({ fulltext: true })
   @Column()
     name: string;
 

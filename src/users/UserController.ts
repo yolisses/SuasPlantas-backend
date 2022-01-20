@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { signIn } from './signIn';
 import { getUser } from './getUser';
+import { getUsers } from './getUsers';
 import { editUser } from './editUser';
 import { error } from '../utils/error';
 import { removeUser } from './removeUser';
@@ -63,5 +64,13 @@ export const UserController = {
     const { userId } = req.session;
     const quests = await getUserQuests(userId);
     return res.send(quests);
+  },
+
+  async getMany(req:Request, res:Response) {
+    const users = await getUsers({
+      ...req.query,
+      page: Number(req.query) || 0,
+    });
+    return res.send(users);
   },
 };
