@@ -8,6 +8,7 @@ import { getPlantsSitemap } from './getPlantsSitemap';
 import { likePlant } from './likePlant';
 import { dislikePlant } from './dislikePlant';
 import { addView } from '../view/addView';
+import { notificateNewPlant } from '../notification/notificateNewPlant';
 
 function optionalBoolean(value) {
   if (value === 'true') return true;
@@ -40,7 +41,9 @@ export const PlantsController = {
 
   async create(req:Request, res) {
     const { userId } = req.session;
-    res.send(await createPlant(req.body, userId));
+    const plant = await createPlant(req.body, userId);
+    res.send(plant);
+    await notificateNewPlant(plant);
   },
 
   async edit(req, res) {

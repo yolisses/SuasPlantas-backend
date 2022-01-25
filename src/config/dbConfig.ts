@@ -9,6 +9,7 @@ import { Session } from '../signIn/Session';
 import { Feedback } from '../feedback/Feedback';
 import { View } from '../view/View';
 import { Quest } from '../quests/Quest';
+import { Notification } from '../notification/Notification';
 
 export const dbConfig: ConnectionOptions = {
   type: 'postgres',
@@ -22,13 +23,14 @@ export const dbConfig: ConnectionOptions = {
   namingStrategy: new SnakeNamingStrategy(),
 
   entities: [
-    Plant,
-    User,
     Tag,
+    View,
+    User,
+    Quest,
+    Plant,
     Image,
     Session,
     Feedback,
-    View,
-    Quest,
+    Notification,
   ],
 };
