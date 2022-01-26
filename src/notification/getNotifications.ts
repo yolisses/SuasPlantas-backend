@@ -13,7 +13,7 @@ export async function getNotifications({ userId, page = 0, take = 20 }:GetNotifi
   console.log(userId);
   const query = Notification.createQueryBuilder('notification');
 
-  query.leftJoinAndMapOne('notification.card', 'plant', 'plant', 'plant.id = notification.entityId');
+  query.leftJoinAndMapOne('notification.entity', 'plant', 'plant', 'plant.id = notification.entityId');
   query.where('notification.userId = :userId', { userId });
 
   const skip = page * take;
