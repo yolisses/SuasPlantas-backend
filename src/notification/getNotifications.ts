@@ -1,4 +1,5 @@
 import { paginateResults } from '../common/paginateResults';
+import { Plant } from '../plant/Plant';
 import { UserId } from '../users/User';
 import { Notification } from './Notification';
 
@@ -9,9 +10,13 @@ interface GetNotificationsParams{
 }
 
 export async function getNotifications({ userId, page = 0, take = 20 }:GetNotificationsParams) {
+  console.log(userId);
+  const query = Notification.createQueryBuilder('notification');
+
+  query.leftJoinAndMapOne('notification.card', 'plant', 'plant', 'plant.id = notification.entityId');
+  query.where('notification.userId = :userId', { userId });
+
   const skip = page * take;
-  return await paginateResults(
-    Notification.findAndCount({ where: { userId }, skip, take }),
-    { page, take },
-  );
+  query.limit(take).skip(skip);
+  return paginateResults(query.getManyAndCount(), { page, take });
 }

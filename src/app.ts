@@ -21,7 +21,6 @@ createConnection(dbConfig)
     // don't change the order unless strictly necessary
     app.use(corsConfig);
     app.use((req:Request, res:Response, next) => {
-      console.log(req);
       const connectSid = req.header('Authorization');
       if (connectSid) {
         req.headers.cookie = `connect.sid=${connectSid}`;

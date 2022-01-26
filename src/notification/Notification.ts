@@ -1,10 +1,10 @@
 import {
   Entity,
   Column,
-  BaseEntity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
   Timestamp,
+  BaseEntity,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { PlantId } from '../plant/Plant';
 import { UserId } from '../users/User';
@@ -28,4 +28,6 @@ export class Notification extends BaseEntity {
 
     @CreateDateColumn()
       createdAt: Timestamp;
+
+    entity?:any;
 }
