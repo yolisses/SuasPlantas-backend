@@ -13,6 +13,7 @@ export type NotificationId = number
 
 @Entity({
   orderBy: {
+    viewed: 'ASC',
     createdAt: 'DESC',
   },
 })
@@ -28,6 +29,9 @@ export class Notification extends BaseEntity {
 
     @CreateDateColumn()
       createdAt: Timestamp;
+
+    @Column({ nullable: false, default: false })
+      viewed:boolean;
 
     entity?:any;
 }
