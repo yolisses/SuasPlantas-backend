@@ -1,6 +1,8 @@
 import { Router } from 'express';
 
+import { isDev } from './utils/isDev';
 import { pingRoutes } from './utils/ping';
+import { devRoutes } from './dev/devRoutes';
 import { userRoutes } from './users/userRoutes';
 import { plantRoutes } from './plant/plantRoutes';
 import { questRoutes } from './quests/questsRoutes';
@@ -17,3 +19,7 @@ routes.use('/plants', plantRoutes);
 routes.use('/upload', uploadRoutes);
 routes.use('/feedback', feedbackRoutes);
 routes.use('/notifications', notificationsRoutes);
+
+if (isDev) {
+  routes.use('/dev', devRoutes);
+}
