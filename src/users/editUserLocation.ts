@@ -32,7 +32,7 @@ export async function editUserLocation({
       { city, state, location: getPoint(location) },
     );
   } catch (err) {
-    console.log(err);
+    console.error(err);
     locationFound = false;
   }
   return { user, locationFound };

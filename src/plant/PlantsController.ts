@@ -60,7 +60,6 @@ export const PlantsController = {
 
   async sitemap(req, res) {
     const result = await getPlantsSitemap();
-    console.log(result);
     res.send(result);
   },
 
