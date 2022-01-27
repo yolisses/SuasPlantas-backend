@@ -16,6 +16,8 @@ export const {
   AWS_ACCESS_KEY_ID,
   AWS_SECRET_ACCESS_KEY,
   CREATE_CARD_LAMBDA_FUNCTION,
+
+  ONESIGNAL_REST_API_KEY,
 } = process.env;
 
 const {
