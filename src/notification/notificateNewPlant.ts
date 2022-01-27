@@ -6,7 +6,10 @@ import { Notification } from './Notification';
 
 export async function notificateNewPlant(plant :Plant) {
   const {
-    userId, id: entityId, name, card,
+    name,
+    card,
+    userId,
+    id: entityId,
   } = plant;
 
   const query = Quest.createQueryBuilder('quest');
