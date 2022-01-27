@@ -12,7 +12,6 @@ export interface GetNotificationHashResult{
 export async function getNotificationHash(userId:UserId):Promise<GetNotificationHashResult> {
   const { email } = await User.findOneOrFail(userId, { select: ['id', 'email'] });
   const id = `${userId}`;
-  console.log(id);
   const idHash = crypto
     .createHmac('sha256', ONESIGNAL_REST_API_KEY)
     .update(id)
