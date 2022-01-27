@@ -1,7 +1,8 @@
 import { Not } from 'typeorm';
-import { Plant } from '../plant/Plant';
-import { User } from '../users/User';
 import { client } from './client';
+import { User } from '../users/User';
+import { Plant } from '../plant/Plant';
+import { BASE_URL } from '../config/env';
 import { Notification } from './Notification';
 
 export async function notificateNewPlant(plant :Plant) {
@@ -23,5 +24,6 @@ export async function notificateNewPlant(plant :Plant) {
     },
     big_picture: card,
     include_external_user_ids: users.map((user) => `${user.id}`),
+    url: `${BASE_URL}/plants/${entityId}`,
   });
 }

@@ -4,6 +4,7 @@ dotenv.config();
 
 export const {
   PORT,
+  BASE_URL,
   NODE_ENV,
   AUTH_SECRET,
 
