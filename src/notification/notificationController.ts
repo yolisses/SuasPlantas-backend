@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { getNotifications } from './getNotifications';
 import { viewNotification } from './viewNotification';
 import { getNotificationHash } from './getNotificationHash';
+import { validateAuthenticated } from '../utils/validateAuthenticated';
 
 export const NotificationsController = {
   async get(req:Request, res:Response) {
@@ -18,6 +19,7 @@ export const NotificationsController = {
   },
 
   async hash(req:Request, res:Response) {
+    validateAuthenticated(req);
     const { userId } = req.session;
     const hash = await getNotificationHash(userId);
     res.send(hash);
