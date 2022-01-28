@@ -41,7 +41,7 @@ export async function signIn({ accessToken, provider, ip }:SignInParams) {
     }).save();
   }
 
-  if (!user.ip && validIpRegex.test(ip) && ip !== '127.0.0.1') {
+  if (!user.ip && validIpRegex.test(ip) && (ip !== '127.0.0.1')) {
     user.ip = ip;
     await user.save();
   }
