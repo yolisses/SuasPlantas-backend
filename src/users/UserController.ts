@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { isArray } from 'class-validator';
 import { signIn } from './signIn';
 import { getUser } from './getUser';
 import { getUsers } from './getUsers';
@@ -46,7 +47,8 @@ export const UserController = {
   },
 
   async signIn(req:Request, res:Response) {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    if (Array.isArray(ip)) [ip] = ip;
     const { accessToken, provider } = req.body;
     const user = await signIn({ accessToken, provider, ip });
     req.session.userId = user.id;
