@@ -78,13 +78,13 @@ export class Plant extends BaseEntity {
   @Index({ spatial: true })
     location: Point;
 
-  @BeforeUpdate()
-  @BeforeInsert()
-  checkAvailabilities() {
-    if (!this.price && !this.swap && !this.donate) {
-      error(400, 'Plant with no price or swap or donate');
-    }
-  }
+  // @BeforeUpdate()
+  // @BeforeInsert()
+  // checkAvailabilities() {
+  //   if (!this.price && !this.swap && !this.donate) {
+  //     error(400, 'Plant with no price or swap or donate');
+  //   }
+  // }
 
   @ManyToMany(() => Tag)
   @JoinTable()
