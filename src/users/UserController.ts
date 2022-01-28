@@ -46,7 +46,7 @@ export const UserController = {
   },
 
   async signIn(req:Request, res:Response) {
-    const { ip } = req;
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const { accessToken, provider } = req.body;
     const user = await signIn({ accessToken, provider, ip });
     req.session.userId = user.id;
