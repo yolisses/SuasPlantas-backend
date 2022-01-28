@@ -40,6 +40,7 @@ export async function signIn({ accessToken, provider, ip }:SignInParams) {
       image: picture,
     }).save();
   }
+  console.log('ip', ip);
 
   if (!user.ip && validIpRegex.test(ip) && (ip !== '127.0.0.1')) {
     user.ip = ip;
