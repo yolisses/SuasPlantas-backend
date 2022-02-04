@@ -75,9 +75,6 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
     updatedAt: Timestamp;
 
-  @DeleteDateColumn({ select: false })
-    deletedAt?: Date;
-
   @Column({ select: false, nullable: true })
     ip: string;
 }

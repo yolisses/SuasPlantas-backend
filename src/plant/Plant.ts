@@ -96,9 +96,6 @@ export class Plant extends BaseEntity {
   @UpdateDateColumn()
     updatedAt: Timestamp;
 
-  @DeleteDateColumn({ select: false })
-    deletedAt?: Date;
-
   liked?:boolean;
 
   alsoSaw?: Plant[];
