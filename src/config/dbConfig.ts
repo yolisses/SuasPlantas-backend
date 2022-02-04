@@ -1,14 +1,15 @@
 import { ConnectionOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { DATABASE_URL, DB_SSL } from './env';
+
+import { View } from '../view/View';
 import { User } from '../users/User';
-import { Image } from '../upload/Image';
 import { Tag } from '../plant/tag/Tag';
 import { Plant } from '../plant/Plant';
-import { Session } from '../signIn/Session';
-import { Feedback } from '../feedback/Feedback';
-import { View } from '../view/View';
+import { Image } from '../upload/Image';
 import { Quest } from '../quests/Quest';
+import { Session } from '../signIn/Session';
+import { DATABASE_URL, DB_SSL } from './env';
+import { Feedback } from '../feedback/Feedback';
 import { Notification } from '../notification/Notification';
 
 export const dbConfig: ConnectionOptions = {
