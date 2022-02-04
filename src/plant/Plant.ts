@@ -1,33 +1,27 @@
-import { Point } from 'geojson';
 import {
   Entity,
-  PrimaryGeneratedColumn,
+  Index,
   Column,
-  BaseEntity,
-  BeforeUpdate,
-  BeforeInsert,
-  ManyToMany,
-  JoinTable,
-  CreateDateColumn,
-  UpdateDateColumn,
   Timestamp,
   OneToMany,
-  DeleteDateColumn,
   ManyToOne,
-  Index,
+  JoinTable,
+  BaseEntity,
+  ManyToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User, UserId } from '../users/User';
+import { Point } from 'geojson';
+
 import { Tag } from './tag/Tag';
 import { Image } from '../upload/Image';
-import { error } from '../utils/error';
+import { User, UserId } from '../users/User';
 
 export type PlantId = number;
 
-@Entity({
-  orderBy: {
-    createdAt: 'DESC',
-  },
-})
+@Entity({ orderBy: { createdAt: 'DESC' } })
 export class Plant extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
     id: PlantId;
@@ -75,16 +69,9 @@ export class Plant extends BaseEntity {
     type: 'geography',
     spatialFeatureType: 'Point',
   })
+
   @Index({ spatial: true })
     location: Point;
-
-  // @BeforeUpdate()
-  // @BeforeInsert()
-  // checkAvailabilities() {
-  //   if (!this.price && !this.swap && !this.donate) {
-  //     error(400, 'Plant with no price or swap or donate');
-  //   }
-  // }
 
   @ManyToMany(() => Tag)
   @JoinTable()
