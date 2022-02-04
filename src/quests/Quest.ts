@@ -6,7 +6,6 @@ import {
   ManyToOne,
   BaseEntity,
   CreateDateColumn,
-  DeleteDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -38,7 +37,4 @@ export class Quest extends BaseEntity {
 
     @UpdateDateColumn()
       updatedAt: Timestamp;
-
-    @DeleteDateColumn({ select: false })
-      deletedAt?: Date;
 }

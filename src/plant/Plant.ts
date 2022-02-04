@@ -10,7 +10,6 @@ import {
   ManyToMany,
   CreateDateColumn,
   UpdateDateColumn,
-  DeleteDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Point } from 'geojson';
