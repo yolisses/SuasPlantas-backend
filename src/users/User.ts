@@ -52,9 +52,10 @@ export class User extends BaseEntity {
     city: string;
 
   @Column({
+    srid: 4326,
+    nullable: true,
     type: 'geography',
     spatialFeatureType: 'Point',
-    nullable: true,
   })
   @Index({ spatial: true })
     location: Point;

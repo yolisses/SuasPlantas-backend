@@ -3,6 +3,7 @@ import { IsNull, Not } from 'typeorm';
 import { Plant } from './Plant';
 import { UserId } from '../users/User';
 import { paginateResults } from '../common/paginateResults';
+import { PlantView } from './PlantView';
 
 interface GetPlantsParams {
   page: number;
@@ -15,7 +16,6 @@ interface GetPlantsParams {
   donate?: boolean;
 }
 export async function getPlants({
-  tags,
   sell,
   swap,
   text,
@@ -24,15 +24,7 @@ export async function getPlants({
   page = 0,
   take = 50,
 }: GetPlantsParams) {
-  const query = Plant.createQueryBuilder('plant');
-
-  query.select([
-    'plant.id',
-    'plant.name',
-    'plant.swap',
-    'plant.donate',
-    'plant.price',
-    'plant.card']);
+  const query = PlantView.createQueryBuilder('plant');
 
   if (swap || donate || sell) {
     query.where({ swap, donate, price: null });
@@ -58,7 +50,6 @@ export async function getPlants({
   query
     .skip(skip)
     .take(take)
-    .loadRelationIdAndMap('images', 'plant.images')
     .addSelect('user');
 
   return paginateResults(query.getManyAndCount(), { page, take });

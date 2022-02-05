@@ -49,9 +49,6 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
 
   const user = await User.findOneOrFail(userId);
   result.user = user;
-  result.city = user.city;
-  result.state = user.state;
-  result.location = user.location;
 
   if (plant.tags) {
     const validatedTags = plant.tags.filter((tag) => validTags.has(tag));

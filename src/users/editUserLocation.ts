@@ -26,11 +26,6 @@ export async function editUserLocation({
     user.state = state;
     user.location = getPoint(location);
     await user.save();
-    await getManager().update(
-      Plant,
-      { userId: user.id },
-      { city, state, location: getPoint(location) },
-    );
   } catch (err) {
     console.error(err);
     locationFound = false;

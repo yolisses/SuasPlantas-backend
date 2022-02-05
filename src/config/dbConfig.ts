@@ -12,6 +12,7 @@ import { Preview } from '../preview/Preview';
 import { DATABASE_URL, DB_SSL } from './env';
 import { Feedback } from '../feedback/Feedback';
 import { Notification } from '../notification/Notification';
+import { PlantView } from '../plant/PlantView';
 
 export const dbConfig: ConnectionOptions = {
   type: 'postgres',
@@ -35,5 +36,7 @@ export const dbConfig: ConnectionOptions = {
     Preview,
     Feedback,
     Notification,
+
+    PlantView,
   ],
 };
