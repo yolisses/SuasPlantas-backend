@@ -1,26 +1,21 @@
 import { User } from './User';
+import { Provider } from './Provider';
 import { getPoint } from '../location/getPoint';
 import { getUserByEmail } from './getUserByEmail';
-import { findLocationByIp } from '../location/findLocationByIp';
-import { validateWithGoogle } from '../signIn/validateWithGoogle';
-import { validateWithFacebook } from '../signIn/validateWithFacebook';
 import { setUserPreview } from '../preview/setUserPreview';
+import { validateWithProvider } from './validateWithProvider';
+import { findLocationByIp } from '../location/findLocationByIp';
 
 interface SignInParams{
 accessToken :string
-provider:'google'|'facebook'
+provider:Provider
 ip:string
 }
 
-const validateWith = {
-  google: validateWithGoogle,
-  facebook: validateWithFacebook,
-} as const;
-
 const validIpRegex = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
-export async function signIn({ accessToken, provider, ip }:SignInParams) {
-  const { email, name, picture } = await validateWith[provider](accessToken);
+export async function signIn({ provider, accessToken, ip }:SignInParams) {
+  const { email, name, picture } = await validateWithProvider(provider, accessToken);
 
   let user = await getUserByEmail(email);
 
