@@ -1,7 +1,8 @@
 import { IsNull, Not } from 'typeorm';
-import { paginateResults } from '../common/paginateResults';
-import { UserId } from '../users/User';
+
 import { Plant } from './Plant';
+import { UserId } from '../users/User';
+import { paginateResults } from '../common/paginateResults';
 
 interface GetPlantsParams {
   page: number;
@@ -53,15 +54,6 @@ export async function getPlants({
       @@ plainto_tsquery('portuguese', :text)`,
       { text },
     );
-  }
-
-  if (tags && tags.length) {
-    query
-      .leftJoin('plant.tags', 'tag')
-      .leftJoinAndSelect('plant.tags', 'tagSelect')
-      .where('tag.name LIKE ANY (:searchQuery)', {
-        searchQuery: tags,
-      });
   }
 
   const skip = page * take;

@@ -11,6 +11,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 import { Point } from 'geojson';
 
@@ -94,6 +95,9 @@ export class Plant extends BaseEntity {
 
   @UpdateDateColumn()
     updatedAt: Timestamp;
+
+  @DeleteDateColumn()
+    deletedAt: Timestamp;
 
   liked?:boolean;
 

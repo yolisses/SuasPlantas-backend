@@ -13,8 +13,10 @@ import {
   DeleteDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
+  OneToOne,
 } from 'typeorm';
 import { Plant } from '../plant/Plant';
+import { Preview } from '../preview/Preview';
 import { Quest } from '../quests/Quest';
 
 export type UserId = number;
@@ -56,10 +58,10 @@ export class User extends BaseEntity {
   @Index({ spatial: true })
     location: Point;
 
-  @OneToMany(() => Plant, (plant) => plant.user)
+  @OneToMany(() => Plant, (plant) => plant.user, { cascade: true })
     plants: Plant[];
 
-  @OneToMany(() => Quest, (quest) => quest.user)
+  @OneToMany(() => Quest, (quest) => quest.user, { cascade: true })
     quests: Quest[];
 
   @ManyToMany(() => Plant, (plant) => plant.likedBy)
@@ -68,6 +70,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Plant, (plant) => plant.user)
     feedbacks: Feedback[];
+
+  @OneToOne(() => Preview, (preview) => preview.user)
+    preview: Preview;
 
   @CreateDateColumn()
     createdAt: Timestamp;

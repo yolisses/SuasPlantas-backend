@@ -8,6 +8,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 import { User, UserId } from '../users/User';
 
@@ -37,4 +38,7 @@ export class Quest extends BaseEntity {
 
     @UpdateDateColumn()
       updatedAt: Timestamp;
+
+    @DeleteDateColumn()
+      deletedAt: Timestamp;
 }
