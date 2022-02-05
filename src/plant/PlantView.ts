@@ -1,14 +1,13 @@
 import { Point } from 'geojson';
 import {
-  BaseEntity, Connection, ViewColumn, ViewEntity,
+  BaseEntity, Connection, Index, ViewColumn, ViewEntity,
 } from 'typeorm';
 import { User } from '../users/User';
 import { Plant } from './Plant';
 
 @ViewEntity({
   name: 'plants',
-  materialized: true,
-  dependsOn: [User],
+  materialized: false,
   expression: (connection:Connection) => connection
     .createQueryBuilder()
     .addSelect('plant.id', 'id')
@@ -28,9 +27,11 @@ export class PlantView extends BaseEntity {
   @ViewColumn()
     card:string;
 
+  @Index({ fulltext: true })
   @ViewColumn()
     name:string;
 
+  @Index({ fulltext: true })
   @ViewColumn()
     description?:string;
 
@@ -40,6 +41,7 @@ export class PlantView extends BaseEntity {
   @ViewColumn()
     state?:string;
 
+  @Index({ spatial: true })
   @ViewColumn()
     location?:Point;
 }
