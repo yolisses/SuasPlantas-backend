@@ -32,7 +32,7 @@ interface Response {
   org:string
 }
 
-export async function findLocationByIp(ip: string) {
+export async function getLocationByIp(ip: string) {
   let res;
   try {
     res = await axios.get(`https://ipapi.co/${ip}/json`);

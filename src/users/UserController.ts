@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { isArray } from 'class-validator';
 import { signIn } from './signIn';
 import { getUser } from './getUser';
 import { getUsers } from './getUsers';
 import { editUser } from './editUser';
+import { getReqIp } from './getReqIp';
 import { error } from '../utils/error';
 import { removeUser } from './removeUser';
 import { getUserQuests } from './getUserQuests';
@@ -47,10 +47,14 @@ export const UserController = {
   },
 
   async signIn(req:Request, res:Response) {
-    let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    if (Array.isArray(ip)) [ip] = ip;
-    const { accessToken, provider } = req.body;
-    const user = await signIn({ accessToken, provider, ip });
+    const ip = getReqIp(req);
+    const { accessToken, provider, previewCode } = req.body;
+    const user = await signIn({
+      ip,
+      provider,
+      accessToken,
+      previewCode,
+    });
     req.session.userId = user.id;
     return res.send(user);
   },
