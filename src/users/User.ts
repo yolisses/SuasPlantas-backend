@@ -30,7 +30,7 @@ export class User extends BaseEntity {
   @Column()
     name: string;
 
-  @Column({ unique: true, select: false })
+  @Column({ unique: true, select: false, nullable: true })
     email: string;
 
   @Column()
@@ -45,15 +45,16 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
     whatsappNumber?: string;
 
-  @Column()
+  @Column({ nullable: true })
     state: string;
 
-  @Column()
+  @Column({ nullable: true })
     city: string;
 
   @Column({
     type: 'geography',
     spatialFeatureType: 'Point',
+    nullable: true,
   })
   @Index({ spatial: true })
     location: Point;
