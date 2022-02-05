@@ -23,7 +23,7 @@ export class View extends BaseEntity {
   @Column()
     userId:UserId;
 
-  @ManyToOne(() => Plant, { nullable: false })
+  @ManyToOne(() => Plant, { nullable: false, onDelete: 'CASCADE' })
     plant: Plant;
 
   @Column()
