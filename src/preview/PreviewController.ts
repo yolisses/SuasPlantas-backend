@@ -10,6 +10,12 @@ export const PreviewController = {
   },
 
   async post(req:Request, res:Response) {
-    res.send(setUserPreview(req.session.userId));
+    const { userId } = req.session;
+    res.send(await setUserPreview(userId, false));
+  },
+
+  async delete(req:Request, res:Response) {
+    const { userId } = req.session;
+    res.send(await setUserPreview(userId, true));
   },
 };

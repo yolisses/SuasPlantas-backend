@@ -5,3 +5,4 @@ export const previewRoutes = Router();
 
 previewRoutes.get('/', PreviewController.get);
 previewRoutes.post('/', PreviewController.post);
+previewRoutes.delete('/', PreviewController.delete);
