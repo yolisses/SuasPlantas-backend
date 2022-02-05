@@ -57,21 +57,7 @@ export class Plant extends BaseEntity {
     description?: string;
 
   @Column()
-    state: string;
-
-  @Column()
-    city: string;
-
-  @Column()
     card: string;
-
-  @Column({
-    type: 'geography',
-    spatialFeatureType: 'Point',
-  })
-
-  @Index({ spatial: true })
-    location: Point;
 
   @ManyToMany(() => Tag)
   @JoinTable()

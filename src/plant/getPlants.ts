@@ -32,8 +32,6 @@ export async function getPlants({
     'plant.swap',
     'plant.donate',
     'plant.price',
-    'plant.city',
-    'plant.state',
     'plant.card']);
 
   if (swap || donate || sell) {

@@ -3,7 +3,7 @@ import { Plant, PlantId } from '../plant/Plant';
 
 export async function alsoSaw(plantId: PlantId):Promise<Plant[]> {
   return getManager().query(`
-select rank, id, name, swap, price, city, state, card from plant
+select rank, id, name, swap, price, card from plant
 left join
 (select plant_id, count(plant_id) as rank from 
  (select distinct view.user_id, plant_id from view
