@@ -1,6 +1,5 @@
 import { validateOwner } from '../utils/validateOwner';
 import { Plant, PlantId } from './Plant';
-import { validateLength } from '../utils/validateLength';
 import { Image } from '../upload/Image';
 import { Tag } from './tag/Tag';
 import { User } from '../users/User';
