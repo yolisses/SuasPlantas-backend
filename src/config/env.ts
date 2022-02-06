@@ -20,6 +20,8 @@ export const {
 
   ONESIGNAL_REST_APP_ID,
   ONESIGNAL_REST_API_KEY,
+
+  GOOGLE_CLOUD_API_KEY,
 } = process.env;
 
 const {
