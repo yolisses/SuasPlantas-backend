@@ -56,7 +56,7 @@ export class Plant extends BaseEntity {
   @Column({ nullable: true })
     description?: string;
 
-  @Column()
+  @Column({ nullable: true })
     card: string;
 
   @ManyToMany(() => Tag)
