@@ -1,4 +1,4 @@
-import { Preview } from './Preview';
+import { PreviewId } from './Preview';
 
 export function createPreview(id: PreviewId) {
 

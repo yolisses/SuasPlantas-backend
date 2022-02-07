@@ -1,8 +1,8 @@
 import { User } from './User';
 import { Provider } from './Provider';
 import { getUserByEmail } from './getUserByEmail';
-import { setUserPreview } from '../preview/setUserPreview';
 import { getUserByPreviewId } from './getUserByPreviewId';
+import { setUserPreview } from '../preview/setUserPreview';
 import { validateWithProvider } from './validateWithProvider';
 import { mutateUserWithIpInfo } from './mutateUserWithIpInfo';
 
