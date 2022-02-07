@@ -8,7 +8,8 @@ export async function setUserPreview(userId: UserId, value:boolean) {
   });
 
   if (value) {
-    return repo.recover(parent);
+    const user = await repo.recover(parent);
+    return user;
   }
   return repo.softRemove(parent);
 }

@@ -2,7 +2,7 @@ import { User } from './User';
 import { Provider } from './Provider';
 import { getUserByEmail } from './getUserByEmail';
 import { setUserPreview } from '../preview/setUserPreview';
-import { getUserByPreviewCode } from './getUserByPreviewCode';
+import { getUserByPreviewId } from './getUserByPreviewId';
 import { validateWithProvider } from './validateWithProvider';
 import { mutateUserWithIpInfo } from './mutateUserWithIpInfo';
 
@@ -23,7 +23,7 @@ export async function signIn({
 
   let user: User;
   if (previewCode) {
-    user = await getUserByPreviewCode(previewCode);
+    user = await getUserByPreviewId(previewCode);
     user.email = providerData.email;
   } else {
     user = await getUserByEmail(providerData.email);

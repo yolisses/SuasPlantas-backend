@@ -8,12 +8,12 @@ import {
 } from 'typeorm';
 import { User, UserId } from '../users/User';
 
-export type PreviewCode = string
+export type PreviewId = string
 
 @Entity()
 export class Preview extends BaseEntity {
     @PrimaryColumn()
-      id:PreviewCode;
+      id:PreviewId;
 
     @Column()
       userId:UserId;
