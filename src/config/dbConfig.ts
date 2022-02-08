@@ -8,7 +8,6 @@ import { Plant } from '../plant/Plant';
 import { Image } from '../upload/Image';
 import { Quest } from '../quests/Quest';
 import { Session } from '../signIn/Session';
-import { Preview } from '../preview/Preview';
 import { DATABASE_URL, DB_SSL } from './env';
 import { Feedback } from '../feedback/Feedback';
 import { Notification } from '../notification/Notification';
@@ -33,7 +32,6 @@ export const dbConfig: ConnectionOptions = {
     Plant,
     Image,
     Session,
-    Preview,
     Feedback,
     Notification,
 

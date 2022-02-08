@@ -1,6 +1,5 @@
-import { Preview, PreviewId } from '../preview/Preview';
+import { User } from './User';
 
-export async function getUserByPreviewId(id:PreviewId) {
-  const preview = await Preview.findOne(id, { relations: ['user'], withDeleted: true });
-  return preview.user;
+export async function getUserByPreviewId(preview:string) {
+  return User.findOne({ where: { preview }, withDeleted: true });
 }

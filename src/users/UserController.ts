@@ -8,9 +8,11 @@ import { error } from '../utils/error';
 import { removeUser } from './removeUser';
 import { getUserQuests } from './getUserQuests';
 import { editUserLocation } from './editUserLocation';
+import { getUserPreview } from '../preview/getPreview';
 import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
+import { setUserPreview } from '../preview/setUserPreview';
 
 export const UserController = {
   async getOne(req, res) {
@@ -85,5 +87,19 @@ export const UserController = {
       page: Number(req.query) || 0,
     });
     return res.send(users);
+  },
+
+  async getPreview(req:Request, res:Response) {
+    const ip = getReqIp(req);
+    const { code } = req.params;
+    validateProvided({ code });
+    const user = await getUserPreview(code as string, ip);
+    res.send(user);
+  },
+
+  async setAsPreview(req:Request, res:Response) {
+    const { userId } = req.session;
+    const user = await setUserPreview(userId, false);
+    res.send(user);
   },
 };

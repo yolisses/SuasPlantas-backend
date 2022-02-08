@@ -13,10 +13,8 @@ import {
   DeleteDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
-  OneToOne,
 } from 'typeorm';
 import { Plant } from '../plant/Plant';
-import { Preview } from '../preview/Preview';
 import { Quest } from '../quests/Quest';
 
 export type UserId = number;
@@ -73,9 +71,6 @@ export class User extends BaseEntity {
   @OneToMany(() => Plant, (plant) => plant.user)
     feedbacks: Feedback[];
 
-  @OneToOne(() => Preview, (preview) => preview.user)
-    preview: Preview;
-
   @CreateDateColumn()
     createdAt: Timestamp;
 
@@ -87,4 +82,9 @@ export class User extends BaseEntity {
 
   @Column({ select: false, nullable: true })
     ip: string;
+
+  @Column({
+    select: false, length: 6, unique: true, nullable: true,
+  })
+    preview:string;
 }

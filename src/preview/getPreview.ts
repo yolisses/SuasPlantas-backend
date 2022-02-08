@@ -1,18 +1,14 @@
-import { Preview } from './Preview';
 import { User } from '../users/User';
-import { validateFound } from '../utils/validateFound';
 import { mutateUserWithIpInfo } from '../users/mutateUserWithIpInfo';
+import { validateFound } from '../utils/validateFound';
 
-export async function getPreview(previewCode:string, ip:string):Promise<User|undefined> {
-  const preview = await Preview.findOne(previewCode);
-  console.log(preview);
-  validateFound({ preview });
-  const id = preview.userId;
+export async function getUserPreview(preview:string, ip:string):Promise<User|undefined> {
   const user = await User.findOne({
-    where: { id },
+    where: { preview },
     relations: ['plants', 'quests'],
     withDeleted: true,
   });
+  validateFound({ preview: user });
 
   await mutateUserWithIpInfo(user, ip);
   user.save();
