@@ -8,6 +8,7 @@ import { error } from '../utils/error';
 import { removeUser } from './removeUser';
 import { getUserQuests } from './getUserQuests';
 import { editUserLocation } from './editUserLocation';
+import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 
@@ -57,6 +58,12 @@ export const UserController = {
     });
     req.session.userId = user.id;
     return res.send(user);
+  },
+
+  async createByProfile(req:Request, res:Response) {
+    const { name, image } = req.body;
+    const user = await createUserByProfile({ name, image });
+    res.status(201).send(user);
   },
 
   async logout(req:Request, res:Response) {
