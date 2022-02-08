@@ -1,6 +1,6 @@
 import { Preview } from './Preview';
 import { UserId, User } from '../users/User';
-import { generatePreviewCode } from './generatePreviewCode';
+import { getNewPreviewCode } from './getNewPreviewCode';
 
 export async function setUserPreview(userId: UserId, value:boolean) {
   const repo = User.getRepository();
@@ -17,7 +17,7 @@ export async function setUserPreview(userId: UserId, value:boolean) {
   }
 
   const user = await repo.softRemove(parent);
-  const previewCode = generatePreviewCode();
+  const previewCode = getNewPreviewCode();
   const preview = await Preview.findOne({ userId });
   if (preview) {
     preview.id = previewCode;

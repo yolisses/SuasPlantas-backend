@@ -1,6 +1,6 @@
 import { getRandomInt } from '../utils/getRandomInt';
 
-export function generatePreviewCode() {
+export function getNewPreviewCode() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
   for (let i = 0; i < 6; i++) {
