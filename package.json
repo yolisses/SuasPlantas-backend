@@ -1,5 +1,5 @@
 {
-  "name": "PlantesBackend",
+  "name": "SuasPlantasBackend",
   "version": "0.0.1",
   "license": "UNLICENSED",
   "description": "Awesome project",
@@ -7,8 +7,8 @@
     "gen-env": "gen-env-types .env -o src/env.d.ts -e .",
     "build": "tsc",
     "watch": "tsc -w",
-    "dev": "nodemon dist/app.js",
-    "start": "node dist/app.js",
+    "dev": "nodemon dist/src/app.js",
+    "start": "node dist/src/app.js",
     "test": "jest"
   },
   "devDependencies": {
