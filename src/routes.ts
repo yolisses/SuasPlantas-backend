@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
 import { isDev } from './utils/isDev';
-import { pingRoutes } from './utils/ping';
 import { devRoutes } from './dev/devRoutes';
+import { pingRoutes } from './ping/pingRoutes';
 import { userRoutes } from './users/userRoutes';
 import { plantRoutes } from './plant/plantRoutes';
 import { questRoutes } from './quests/questsRoutes';
