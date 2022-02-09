@@ -6,6 +6,7 @@ import { editUser } from './editUser';
 import { getReqIp } from './getReqIp';
 import { error } from '../utils/error';
 import { removeUser } from './removeUser';
+import { getReqUA } from '../request/getReqUA';
 import { getUserQuests } from './getUserQuests';
 import { editUserLocation } from './editUserLocation';
 import { getUserPreview } from '../preview/getPreview';
@@ -91,9 +92,11 @@ export const UserController = {
 
   async getPreview(req:Request, res:Response) {
     const ip = getReqIp(req);
+    const ua = getReqUA(req);
+    console.log(ua);
     const { code } = req.params;
     validateProvided({ code });
-    const user = await getUserPreview(code as string, ip);
+    const user = await getUserPreview(code as string, ip, ua);
     res.send(user);
   },
 
