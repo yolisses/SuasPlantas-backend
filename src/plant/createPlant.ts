@@ -32,10 +32,8 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
 
   if (!images) error(400, 'Images not provided');
 
-  if (images.length > 0) {
-    const card = images[0];
-    result.card = card;
-  }
+  const card = images[0];
+  result.card = card;
 
   const imagesInstances: Image[] = await Promise.all(
     plant.images.map(async (uri) => {
