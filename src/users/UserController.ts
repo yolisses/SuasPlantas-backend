@@ -9,10 +9,10 @@ import { removeUser } from './removeUser';
 import { getUserQuests } from './getUserQuests';
 import { editUserLocation } from './editUserLocation';
 import { getUserPreview } from '../preview/getPreview';
+import { setUserPreview } from '../preview/setUserPreview';
 import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
-import { setUserPreview } from '../preview/setUserPreview';
 
 export const UserController = {
   async getOne(req, res) {
