@@ -1,6 +1,10 @@
 import { ConnectionOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
+import {
+  DB_SSL,
+  DATABASE_URL,
+} from './env';
 import { View } from '../view/View';
 import { User } from '../users/User';
 import { Tag } from '../plant/tag/Tag';
@@ -8,10 +12,9 @@ import { Plant } from '../plant/Plant';
 import { Image } from '../upload/Image';
 import { Quest } from '../quests/Quest';
 import { Session } from '../signIn/Session';
-import { DATABASE_URL, DB_SSL } from './env';
+import { PlantView } from '../plant/PlantView';
 import { Feedback } from '../feedback/Feedback';
 import { Notification } from '../notification/Notification';
-import { PlantView } from '../plant/PlantView';
 
 export const dbConfig: ConnectionOptions = {
   type: 'postgres',

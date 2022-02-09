@@ -1,21 +1,20 @@
-import { validateLength } from '../utils/validateLength';
-import { Image } from '../upload/Image';
 import { Tag } from './tag/Tag';
+import { Plant } from './Plant';
 import { User } from '../users/User';
 import { error } from '../utils/error';
+import { Image } from '../upload/Image';
 import { validTags } from './tag/validTags';
-import { Plant } from './Plant';
 import { AWS_BUCKET_PATH } from '../config/env';
 
 interface IPlantCreationDTO {
   name: string;
-  description: string;
-  amount?: number;
-  price?: number;
   swap: boolean;
-  donate: boolean;
   tags: string[];
+  price?: number;
+  donate: boolean;
+  amount?: number;
   images: string[];
+  description: string;
 }
 
 export async function createPlant(plant: IPlantCreationDTO, userId: number) {

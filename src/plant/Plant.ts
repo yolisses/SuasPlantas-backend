@@ -1,6 +1,6 @@
 import {
-  Entity,
   Index,
+  Entity,
   Column,
   Timestamp,
   OneToMany,
@@ -10,10 +10,9 @@ import {
   ManyToMany,
   CreateDateColumn,
   UpdateDateColumn,
-  PrimaryGeneratedColumn,
   DeleteDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Point } from 'geojson';
 
 import { Tag } from './tag/Tag';
 import { Image } from '../upload/Image';

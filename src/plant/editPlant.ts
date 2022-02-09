@@ -1,11 +1,11 @@
-import { validateOwner } from '../utils/validateOwner';
-import { Plant, PlantId } from './Plant';
-import { Image } from '../upload/Image';
 import { Tag } from './tag/Tag';
 import { User } from '../users/User';
 import { error } from '../utils/error';
+import { Image } from '../upload/Image';
+import { Plant, PlantId } from './Plant';
 import { validTags } from './tag/validTags';
 import { AWS_BUCKET_PATH } from '../config/env';
+import { validateOwner } from '../utils/validateOwner';
 
 interface IPlantEditDTO {
   id:PlantId
