@@ -3,7 +3,7 @@ import { UserId } from '../users/User';
 import { AWS_BUCKET_NAME } from '../config/env';
 import { oneHourInMinutes } from '../utils/oneHourInMinutes';
 
-export async function generateUploadLink(key :string, userId: UserId) {
+export async function getNewUploadLink(key :string, userId: UserId) {
   const params = {
     Key: `uploads/${key}`,
     Expires: oneHourInMinutes,
