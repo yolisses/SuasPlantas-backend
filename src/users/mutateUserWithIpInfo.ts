@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { getLocationByIp } from '../location/getLocationByIp';
 import { getPoint } from '../location/getPoint';
-import { isValidIp } from './isValidIp';
+import { isValidIp } from '../request/isValidIp';
 import { User } from './User';
 
 export async function mutateUserWithIpInfo(user:User, ip:string) {
