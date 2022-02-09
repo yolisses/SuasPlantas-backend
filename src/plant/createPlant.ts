@@ -4,7 +4,6 @@ import { User } from '../users/User';
 import { error } from '../utils/error';
 import { Image } from '../upload/Image';
 import { validTags } from './tag/validTags';
-import { AWS_BUCKET_PATH } from '../config/env';
 
 interface IPlantCreationDTO {
   name: string;
@@ -34,14 +33,14 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
   if (!images) error(400, 'Images not provided');
 
   if (images.length > 0) {
-    const card = `${AWS_BUCKET_PATH}/uploads/${images[0]}`;
+    const card = images[0];
     result.card = card;
   }
 
   const imagesInstances: Image[] = await Promise.all(
-    plant.images.map(async (key) => {
+    plant.images.map(async (uri) => {
       const image = Image.create();
-      image.uri = `${AWS_BUCKET_PATH}/uploads/${key}`;
+      image.uri = uri;
       return image.save();
     }),
   );

@@ -4,7 +4,6 @@ import { error } from '../utils/error';
 import { Image } from '../upload/Image';
 import { Plant, PlantId } from './Plant';
 import { validTags } from './tag/validTags';
-import { AWS_BUCKET_PATH } from '../config/env';
 import { validateOwner } from '../utils/validateOwner';
 
 interface IPlantEditDTO {
@@ -42,14 +41,14 @@ export async function editPlant(plant: IPlantEditDTO, userId: number) {
   if (!images) error(400, 'Images not provided');
 
   if (images.length > 0) {
-    const card = `${AWS_BUCKET_PATH}/uploads/${images[0]}`;
+    const card = images[0];
     result.card = card;
   }
 
   const imagesInstances: Image[] = await Promise.all(
-    plant.images.map(async (key) => {
+    plant.images.map(async (uri) => {
       const image = Image.create();
-      image.uri = `${AWS_BUCKET_PATH}/uploads/${key}`;
+      image.uri = uri;
       return image.save();
     }),
   );

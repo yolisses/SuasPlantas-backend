@@ -1,33 +1,34 @@
 import { User, UserId } from './User';
-import { AWS_BUCKET_PATH } from '../config/env';
 import { validateFound } from '../utils/validateFound';
 import { editIfNotUndefined } from '../utils/editIfNotUndefined';
 
 interface IUserEditDTO {
-  name?: string;
-  instagramUsername?: string;
-  whatsappNumber?: string;
-  description?: string;
+  name?: string
   image?:string
+  description?: string;
+  whatsappNumber?: string;
+  instagramUsername?: string;
 }
 
 export async function editUser(
   userId: UserId,
   {
-    name, description, instagramUsername, whatsappNumber, image: imageKey,
+    name,
+    image,
+    description,
+    whatsappNumber,
+    instagramUsername,
   }: IUserEditDTO,
 ): Promise<User> {
   const user = await User.findOne(userId);
   validateFound({ user });
-  if (name) {
-    user.name = name;
-  }
-
-  if (imageKey) {
-    user.image = `${AWS_BUCKET_PATH}/uploads/${imageKey}`;
-  }
-
-  editIfNotUndefined(user, { description, instagramUsername, whatsappNumber });
+  editIfNotUndefined(user, {
+    name,
+    image,
+    description,
+    whatsappNumber,
+    instagramUsername,
+  });
   await user.save();
   return user;
 }
