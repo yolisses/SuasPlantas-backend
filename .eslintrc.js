@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    browser: true,
+    browser: false,
     es2021: true,
     jest: true,
   },
@@ -17,9 +17,15 @@ module.exports = {
     '@typescript-eslint',
   ],
   ignorePatterns: ['**/dist/*'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.ts'],
+      },
+    },
+  },
   rules: {
     'import/extensions': 0,
-    'import/no-unresolved': 0,
     'class-methods-use-this': 0,
     'import/prefer-default-export': 0,
   },
