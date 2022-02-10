@@ -29,7 +29,7 @@ createConnection(dbConfig)
 
     // last
     app.use(errorMiddleware);
-
-    app.listen(PORT || 3001, () => console.info(`Server running on http://localhost:${port}`));
+    const port = PORT || 3001;
+    app.listen(port, () => console.info(`Server running on http://localhost:${port}`));
   })
   .catch((error) => console.error(error));
