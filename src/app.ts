@@ -3,43 +3,35 @@ import 'reflect-metadata';
 import 'regenerator-runtime';
 
 import 'express-async-errors';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { createConnection } from 'typeorm';
 
-import signature from 'cookie-signature';
 import { routes } from './routes';
-import { AUTH_SECRET, PORT } from './config/env';
+import { PORT } from './config/env';
 import { dbConfig } from './config/dbConfig';
+import { corsConfig } from './config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
 import { sessionConfig } from './config/sessionConfig';
-import { corsConfig } from './config/corsConfig';
+import { getAuthCookieFromHeader } from './auth/getAuthCookieFromHeader';
+import { setAuthHeaderFromCookie } from './auth/setAuthHeaderFromCookie';
+
+const app = express();
+app.use(corsConfig);
+app.use(express.json());
 
 createConnection(dbConfig)
   .then(async (connection) => {
-    const app = express();
-
     // don't change the order unless strictly necessary
-    app.use(corsConfig);
-    app.use((req:Request, res:Response, next) => {
-      const connectSid = req.header('Authorization');
-      if (connectSid) {
-        req.headers.cookie = `connect.sid=${connectSid}`;
-      }
-      next();
-    });
+    app.use(getAuthCookieFromHeader);
     app.use(sessionConfig(connection));
-    app.use((req, res, next) => {
-      const connectSid = `s:${signature.sign(req.sessionID, AUTH_SECRET)}`;
-      res.setHeader('Authorization', connectSid);
-      next();
-    });
-    app.use(express.json());
+    app.use(setAuthHeaderFromCookie);
+
     app.use(routes);
+
+    // last
     app.use(errorMiddleware);
 
     const port = parseInt(PORT, 10);
-    // eslint-disable-next-line no-console
     app.listen(port, () => console.info(`Server running on http://localhost:${port}`));
   })
-  // eslint-disable-next-line no-console
   .catch((error) => console.error(error));
