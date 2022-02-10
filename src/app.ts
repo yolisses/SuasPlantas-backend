@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 import 'reflect-metadata';
 import 'regenerator-runtime';
 
