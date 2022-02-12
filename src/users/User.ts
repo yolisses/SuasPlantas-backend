@@ -83,6 +83,9 @@ export class User extends BaseEntity {
   @Column({ select: false, nullable: true })
     ip: string;
 
+  @Column({ type: 'bigint', select: false, nullable: true })
+    fbId: string;
+
   @Column({
     select: false, length: 6, unique: true, nullable: true,
   })
