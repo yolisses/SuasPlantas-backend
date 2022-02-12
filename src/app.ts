@@ -15,6 +15,7 @@ import { getAuthCookieFromHeader } from './auth/getAuthCookieFromHeader';
 import { setAuthHeaderFromCookie } from './auth/setAuthHeaderFromCookie';
 
 const app = express();
+app.disable('x-powered-by');
 app.use(corsConfig);
 app.use(express.json());
 
