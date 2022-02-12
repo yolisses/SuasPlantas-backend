@@ -10,6 +10,7 @@ import { uploadRoutes } from './upload/uploadRoutes';
 import { imagesRoutes } from './images/imagesRoutes';
 import { feedbackRoutes } from './feedback/FeedBackRoutes';
 import { notificationsRoutes } from './notification/notificationsRoutes';
+import { visualizationRoutes } from './visualization/visualizationRoutes';
 
 export const routes = Router();
 
@@ -21,6 +22,7 @@ routes.use('/upload', uploadRoutes);
 routes.use('/images', imagesRoutes);
 routes.use('/feedback', feedbackRoutes);
 routes.use('/notifications', notificationsRoutes);
+routes.use('/visualizations', visualizationRoutes);
 
 if (isDev) {
   routes.use('/dev', devRoutes);

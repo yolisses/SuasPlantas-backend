@@ -15,6 +15,7 @@ import { Session } from '../signIn/Session';
 import { PlantView } from '../plant/PlantView';
 import { Feedback } from '../feedback/Feedback';
 import { Notification } from '../notification/Notification';
+import { Visualization } from '../visualization/Visualization';
 
 export const dbConfig: ConnectionOptions = {
   type: 'postgres',
@@ -37,6 +38,7 @@ export const dbConfig: ConnectionOptions = {
     Session,
     Feedback,
     Notification,
+    Visualization,
 
     PlantView,
   ],
