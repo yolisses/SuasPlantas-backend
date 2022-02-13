@@ -64,8 +64,12 @@ export const UserController = {
   },
 
   async createByProfile(req:Request, res:Response) {
-    const { name, image } = req.body;
-    const user = await createUserByProfile({ name, image });
+    const {
+      name, image, city, state, fbId,
+    } = req.body;
+    const user = await createUserByProfile({
+      name, image, city, state, fbId,
+    });
     res.status(201).send(user);
   },
 
