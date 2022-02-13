@@ -18,5 +18,6 @@ export async function createUserByProfile({
     state: state || undefined,
     preview: getNewPreviewCode(),
   }).save();
-  return user.softRemove();
+  // return user.softRemove();
+  return user;
 }
