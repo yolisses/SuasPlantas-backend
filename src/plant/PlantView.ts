@@ -5,21 +5,22 @@ import {
 import { User } from '../users/User';
 import { Plant } from './Plant';
 
-@ViewEntity({
-  name: 'plants',
-  materialized: false,
-  expression: (connection:Connection) => connection
-    .createQueryBuilder()
-    .addSelect('plant.id', 'id')
-    .addSelect('plant.card', 'card')
-    .addSelect('plant.name', 'name')
-    .addSelect('plant.description', 'description')
-    .addSelect('user.city', 'city')
-    .addSelect('user.state', 'state')
-    .addSelect('user.location', 'location')
-    .from(Plant, 'plant')
-    .leftJoin(User, 'user', 'user.id = plant.userId'),
-})
+@ViewEntity(
+  'plants',
+  {
+    materialized: false,
+    expression: () => Plant
+      .createQueryBuilder('plant')
+      .select('plant.id', 'id')
+      .addSelect('plant.card', 'card')
+      .addSelect('plant.name', 'name')
+      .addSelect('plant.description', 'description')
+      .addSelect('user.city', 'city')
+      .addSelect('user.state', 'state')
+      .addSelect('user.location', 'location')
+      .leftJoin(User, 'user', 'user.id = plant.userId'),
+  },
+)
 export class PlantView extends BaseEntity {
   @ViewColumn()
     id:string;
