@@ -16,13 +16,15 @@ export async function getFusers({
   take = 50,
 }: GetFusersParams) {
   const query = FUser.createQueryBuilder('fuser');
-  if (city) {
-    query.orWhere({ cityId: city });
-  }
+  query
+    .innerJoinAndSelect('fuser.city', 'city');
+
   if (state) {
-    query
-      .innerJoinAndSelect('fuser.city', 'city')
-      .orWhere('city.state = :state', { state });
+    query.where('city.state = :state', { state });
+  }
+
+  if (city) {
+    query.where({ cityId: city });
   }
 
   const skip = page * take;
