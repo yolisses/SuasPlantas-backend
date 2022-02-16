@@ -23,16 +23,16 @@ export class FUser extends BaseEntity {
   @ManyToOne(() => City, (city) => city.users)
     city: City;
 
-  @Column()
+  @Column({ select: false })
     joinStatusText:string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, select: false })
     bioText?:string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, select: false })
     livesIn?: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, select: false })
     from?: string;
 
   @CreateDateColumn()

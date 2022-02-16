@@ -28,9 +28,9 @@ export class City extends BaseEntity {
     @OneToMany(() => FUser, (user) => user.city)
       users: FUser[];
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
       createdAt:Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select: false })
       updateAt:Date;
 }

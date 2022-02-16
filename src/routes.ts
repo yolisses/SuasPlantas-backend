@@ -4,6 +4,7 @@ import { isDev } from './utils/isDev';
 import { devRoutes } from './dev/devRoutes';
 import { pingRoutes } from './ping/pingRoutes';
 import { userRoutes } from './users/userRoutes';
+import { fuserRoutes } from './fuser/fuserRoutes';
 import { plantRoutes } from './plant/plantRoutes';
 import { questRoutes } from './quests/questsRoutes';
 import { uploadRoutes } from './upload/uploadRoutes';
@@ -16,6 +17,7 @@ export const routes = Router();
 
 routes.use('/ping', pingRoutes);
 routes.use('/users', userRoutes);
+routes.use('/fusers', fuserRoutes);
 routes.use('/quests', questRoutes);
 routes.use('/plants', plantRoutes);
 routes.use('/upload', uploadRoutes);

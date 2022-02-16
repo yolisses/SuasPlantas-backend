@@ -20,9 +20,9 @@ export class State extends BaseEntity {
     @OneToMany(() => City, (city) => city.state, { cascade: true })
       cities: City[];
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
       createdAt:Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select: false })
       updateAt:Date;
 }
