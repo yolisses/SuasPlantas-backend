@@ -35,9 +35,9 @@ export class FUser extends BaseEntity {
   @Column({ nullable: true, select: false })
     from?: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ select: false })
     createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ select: false })
     updatedAt: Date;
 }
