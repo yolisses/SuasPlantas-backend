@@ -6,6 +6,7 @@ import {
   PrimaryColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 import { City } from '../location/City';
 
@@ -35,9 +36,15 @@ export class FUser extends BaseEntity {
   @Column({ nullable: true, select: false })
     from?: string;
 
+  @Column({ nullable: true })
+    deletedByIp: string;
+
   @CreateDateColumn({ select: false })
     createdAt: Date;
 
   @UpdateDateColumn({ select: false })
     updatedAt: Date;
+
+  @DeleteDateColumn({ select: false })
+    deletedAt:Date;
 }
