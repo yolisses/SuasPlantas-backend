@@ -16,6 +16,9 @@ import { PlantView } from '../plant/PlantView';
 import { Feedback } from '../feedback/Feedback';
 import { Notification } from '../notification/Notification';
 import { Visualization } from '../visualization/Visualization';
+import { FUser } from '../fuser/FUser';
+import { City } from '../location/City';
+import { State } from '../location/State';
 
 export const dbConfig: ConnectionOptions = {
   type: 'postgres',
@@ -32,6 +35,9 @@ export const dbConfig: ConnectionOptions = {
     Tag,
     View,
     User,
+    City,
+    FUser,
+    State,
     Quest,
     Plant,
     Image,
