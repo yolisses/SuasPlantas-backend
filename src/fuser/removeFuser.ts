@@ -2,7 +2,7 @@ import { error } from '../utils/error';
 import { validateFound } from '../utils/validateFound';
 import { FUser } from './FUser';
 
-const MAX_REMOTIONS_BY_IP = 200;
+const MAX_REMOTIONS_BY_IP = 100;
 
 export async function removeFuser(id:string, ip:string) {
   const deleteds = await FUser.find({
