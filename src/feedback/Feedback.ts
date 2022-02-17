@@ -37,6 +37,6 @@ export class Feedback extends BaseEntity {
 @ManyToOne(() => User, (user) => user.feedbacks)
   user: User;
 
-@Column()
+@Column({ nullable: true })
   userId: UserId;
 }
