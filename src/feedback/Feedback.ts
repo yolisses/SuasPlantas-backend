@@ -38,5 +38,8 @@ export class Feedback extends BaseEntity {
   user: User;
 
 @Column({ nullable: true })
+  source: string;
+
+@Column({ nullable: true })
   userId: UserId;
 }
