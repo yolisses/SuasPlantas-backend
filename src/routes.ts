@@ -10,6 +10,7 @@ import { questRoutes } from './quests/questsRoutes';
 import { uploadRoutes } from './upload/uploadRoutes';
 import { imagesRoutes } from './images/imagesRoutes';
 import { feedbackRoutes } from './feedback/FeedBackRoutes';
+import { interactionRoutes } from './interaction/interactionRoutes';
 import { notificationsRoutes } from './notification/notificationsRoutes';
 import { visualizationRoutes } from './visualization/visualizationRoutes';
 
@@ -23,6 +24,7 @@ routes.use('/plants', plantRoutes);
 routes.use('/upload', uploadRoutes);
 routes.use('/images', imagesRoutes);
 routes.use('/feedback', feedbackRoutes);
+routes.use('/interactions', interactionRoutes);
 routes.use('/notifications', notificationsRoutes);
 routes.use('/visualizations', visualizationRoutes);
 
