@@ -97,7 +97,6 @@ export const UserController = {
   async getPreview(req:Request, res:Response) {
     const ip = getReqIp(req);
     const ua = getReqUA(req);
-    console.log(ua);
     const { code } = req.params;
     validateProvided({ code });
     const user = await getUserPreview(code as string, ip, ua);

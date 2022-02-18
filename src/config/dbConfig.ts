@@ -14,6 +14,7 @@ import { Quest } from '../quests/Quest';
 import { Session } from '../signIn/Session';
 import { PlantView } from '../plant/PlantView';
 import { Feedback } from '../feedback/Feedback';
+import { Interaction } from '../interaction/Interaction';
 import { Notification } from '../notification/Notification';
 import { Visualization } from '../visualization/Visualization';
 import { FUser } from '../fuser/FUser';
@@ -43,6 +44,7 @@ export const dbConfig: ConnectionOptions = {
     Image,
     Session,
     Feedback,
+    Interaction,
     Notification,
     Visualization,
 
