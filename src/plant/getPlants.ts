@@ -1,5 +1,6 @@
 import { Plant } from './Plant';
 import { UserId } from '../users/User';
+import { paginateResults } from '../common/paginateResults';
 
 interface GetPlantsParams {
   page: number;
@@ -50,6 +51,5 @@ export async function getPlants({
     .skip(skip)
     .take(take);
 
-  // return paginateResults(query.getManyAndCount(), { page, take });
-  return query.getMany();
+  return paginateResults(query.getManyAndCount(), { page, take });
 }
