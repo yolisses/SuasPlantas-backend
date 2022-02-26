@@ -29,13 +29,10 @@ export async function getPlants({
   }
 
   if (latitude && longitude && radius) {
+    console.log({ latitude, longitude, radius });
     query.andWhere(
       'ST_DWithin(user.location, ST_Point(:latitude, :longitude), :radius)',
-      {
-        radius,
-        latitude,
-        longitude,
-      },
+      { radius, latitude, longitude },
     );
   }
 
