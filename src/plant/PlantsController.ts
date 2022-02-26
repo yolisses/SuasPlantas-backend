@@ -12,7 +12,7 @@ import { notificateNewPlant } from '../notification/notificateNewPlant';
 
 export const PlantsController = {
   async get(req, res) {
-    const { page, ...rest } = req.body;
+    const { page, ...rest } = req.query;
     const plants = await getPlants({
       page: parseInt(page, 10) || 0,
       ...rest,

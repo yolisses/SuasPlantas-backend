@@ -7,14 +7,16 @@ interface GetPlantsParams {
   take?: number;
   text?: string;
   radius?:number
-  userId?: UserId;
-  position?:[number, number]
+  userId?: UserId
+  latitude?:number
+  longitude?:number
 }
 export async function getPlants({
   text,
   userId,
   radius,
-  position,
+  latitude,
+  longitude,
   page = 0,
   take = 50,
 }: GetPlantsParams) {
@@ -26,13 +28,13 @@ export async function getPlants({
     query.andWhere({ userId });
   }
 
-  if (position && radius) {
+  if (latitude && longitude && radius) {
     query.andWhere(
       'ST_DWithin(user.location, ST_Point(:latitude, :longitude), :radius)',
       {
-        latitude: position[0],
-        longitude: position[1],
         radius,
+        latitude,
+        longitude,
       },
     );
   }
