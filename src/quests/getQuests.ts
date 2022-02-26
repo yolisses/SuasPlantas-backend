@@ -5,12 +5,30 @@ interface GetQuestsParams{
   page:number
   take:number
   text?:string
+  radius?:number
+  latitude?:number
+  longitude?:number
 }
 
-export async function getQuests({ page = 0, take = 20, text }:GetQuestsParams) {
+export async function getQuests({
+  text,
+  radius,
+  latitude,
+  longitude,
+  page = 0,
+  take = 20,
+}:GetQuestsParams) {
   const skip = page * take;
 
-  const query = Quest.createQueryBuilder('quest');
+  const query = Quest.createQueryBuilder('quest')
+    .leftJoinAndSelect('quest.user', 'user');
+
+  if (latitude && longitude && radius) {
+    query.andWhere(
+      'ST_DWithin(user.location, ST_Point(:latitude, :longitude), :radius)',
+      { radius: radius * 1000, latitude, longitude },
+    );
+  }
 
   if (text) {
     query.where(
@@ -22,8 +40,7 @@ export async function getQuests({ page = 0, take = 20, text }:GetQuestsParams) {
 
   query
     .skip(skip)
-    .take(take)
-    .leftJoinAndSelect('quest.user', 'user');
+    .take(take);
 
   return paginateResults(query.getManyAndCount(), { page, take });
 }

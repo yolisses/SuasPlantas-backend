@@ -10,11 +10,18 @@ export const QuestController = {
   },
 
   async get(req, res) {
+    const {
+      page, radius, latitude, longitude,
+    } = req.query;
+
     const quests = await getQuests({
       ...req.query,
-      page: Number(req.query.page) || 0,
+      page: Number(page) || 0,
+      radius: Number(radius),
+      latitude: Number(latitude),
+      longitude: Number(longitude),
     });
-    res.send(quests);
+    return res.send(quests);
   },
 
   async delete(req, res) {
