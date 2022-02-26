@@ -12,8 +12,13 @@ import { notificateNewPlant } from '../notification/notificateNewPlant';
 
 export const PlantsController = {
   async get(req, res) {
-    const { page, ...rest } = req.query;
+    const {
+      page, latitude, longitude, radius, ...rest
+    } = req.query;
     const plants = await getPlants({
+      radius: Number(radius),
+      latitude: Number(latitude),
+      longitude: Number(longitude),
       page: parseInt(page, 10) || 0,
       ...rest,
     });
