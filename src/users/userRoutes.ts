@@ -3,12 +3,12 @@ import { PingController } from '../ping/PingController';
 import { UserController } from './UserController';
 
 export const userRoutes = Router();
-
+// The order matters!
 userRoutes.get('/preview/:code', UserController.getPreview);
 userRoutes.get('/me/quests', UserController.getQuests);
 userRoutes.get('/me', UserController.me);
 userRoutes.get('/:id', UserController.getOne);
-userRoutes.get('/', UserController.getMany);
+userRoutes.get('/', UserController.get);
 
 userRoutes.post('/by-profile', UserController.createByProfile);
 userRoutes.post('/preview', UserController.setAsPreview);

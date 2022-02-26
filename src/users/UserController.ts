@@ -16,6 +16,21 @@ import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 
 export const UserController = {
+  async get(req:Request, res:Response) {
+    const {
+      page, radius, latitude, longitude,
+    } = req.query;
+
+    const users = await getUsers({
+      ...req.query,
+      page: Number(page) || 0,
+      radius: Number(radius),
+      latitude: Number(latitude),
+      longitude: Number(longitude),
+    });
+    return res.send(users);
+  },
+
   async getOne(req, res) {
     const { id } = req.params;
     const user = await getUser(Number(id));
@@ -84,14 +99,6 @@ export const UserController = {
     const { userId } = req.session;
     const quests = await getUserQuests(userId);
     return res.send(quests);
-  },
-
-  async getMany(req:Request, res:Response) {
-    const users = await getUsers({
-      ...req.query,
-      page: Number(req.query) || 0,
-    });
-    return res.send(users);
   },
 
   async getPreview(req:Request, res:Response) {
