@@ -1,31 +1,20 @@
 import { Request } from 'express';
-import { createPlant } from './createPlant';
 import { findPlant } from './findPlant';
 import { getPlants } from './getPlants';
-import { removePlant } from './removePlant';
 import { editPlant } from './editPlant';
-import { getPlantsSitemap } from './getPlantsSitemap';
 import { likePlant } from './likePlant';
-import { dislikePlant } from './dislikePlant';
 import { addView } from '../view/addView';
+import { createPlant } from './createPlant';
+import { removePlant } from './removePlant';
+import { dislikePlant } from './dislikePlant';
+import { getPlantsSitemap } from './getPlantsSitemap';
 import { notificateNewPlant } from '../notification/notificateNewPlant';
-
-function optionalBoolean(value) {
-  if (value === 'true') return true;
-  if (value === 'false') return false;
-  return undefined;
-}
 
 export const PlantsController = {
   async get(req, res) {
-    const {
-      sell, swap, donate, page, ...rest
-    } = req.query;
+    const { page, ...rest } = req.body;
     const plants = await getPlants({
-      sell: optionalBoolean(sell),
-      swap: optionalBoolean(swap),
-      donate: optionalBoolean(donate),
-      page: Number(page) || 0,
+      page: parseInt(page, 10) || 0,
       ...rest,
     });
     res.send(plants);

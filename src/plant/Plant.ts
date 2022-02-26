@@ -2,7 +2,6 @@ import {
   Index,
   Entity,
   Column,
-  Timestamp,
   OneToMany,
   ManyToOne,
   JoinTable,
@@ -76,13 +75,13 @@ export class Plant extends BaseEntity {
     images: Image[];
 
   @CreateDateColumn()
-    createdAt: Timestamp;
+    createdAt: Date;
 
   @UpdateDateColumn()
-    updatedAt: Timestamp;
+    updatedAt: Date;
 
-  @DeleteDateColumn()
-    deletedAt: Timestamp;
+  @DeleteDateColumn({ select: false })
+    deletedAt: Date;
 
   liked?:boolean;
 
