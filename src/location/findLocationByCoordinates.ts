@@ -15,10 +15,15 @@ interface IResponse{
   address:Address
 }
 
+interface LocationParams{
+  latitude:number|string
+  longitude:number|string
+}
+
 export async function findLocationByCoordinates({
   latitude,
   longitude,
-}: ILocation) {
+}:LocationParams) {
   const res = await axios.get(
     `https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_API_KEY}&lat=${latitude}&lon=${longitude}&accept-language=pt&format=json`,
   );
