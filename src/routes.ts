@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { isDev } from './utils/isDev';
 import { devRoutes } from './dev/devRoutes';
 import { pingRoutes } from './ping/pingRoutes';
+import { chatRoutes } from './chat/chatRoutes';
 import { userRoutes } from './users/userRoutes';
 import { fuserRoutes } from './fuser/fuserRoutes';
 import { plantRoutes } from './plant/plantRoutes';
@@ -17,6 +18,7 @@ import { visualizationRoutes } from './visualization/visualizationRoutes';
 
 export const routes = Router();
 
+routes.use('/chat', chatRoutes);
 routes.use('/ping', pingRoutes);
 routes.use('/users', userRoutes);
 routes.use('/fusers', fuserRoutes);
