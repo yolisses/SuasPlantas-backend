@@ -13,8 +13,7 @@ it('should ping return the body as sent', (done) => {
     .get('/ping')
     .send(body)
     .expect(200)
-    .end((err, res) => {
-      if (err) return done(err);
+    .then((res) => {
       expect(res.body).toHaveProperty('body', body);
       done();
     });
