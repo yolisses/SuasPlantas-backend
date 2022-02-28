@@ -14,6 +14,7 @@ import { errorMiddleware } from './errorMiddleware';
 import { sessionConfig } from './config/sessionConfig';
 import { getAuthCookieFromHeader } from './auth/getAuthCookieFromHeader';
 import { setAuthHeaderFromCookie } from './auth/setAuthHeaderFromCookie';
+import { setUser } from './test/setUser';
 
 export function server(connection?:Connection) {
   const app = express();
