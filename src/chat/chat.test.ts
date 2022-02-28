@@ -5,8 +5,12 @@ import { Message } from './Message';
 
 beforeAll(async () => {
   await startDatabase();
-  await User.create({ id: 1, name: 'test user 0', image: 'https://testimage' }).save();
-  await User.create({ id: 2, name: 'test user 1', image: 'https://testimage' }).save();
+  await Promise.all(
+    [
+      User.create({ id: 1, name: 'test user 0', image: 'https://testimage' }).save(),
+      User.create({ id: 2, name: 'test user 1', image: 'https://testimage' }).save(),
+    ],
+  );
   await Message.create({ text: 'hello', ownerId: 1, receiverId: 2 }).save();
 });
 
