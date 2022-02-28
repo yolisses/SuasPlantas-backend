@@ -14,6 +14,7 @@ import { setUserPreview } from '../preview/setUserPreview';
 import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
+import { validateFound } from '../utils/validateFound';
 
 export const UserController = {
   async get(req:Request, res:Response) {
@@ -33,7 +34,9 @@ export const UserController = {
 
   async getOne(req, res) {
     const { id } = req.params;
+    validateProvided({ id });
     const user = await getUser(Number(id));
+    validateFound({ user });
     return res.send(user);
   },
 
@@ -41,6 +44,7 @@ export const UserController = {
     validateAuthenticated(req);
     const { userId } = req.session;
     const user = await getUser(userId);
+    validateFound({ user });
     return res.send(user);
   },
 

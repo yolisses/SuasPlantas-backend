@@ -26,15 +26,20 @@ export const {
 
 const {
   DATABASE_DEV_URL,
+  DATABASE_TEST_URL,
   DATABASE_STAGE_URL,
   DATABASE_URL: DATABASE_PROD_URL,
 } = process.env;
 
 // imported isDev is not initialized
+const isTest = NODE_ENV === 'test';
 const isDev = NODE_ENV === 'development';
 const useStageDB = false;
 
 function getDataBaseUrl() {
+  if (isTest) {
+    return DATABASE_TEST_URL;
+  }
   if (isDev) {
     return useStageDB ? DATABASE_STAGE_URL : DATABASE_DEV_URL;
   }
@@ -43,4 +48,4 @@ function getDataBaseUrl() {
 
 export const DATABASE_URL = getDataBaseUrl();
 
-export const DB_SSL = isDev ? useStageDB : true;
+export const DB_SSL = (isDev || isTest) ? useStageDB : true;

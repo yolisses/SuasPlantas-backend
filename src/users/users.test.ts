@@ -1,5 +1,6 @@
 import req from 'supertest';
-import { app, server } from '../server';
+import { startDatabase } from '../database/startDatabase';
+import { app } from '../server';
 import { getUser } from './getUser';
 import { User } from './User';
 
@@ -10,7 +11,7 @@ it(
 
 it('should return a user if the userId is valid', async () => {
   const userId = 1;
-  const app = server();
+  await startDatabase();
   const user = await getUser(userId);
   expect(user).toBeInstanceOf(User);
 });

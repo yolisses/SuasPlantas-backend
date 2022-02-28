@@ -2,10 +2,7 @@ import { ConnectionOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { databaseEntities } from '../database/databaseEntities';
 
-import {
-  DB_SSL,
-  DATABASE_URL,
-} from './env';
+import { DB_SSL, DATABASE_URL } from './env';
 
 export const dbConfig: ConnectionOptions = {
   logging: false,

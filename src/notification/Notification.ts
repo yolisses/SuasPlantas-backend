@@ -22,10 +22,10 @@ export class Notification extends BaseEntity {
       id:NotificationId;
 
     @Column()
-      userId:UserId;
+      userId:number;
 
     @Column()
-      entityId:PlantId;
+      entityId:number;
 
     @CreateDateColumn()
       createdAt: Timestamp;
