@@ -14,9 +14,8 @@ it('should ping return the body as sent', (done) => {
     .send(body)
     .expect(200)
     .end((err, res) => {
-      if (err)done(err);
-      expect(res.body)
-        .toHaveProperty('body', body);
+      if (err) return done(err);
+      expect(res.body).toHaveProperty('body', body);
       done();
     });
 });
