@@ -1,7 +1,3 @@
-import 'reflect-metadata';
-import 'regenerator-runtime';
-
-import 'express-async-errors';
 import { createConnection } from 'typeorm';
 
 import { dbConfig } from './config/dbConfig';

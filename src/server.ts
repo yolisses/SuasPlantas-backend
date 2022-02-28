@@ -1,7 +1,14 @@
-import express from 'express';
+import 'reflect-metadata';
+import 'regenerator-runtime';
+import 'express-async-errors';
 
+import express from 'express';
 import { Connection } from 'typeorm';
+import session from 'express-session';
+import { TypeormStore } from 'connect-typeorm/out';
+
 import { routes } from './routes';
+import { Session } from './signIn/Session';
 import { corsConfig } from './config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
 import { sessionConfig } from './config/sessionConfig';
@@ -14,12 +21,12 @@ export function server(connection?:Connection) {
   app.use(corsConfig);
   app.use(express.json());
 
-  if (connection) {
-  // don't change the order unless strictly necessary
-    app.use(getAuthCookieFromHeader);
-    app.use(sessionConfig(connection));
-    app.use(setAuthHeaderFromCookie);
-  }
+  app.use(getAuthCookieFromHeader);
+  const store = connection
+    ? new TypeormStore().connect(connection.getRepository(Session))
+    : undefined;
+  app.use(session({ ...sessionConfig, store }));
+  app.use(setAuthHeaderFromCookie);
 
   app.use(routes);
 
