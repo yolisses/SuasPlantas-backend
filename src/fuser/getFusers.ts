@@ -1,6 +1,5 @@
-import { Like } from 'typeorm';
-import { paginateResults } from '../common/paginateResults';
 import { FUser } from './FUser';
+import { paginateResults } from '../common/paginateResults';
 
 interface GetFusersParams {
   page: number;
@@ -19,13 +18,8 @@ export async function getFusers({
   query
     .innerJoinAndSelect('fuser.city', 'city');
 
-  if (state) {
-    query.where('city.state = :state', { state });
-  }
-
-  if (city) {
-    query.where({ cityId: city });
-  }
+  if (state) query.where('city.state = :state', { state });
+  if (city) query.where({ cityId: city });
 
   const skip = page * take;
   query
