@@ -1,7 +1,7 @@
-import { startDatabase } from '../database/startDatabase';
+import { Message } from './Message';
 import { User } from '../users/User';
 import { getChatMessages } from './getChatMessages';
-import { Message } from './Message';
+import { startDatabase } from '../database/startDatabase';
 
 beforeAll(async () => {
   await startDatabase();

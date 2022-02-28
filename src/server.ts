@@ -8,13 +8,13 @@ import session from 'express-session';
 import { TypeormStore } from 'connect-typeorm/out';
 
 import { routes } from './routes';
+import { isTest } from './config/env';
 import { Session } from './signIn/Session';
 import { corsConfig } from './config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
 import { sessionConfig } from './config/sessionConfig';
 import { getAuthCookieFromHeader } from './auth/getAuthCookieFromHeader';
 import { setAuthHeaderFromCookie } from './auth/setAuthHeaderFromCookie';
-import { setUser } from './test/setUser';
 
 export function server(connection?:Connection) {
   const app = express();
@@ -23,18 +23,15 @@ export function server(connection?:Connection) {
   app.use(express.json());
 
   app.use(getAuthCookieFromHeader);
-  const store = connection
-    ? new TypeormStore().connect(connection.getRepository(Session))
-    : undefined;
-  app.use(session({ ...sessionConfig, store }));
+  const sessionStore = isTest
+    ? undefined
+    : new TypeormStore().connect(Session.getRepository());
+  app.use(session({ ...sessionConfig, store: sessionStore }));
   app.use(setAuthHeaderFromCookie);
 
   app.use(routes);
 
   // last
   app.use(errorMiddleware);
-
   return app;
 }
-
-export const app = server();
