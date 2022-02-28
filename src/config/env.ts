@@ -32,8 +32,8 @@ const {
 } = process.env;
 
 // imported isDev is not initialized
-const isTest = NODE_ENV === 'test';
-const isDev = NODE_ENV === 'development';
+export const isTest = NODE_ENV === 'test';
+export const isDev = NODE_ENV === 'development';
 const useStageDB = false;
 
 function getDataBaseUrl() {
