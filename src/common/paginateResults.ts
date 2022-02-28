@@ -3,7 +3,7 @@ interface PaginateResultsParams{
     take:number
 }
 
-export class Pagination<T> {
+export interface Pagination<T> {
   pageData: {
     page,
     totalPages,
