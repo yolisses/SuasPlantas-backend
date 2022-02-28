@@ -19,7 +19,6 @@ export async function getChatMessages({
   const queryValues = { id1: userId1, id2: userId2 };
   query.where('message.receiverId = :id1 and message.ownerId = :id2', queryValues);
   query.orWhere('message.receiverId = :id2 and message.ownerId = :id1', queryValues);
-  query.orderBy('createdAt desc');
 
   const skip = page * take;
   query

@@ -5,7 +5,7 @@ import { User, UserId } from '../users/User';
 
 export type MessageId = number
 
-@Entity()
+@Entity({ orderBy: { createdAt: 'DESC' } })
 export class Message extends BaseEntity {
     @PrimaryGeneratedColumn()
       id:MessageId;
@@ -16,13 +16,13 @@ export class Message extends BaseEntity {
     @Column()
       ownerId: UserId;
 
-    @ManyToOne(() => User, (user) => user.plants, { nullable: false })
+    @ManyToOne(() => User, (user) => user.sentMessages, { nullable: false })
       owner: User;
 
     @Column()
       receiverId: UserId;
 
-    @ManyToOne(() => User, (user) => user.plants, { nullable: false })
+    @ManyToOne(() => User, (user) => user.receivedMessages, { nullable: false })
       receiver: User;
 
     @CreateDateColumn()

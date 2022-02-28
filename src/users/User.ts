@@ -16,6 +16,7 @@ import {
 } from 'typeorm';
 import { Plant } from '../plant/Plant';
 import { Quest } from '../quests/Quest';
+import { Message } from '../chat/Message';
 
 export type UserId = number;
 
@@ -60,6 +61,12 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Plant, (plant) => plant.user, { cascade: true })
     plants: Plant[];
+
+  @OneToMany(() => Message, (message) => message.owner, { cascade: true })
+    sentMessages: Message[];
+
+  @OneToMany(() => Message, (message) => message.receiver, { cascade: true })
+    receivedMessages: Message[];
 
   @OneToMany(() => Quest, (quest) => quest.user, { cascade: true })
     quests: Quest[];
