@@ -5,6 +5,7 @@ import { mockMessages } from './mockMessages';
 import { userCookie } from '../test/userCookie';
 import { getChatMessages } from './getChatMessages';
 import { startDatabase } from '../database/startDatabase';
+import { findOrCreateChat } from './findOrCreateChat';
 
 const messages = mockMessages;
 
@@ -26,6 +27,12 @@ it('should return chat messages', async () => {
   expect(res.content).toHaveLength(messages.length);
 });
 
+it('should return a chat', async () => {
+  const users = [1, 2];
+  const chat = await findOrCreateChat(users);
+  console.log(chat);
+});
+
 it.only('should return current user chats', async () => {
   const userId = 1;
   const res = await req(app)
@@ -33,10 +40,4 @@ it.only('should return current user chats', async () => {
     .set('Authorization', await userCookie(userId));
 
   console.log(res.body);
-});
-
-it('should return a chat', async () => {
-  const users = [1, 2];
-  const chat = await findOrCreateChat(users);
-  console.log(chat);
 });

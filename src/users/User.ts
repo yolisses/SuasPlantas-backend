@@ -1,4 +1,3 @@
-import { Feedback } from 'aws-sdk/clients/guardduty';
 import { Point } from 'geojson';
 import {
   Index,
@@ -17,8 +16,7 @@ import {
 import { Plant } from '../plant/Plant';
 import { Quest } from '../quests/Quest';
 import { Message } from '../chat/Message';
-import { Chat } from '../chat/Chat';
-import { UserChat } from '../chat/UserChat';
+import { Feedback } from '../feedback/Feedback';
 
 export type UserId = number;
 
@@ -67,6 +65,9 @@ export class User extends BaseEntity {
   @OneToMany(() => Message, (message) => message.sender, { cascade: true })
     sentMessages: Message[];
 
+  @OneToMany(() => Message, (message) => message.receiver, { cascade: true })
+    receivedMessages: Message[];
+
   @OneToMany(() => Quest, (quest) => quest.user, { cascade: true })
     quests: Quest[];
 
@@ -74,7 +75,7 @@ export class User extends BaseEntity {
   @JoinTable()
     likedPlants: Plant[];
 
-  @OneToMany(() => Plant, (plant) => plant.user)
+  @OneToMany(() => Feedback, (feedback) => feedback.user)
     feedbacks: Feedback[];
 
   @CreateDateColumn()

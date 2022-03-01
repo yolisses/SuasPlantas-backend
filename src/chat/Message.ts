@@ -21,10 +21,10 @@ export class Message extends BaseEntity {
       sender: User;
 
     @Column()
-      chatId: ChatId;
+      receiverId: UserId;
 
-    @ManyToOne(() => Chat, (chat) => chat.messages, { nullable: false })
-      chat: Chat;
+    @ManyToOne(() => User, (user) => user.receivedMessages, { nullable: false })
+      receiver: User;
 
     @CreateDateColumn()
       createdAt:Date;
