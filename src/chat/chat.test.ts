@@ -27,7 +27,7 @@ it('should return chat messages', async () => {
   expect(res.content).toHaveLength(messages.length);
 });
 
-it.only('should return current user chats', async () => {
+it('should return current user chats', async () => {
   const userId = 1;
   const res = await req(app)
     .get('/chat/contacts')

@@ -1,3 +1,4 @@
+import { Chat } from '../chat/Chat';
 import { View } from '../view/View';
 import { User } from '../users/User';
 import { Tag } from '../plant/tag/Tag';
@@ -19,6 +20,7 @@ export const entities = [
   Tag,
   View,
   User,
+  Chat,
   City,
   FUser,
   State,
