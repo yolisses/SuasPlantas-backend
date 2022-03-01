@@ -15,13 +15,14 @@ it(
   () => req(app).get('/users/me').expect(403),
 );
 
-it(
+it.only(
   'should return the current user if authenticated',
   async () => {
     const userId = 1;
-    return req(app)
+    const cookie = await userCookie(userId);
+    await req(app)
       .get('/users/me')
-      .then((res) => console.log(res.body));
+      .set('Authorization', cookie);
   },
 );
 
