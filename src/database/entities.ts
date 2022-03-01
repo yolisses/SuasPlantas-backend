@@ -15,7 +15,7 @@ import { Interaction } from '../interaction/Interaction';
 import { Notification } from '../notification/Notification';
 import { Visualization } from '../visualization/Visualization';
 
-export const databaseEntities = [
+export const entities = [
   Tag,
   View,
   User,
