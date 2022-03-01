@@ -1,13 +1,12 @@
 import { Request, Response } from 'express';
 
-import { Message } from './Message';
-import { getChatMessages } from './getChatMessages';
-import { getUserChats } from './getUserChats';
-import { sendMessage } from './sendMessage';
-import { validateAuthenticated } from '../utils/validateAuthenticated';
 import { ChatId } from './Chat';
-import { findOrCreateChat } from './findOrCreateChat';
 import { error } from '../utils/error';
+import { sendMessage } from './sendMessage';
+import { getUserChats } from './getUserChats';
+import { getChatMessages } from './getChatMessages';
+import { findOrCreateChat } from './findOrCreateChat';
+import { validateAuthenticated } from '../utils/validateAuthenticated';
 
 export const ChatController = {
   async chatMessages(req:Request, res:Response) {
@@ -16,9 +15,8 @@ export const ChatController = {
     const { id: userId2 } = req.params;
     const { userId: userId1 } = req.session;
     const plants = await getChatMessages({
-      userId1,
       page: parseInt(page as string, 10) || 0,
-      userId2: parseInt(userId2 as string, 10) || 0,
+      userIds: [userId1, parseInt(userId2 as string, 10) || 0],
     });
     res.send(plants);
   },

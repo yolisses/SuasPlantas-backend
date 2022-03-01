@@ -21,8 +21,6 @@ export class Chat extends BaseEntity {
     @Column()
       user2:number;
 
-    photos:User;
-
     @OneToMany(() => Message, (message) => message.chat, { cascade: true })
       messages: Message[];
 }

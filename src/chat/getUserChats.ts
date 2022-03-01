@@ -4,7 +4,13 @@ import { UserId } from '../users/User';
 export async function getUserChats(userId:UserId) {
   return getManager().query(`  
 SELECT
-  *
+  chats.id AS id,
+  users.id AS "userId",
+  users.name AS "name",
+  users.image AS "image",
+  last_message.text AS "lastText",
+  last_message.sender_id AS "lastUserId",
+  last_message.created_at AS "lastTime"
 FROM
   (
       SELECT
@@ -14,7 +20,7 @@ FROM
                   ELSE user1
               END
           ) AS other,
-          id
+          *
       FROM
           chat
       WHERE
@@ -23,10 +29,7 @@ FROM
   ) AS chats
   LEFT JOIN (
       SELECT
-          DISTINCT ON (chat_id) text,
-          created_at,
-          sender_id,
-          chat_id
+          DISTINCT ON (chat_id) *
       FROM
           message
       ORDER BY
@@ -35,9 +38,7 @@ FROM
   ) AS last_message ON last_message.chat_id = chats.id
   LEFT JOIN (
       SELECT
-          id,
-          name,
-          image
+          *
       FROM
           "user"
   ) AS users ON users.id = chats.other
