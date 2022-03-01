@@ -5,6 +5,7 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { User } from '../users/User';
 import { Message } from './Message';
 
 export type ChatId = number
@@ -19,6 +20,8 @@ export class Chat extends BaseEntity {
 
     @Column()
       user2:number;
+
+    photos:User;
 
     @OneToMany(() => Message, (message) => message.chat, { cascade: true })
       messages: Message[];

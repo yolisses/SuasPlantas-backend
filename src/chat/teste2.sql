@@ -1,8 +1,3 @@
-import { getManager } from 'typeorm';
-import { Plant, PlantId } from '../plant/Plant';
-
-export async function alsoSaw(plantId: PlantId):Promise<Plant[]> {
-  return getManager().query(`
 SELECT
     rank,
     id,
@@ -40,5 +35,3 @@ ORDER BY
     rank DESC
 LIMIT
     14
-`, [plantId]);
-}

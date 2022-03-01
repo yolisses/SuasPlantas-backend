@@ -34,7 +34,7 @@ it('should return a chat', async () => {
   console.log(chat);
 });
 
-it.only('should send messages', async () => {
+it('should send messages', async () => {
   const users = [1, 2];
   const { id: chatId } = await findOrCreateChat(users);
   console.log(chatId);
@@ -44,7 +44,7 @@ it.only('should send messages', async () => {
   }
 });
 
-it('should return current user chats', async () => {
+it.only('should return user chats', async () => {
   const userId = 1;
   const chats = await getUserChats(userId);
   console.log(chats);
