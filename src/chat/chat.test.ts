@@ -1,14 +1,10 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import req from 'supertest';
-import { app } from '../app';
 import { User } from '../users/User';
 import { mockMessages } from './mockMessages';
-import { userCookie } from '../test/userCookie';
+import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { startDatabase } from '../database/startDatabase';
-import { getUserChats } from './getUserChats';
-import { Message } from './Message';
 
 const messages = mockMessages;
 
