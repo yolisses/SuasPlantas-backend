@@ -41,7 +41,6 @@ export const UserController = {
   },
 
   async me(req: Request, res) {
-    console.log(req.session.userId);
     validateAuthenticated(req);
     const { userId } = req.session;
     const user = await getUser(userId);

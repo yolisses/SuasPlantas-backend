@@ -9,7 +9,7 @@ import { routes } from './routes';
 import { corsConfig } from './config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
 import { sessionConfig } from './config/sessionConfig';
-import { getSessionStore } from './session/sessionStore';
+import { getSessionStore } from './session/getSessionStore';
 import { getAuthCookieFromHeader } from './auth/getAuthCookieFromHeader';
 import { setAuthHeaderFromCookie } from './auth/setAuthHeaderFromCookie';
 

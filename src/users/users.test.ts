@@ -20,9 +20,12 @@ it.only(
   async () => {
     const userId = 1;
     const cookie = await userCookie(userId);
-    await req(app)
+    const res = await req(app)
       .get('/users/me')
       .set('Authorization', cookie);
+    expect(res.body).toHaveProperty('id');
+    expect(res.body).toHaveProperty('name');
+    expect(res.body).toHaveProperty('image');
   },
 );
 
