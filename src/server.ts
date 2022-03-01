@@ -8,8 +8,8 @@ import session from 'express-session';
 import { routes } from './routes';
 import { corsConfig } from './config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
-import { sessionStore } from './session/sessionStore';
 import { sessionConfig } from './config/sessionConfig';
+import { getSessionStore } from './session/sessionStore';
 import { getAuthCookieFromHeader } from './auth/getAuthCookieFromHeader';
 import { setAuthHeaderFromCookie } from './auth/setAuthHeaderFromCookie';
 
@@ -20,7 +20,7 @@ export function server() {
   app.use(express.json());
 
   app.use(getAuthCookieFromHeader);
-  app.use(session({ ...sessionConfig, store: sessionStore }));
+  app.use(session({ ...sessionConfig, store: getSessionStore() }));
   app.use(setAuthHeaderFromCookie);
 
   app.use(routes);
