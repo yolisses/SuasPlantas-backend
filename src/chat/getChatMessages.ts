@@ -3,22 +3,21 @@ import { UserId } from '../users/User';
 import { Message } from './Message';
 
 interface GetChatMessagesParams{
-    userId1: UserId
-    userId2:UserId
+    userIds: [UserId, UserId]
     page?:number
     take?:number
 }
 
 export async function getChatMessages({
-  userId1,
-  userId2,
+  userIds,
   page = 0,
   take = 50,
 }:GetChatMessagesParams) {
-  const query = Message.createQueryBuilder('message');
-  const queryValues = { id1: userId1, id2: userId2 };
-  query.where('message.receiverId = :id1 and message.ownerId = :id2', queryValues);
-  query.orWhere('message.receiverId = :id2 and message.ownerId = :id1', queryValues);
+  const [id1, id2] = userIds;
+  const query = Message.createQueryBuilder('message')
+    .setParameters({ id1, id2 })
+    .where('message.receiverId = :id1 and message.ownerId = :id2')
+    .orWhere('message.receiverId = :id2 and message.ownerId = :id1');
 
   const skip = page * take;
   query

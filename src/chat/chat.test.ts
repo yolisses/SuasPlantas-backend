@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 import req from 'supertest';
 import { app } from '../app';
 import { User } from '../users/User';
@@ -5,7 +7,8 @@ import { mockMessages } from './mockMessages';
 import { userCookie } from '../test/userCookie';
 import { getChatMessages } from './getChatMessages';
 import { startDatabase } from '../database/startDatabase';
-import { findOrCreateChat } from './findOrCreateChat';
+import { getUserChats } from './getUserChats';
+import { Message } from './Message';
 
 const messages = mockMessages;
 
@@ -23,21 +26,12 @@ beforeAll(async () => {
 });
 
 it('should return chat messages', async () => {
-  const res = await getChatMessages({ userId1: 1, userId2: 2 });
+  const res = await getChatMessages({ userIds: [1, 2] });
   expect(res.content).toHaveLength(messages.length);
-});
-
-it('should return a chat', async () => {
-  const users = [1, 2];
-  const chat = await findOrCreateChat(users);
-  console.log(chat);
 });
 
 it.only('should return current user chats', async () => {
   const userId = 1;
-  const res = await req(app)
-    .get('/chat/contacts')
-    .set('Authorization', await userCookie(userId));
-
-  console.log(res.body);
+  const chats = await getUserChats(userId);
+  console.log(chats);
 });
