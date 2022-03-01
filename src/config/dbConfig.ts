@@ -9,7 +9,7 @@ export const dbConfig: ConnectionOptions = {
   type: 'postgres',
   synchronize: true,
   url: DATABASE_URL,
-  dropSchema: isTest,
+  dropSchema: false,
   entities: databaseEntities,
   namingStrategy: new SnakeNamingStrategy(),
   ssl: DB_SSL ? { rejectUnauthorized: false } : undefined,

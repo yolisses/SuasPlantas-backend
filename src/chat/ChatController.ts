@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 import { getChatMessages } from './getChatMessages';
+import { getUserContacts } from './getUserContacts';
 
 export const ChatController = {
   async chatMessages(req:Request, res:Response) {
@@ -14,5 +15,12 @@ export const ChatController = {
       userId2: parseInt(userId2 as string, 10) || 0,
     });
     res.send(plants);
+  },
+
+  async getContacts(req, res) {
+    validateAuthenticated(req);
+    const { userId } = req.session;
+    const contacts = await getUserContacts(userId);
+    return res.send(contacts);
   },
 };

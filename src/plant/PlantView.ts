@@ -1,6 +1,6 @@
 import { Point } from 'geojson';
 import {
-  BaseEntity, Connection, Index, ViewColumn, ViewEntity,
+  BaseEntity, Index, ViewColumn, ViewEntity,
 } from 'typeorm';
 import { User } from '../users/User';
 import { Plant } from './Plant';
