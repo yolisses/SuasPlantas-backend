@@ -20,7 +20,11 @@ export const ChatController = {
   async getContacts(req, res) {
     validateAuthenticated(req);
     const { userId } = req.session;
-    const contacts = await getUserContacts(userId);
-    return res.send(contacts);
+    try {
+      const contacts = await getUserContacts(userId);
+      return res.send(contacts);
+    } catch (err) {
+      console.error(err);
+    }
   },
 };
