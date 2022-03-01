@@ -1,3 +1,5 @@
+import { Chat } from './Chat';
+
 export async function findOrCreateChat(users:number[]) {
   const usersIds = users.sort();
   const [user1, user2] = usersIds;

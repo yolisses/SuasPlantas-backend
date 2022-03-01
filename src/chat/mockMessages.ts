@@ -1,7 +1,4 @@
-import { DeepPartial } from 'typeorm';
-import { Message } from './Message';
-
-export const mockMessages:DeepPartial<Message>[] = [
+export const mockMessages = [
   {
     id: 0,
     senderId: 1,

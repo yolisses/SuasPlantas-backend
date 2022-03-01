@@ -5,6 +5,7 @@ import { mockMessages } from './mockMessages';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { startDatabase } from '../database/startDatabase';
+import { findOrCreateChat } from './findOrCreateChat';
 
 const messages = mockMessages;
 
@@ -26,7 +27,13 @@ it('should return chat messages', async () => {
   expect(res.content).toHaveLength(messages.length);
 });
 
-it.only('should return current user chats', async () => {
+it.only('should return a chat', async () => {
+  const users = [1, 2];
+  const chat = await findOrCreateChat(users);
+  console.log(chat);
+});
+
+it('should return current user chats', async () => {
   const userId = 1;
   const chats = await getUserChats(userId);
   console.log(chats);
