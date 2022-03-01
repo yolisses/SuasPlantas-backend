@@ -1,15 +1,14 @@
 import {
   Entity,
-  JoinTable,
+  Column,
   OneToMany,
-  ManyToMany,
-  RelationId,
+  ManyToOne,
   BaseEntity,
   CreateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User, UserId } from '../users/User';
 import { Message } from './Message';
+import { User, UserId } from '../users/User';
 
 export type ChatId = number
 
@@ -18,12 +17,11 @@ export class Chat extends BaseEntity {
     @PrimaryGeneratedColumn()
       id:ChatId;
 
-    @RelationId((chat: Chat) => chat.users)
-      userIds: UserId[];
+    @Column()
+      user1: number;
 
-    @ManyToMany(() => User, { eager: true, nullable: false })
-    @JoinTable()
-      users: User[];
+    @Column()
+      user2: number;
 
     @OneToMany(() => Message, (message) => message.chat, { cascade: true })
       messages: Message[];

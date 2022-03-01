@@ -17,6 +17,8 @@ import {
 import { Plant } from '../plant/Plant';
 import { Quest } from '../quests/Quest';
 import { Message } from '../chat/Message';
+import { Chat } from '../chat/Chat';
+import { UserChat } from '../chat/UserChat';
 
 export type UserId = number;
 
