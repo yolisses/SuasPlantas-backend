@@ -1,5 +1,12 @@
 import {
-  BaseEntity, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn, RelationId,
+  Entity,
+  JoinTable,
+  OneToMany,
+  ManyToMany,
+  RelationId,
+  BaseEntity,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User, UserId } from '../users/User';
 import { Message } from './Message';
@@ -14,7 +21,7 @@ export class Chat extends BaseEntity {
     @RelationId((chat: Chat) => chat.users)
       userIds: UserId[];
 
-    @ManyToMany(() => User)
+    @ManyToMany(() => User, { eager: true, nullable: false })
     @JoinTable()
       users: User[];
 

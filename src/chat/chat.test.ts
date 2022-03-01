@@ -1,11 +1,11 @@
 import req from 'supertest';
-import { Message } from './Message';
-import { User } from '../users/User';
-import { getChatMessages } from './getChatMessages';
-import { startDatabase } from '../database/startDatabase';
 import { app } from '../app';
+import { User } from '../users/User';
 import { mockMessages } from './mockMessages';
 import { userCookie } from '../test/userCookie';
+import { getChatMessages } from './getChatMessages';
+import { findOrCreateChat } from './findOrCreateChat';
+import { startDatabase } from '../database/startDatabase';
 
 const messages = mockMessages;
 
@@ -32,5 +32,10 @@ it('should return current user chats', async () => {
   const res = await req(app)
     .get('/chat/contacts')
     .set('Authorization', await userCookie(userId));
-  console.log(res.body);
+});
+
+it.only('should return a chat', async () => {
+  const users = [1, 2];
+  const chat = await findOrCreateChat(users);
+  console.log(chat);
 });
