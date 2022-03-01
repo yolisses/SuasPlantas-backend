@@ -8,5 +8,5 @@ interface SendMessageParams{
 }
 
 export async function sendMessage({ text, senderId, chatId }:SendMessageParams) {
-  return Message.create({ text, senderId, chatId });
+  return Message.create({ text, senderId, chatId }).save();
 }
