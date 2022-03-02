@@ -9,6 +9,7 @@ import { removePlant } from './removePlant';
 import { dislikePlant } from './dislikePlant';
 import { getPlantsSitemap } from './getPlantsSitemap';
 import { notificateNewPlant } from '../notification/notificateNewPlant';
+import { int } from '../utils/int';
 
 export const PlantsController = {
   async get(req, res) {
@@ -16,10 +17,10 @@ export const PlantsController = {
       page, latitude, longitude, radius, ...rest
     } = req.query;
     const plants = await getPlants({
+      page: int(page) || 0,
       radius: Number(radius),
       latitude: Number(latitude),
       longitude: Number(longitude),
-      page: parseInt(page, 10) || 0,
       ...rest,
     });
     res.send(plants);

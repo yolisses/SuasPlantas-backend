@@ -1,10 +1,13 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
+import req from 'supertest';
+import { app } from '../app';
 import { Chat } from './Chat';
 import { Message } from './Message';
 import { User } from '../users/User';
 import { sendMessage } from './sendMessage';
 import { getUserChats } from './getUserChats';
+import { userCookie } from '../test/userCookie';
 import { getChatMessages } from './getChatMessages';
 import { findOrCreateChat } from './findOrCreateChat';
 import { startDatabase } from '../database/startDatabase';
@@ -92,6 +95,37 @@ it('should return chat messages', async () => {
       }],
   });
   expect(res.content[0].createdAt > res.content[1].createdAt);
+});
+
+it.only('should get chat messages by userId', async () => {
+  const currentUserId = 1;
+  const otherUserId = 2;
+  const res = await req(app).get(`/chat/user/${otherUserId}`)
+    .set('Authorization', await userCookie(currentUserId));
+  expect(res.body).toMatchObject({
+    pageData: {
+      page: 0, totalPages: 1, totalCount: 2, nextPage: null,
+    },
+    content: [
+      {
+        id: 2,
+        text: '2 -> 1',
+        senderId: 2,
+        sender: undefined,
+        chatId: 1,
+        chat: undefined,
+        createdAt: expect.any(Date),
+      },
+      {
+        id: 1,
+        text: '1 -> 2',
+        senderId: 1,
+        sender: undefined,
+        chatId: 1,
+        chat: undefined,
+        createdAt: expect.any(Date),
+      }],
+  });
 });
 
 it('should return a present chat', async () => {

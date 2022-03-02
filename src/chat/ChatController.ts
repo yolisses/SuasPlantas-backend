@@ -7,6 +7,8 @@ import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { findOrCreateChat } from './findOrCreateChat';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
+import { findChat } from './findChat';
+import { int } from '../utils/int';
 
 export const ChatController = {
   async chatMessages(req:Request, res:Response) {
@@ -14,9 +16,10 @@ export const ChatController = {
     const { page } = req.query;
     const { id: userId2 } = req.params;
     const { userId: userId1 } = req.session;
+    const chat = await findChat([userId1, int(userId2)]);
     const plants = await getChatMessages({
-      page: parseInt(page as string, 10) || 0,
-      userIds: [userId1, parseInt(userId2 as string, 10) || 0],
+      page: int(page) || 0,
+      chatId: chat.id,
     });
     res.send(plants);
   },
