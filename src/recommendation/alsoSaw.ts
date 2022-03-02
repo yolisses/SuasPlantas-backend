@@ -29,7 +29,7 @@ FROM
                         FROM
                             VIEW
                         WHERE
-                            VIEW.plant_id = $ 1
+                            VIEW.plant_id = $1
                     ) AS vplanta2 ON VIEW.user_id = vplanta2.user_id
             ) AS coisa
         GROUP BY
