@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
 
 import { ChatId } from './Chat';
+import { int } from '../utils/int';
 import { error } from '../utils/error';
 import { sendMessage } from './sendMessage';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { findOrCreateChat } from './findOrCreateChat';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
-import { findChat } from './findChat';
-import { int } from '../utils/int';
 
 export const ChatController = {
   async chatMessages(req:Request, res:Response) {
