@@ -8,7 +8,7 @@ interface GetChatMessagesParams{
   chatId:ChatId
 }
 
-export function getChatMessages({ chatId, page = 0, take = 50 }:GetChatMessagesParams) {
+export function getChatMessages({ chatId, page = 0, take = 10000 }:GetChatMessagesParams) {
   const query = Message.createQueryBuilder('message');
   query.where('message.chatId = :chatId', { chatId });
 
