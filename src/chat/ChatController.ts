@@ -14,14 +14,12 @@ export const ChatController = {
   async chatMessages(req:Request, res:Response) {
     validateAuthenticated(req);
     const { page } = req.query;
-    const { id: userId2 } = req.params;
-    const { userId: userId1 } = req.session;
-    const chat = await findChat([userId1, int(userId2)]);
-    const plants = await getChatMessages({
+    const { id } = req.params;
+    const messages = await getChatMessages({
+      chatId: int(id),
       page: int(page) || 0,
-      chatId: chat.id,
     });
-    res.send(plants);
+    res.send(messages);
   },
 
   async getContacts(req, res) {
