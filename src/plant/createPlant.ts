@@ -21,37 +21,23 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
     name, description, amount, price, swap, donate, images,
   } = plant;
 
+  if (!images) error(400, 'Images not provided');
+
   const result = Plant.create({
     name,
     swap,
     price,
     amount,
     donate,
+    userId,
     description,
+    card: images[0],
   });
 
-  if (!images) error(400, 'Images not provided');
-
-  const card = images[0];
-  result.card = card;
-
   const imagesInstances: Image[] = await Promise.all(
-    plant.images.map(async (uri) => {
-      const image = Image.create();
-      image.uri = uri;
-      return image.save();
-    }),
+    plant.images.map(async (uri) => Image.create({ uri }).save()),
   );
   result.images = imagesInstances;
-
-  const user = await User.findOneOrFail(userId);
-  result.user = user;
-
-  if (plant.tags) {
-    const validatedTags = plant.tags.filter((tag) => validTags.has(tag));
-    const tags: Tag[] = await Tag.findByIds(validatedTags);
-    result.tags = tags;
-  }
 
   return result.save();
 }
