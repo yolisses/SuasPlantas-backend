@@ -1,10 +1,8 @@
-import { Tag } from './tag/Tag';
-import { User } from '../users/User';
-import { error } from '../utils/error';
 import { Image } from '../upload/Image';
 import { Plant, PlantId } from './Plant';
-import { validTags } from './tag/validTags';
 import { validateOwner } from '../utils/validateOwner';
+import { editIfNotUndefined } from '../utils/editIfNotUndefined';
+import { validateFound } from '../utils/validateFound';
 
 interface IPlantEditDTO {
   id:PlantId
@@ -18,47 +16,27 @@ interface IPlantEditDTO {
   images: string[];
 }
 
-function editIfPresent(obj:object, values:object) {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in values) {
-    // eslint-disable-next-line no-param-reassign
-    if (values[key] !== undefined) { obj[key] = values[key]; }
-  }
-}
-
 export async function editPlant(plant: IPlantEditDTO, userId: number) {
   const {
     name, description, amount, price, swap, donate, images, id,
   } = plant;
 
   const result = await Plant.findOneOrFail(id);
+  validateFound({ plant });
   validateOwner({ plant }, userId);
 
-  editIfPresent(result, {
+  editIfNotUndefined(result, {
     name, description, amount, price, swap, donate,
   });
 
-  if (!images) error(400, 'Images not provided');
+  if (images) {
+    const card = images[0];
+    result.card = card;
 
-  const card = images[0];
-  result.card = card;
-
-  const imagesInstances: Image[] = await Promise.all(
-    plant.images.map(async (uri) => {
-      const image = Image.create();
-      image.uri = uri;
-      return image.save();
-    }),
-  );
-  result.images = imagesInstances;
-
-  const user = await User.findOneOrFail(userId);
-  result.user = user;
-
-  if (plant.tags) {
-    const validatedTags = plant.tags.filter((tag) => validTags.has(tag));
-    const tags: Tag[] = await Tag.findByIds(validatedTags);
-    result.tags = tags;
+    const imagesInstances: Image[] = await Promise.all(
+      plant.images.map(async (uri) => Image.create({ uri }).save()),
+    );
+    result.images = imagesInstances;
   }
 
   return result.save();
