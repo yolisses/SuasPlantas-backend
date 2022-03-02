@@ -4,7 +4,6 @@ import { Chat } from './Chat';
 import { Message } from './Message';
 import { User } from '../users/User';
 import { sendMessage } from './sendMessage';
-import { mockMessages } from './mockMessages';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { findOrCreateChat } from './findOrCreateChat';
@@ -107,15 +106,23 @@ it('should return a new chat', async () => {
   const users = [3, 4];
   const chat = await findOrCreateChat(users);
   expect(chat).toMatchObject({
-    id: 4, user1: 3, user2: 4, messages: undefined,
+    id: expect.any(Number), user1: 3, user2: 4, messages: undefined,
   });
 });
 
-it('should send messages', async () => {
-  const users = [1, 2];
+it('should send a message', async () => {
+  const users = [3, 4];
   const { id: chatId } = await findOrCreateChat(users);
-  for (const message of mockMessages) {
-    const { text, senderId } = message;
-    await sendMessage({ chatId, text, senderId });
-  }
+  const message = await sendMessage({ chatId, text: '3 -> 4', senderId: 3 });
+  expect(message).toMatchObject(
+    {
+      id: expect.any(Number),
+      text: '3 -> 4',
+      senderId: 3,
+      sender: undefined,
+      chatId: 4,
+      chat: undefined,
+      createdAt: expect.any(Date),
+    },
+  );
 });
