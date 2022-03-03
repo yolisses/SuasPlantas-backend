@@ -5,8 +5,11 @@ export function startSocket() {
   const httpServer = createServer();
   const io = new Server(httpServer);
   io.on('connection', (socket) => {
-    socket.on('ping', (cv) => { cv('pong'); });
-    console.log('connected');
+    socket.on('ping', (callback) => { callback('pong'); });
+    socket.on('send_message', (message, callback) => {
+      console.log(message);
+      callback('ok');
+    });
   });
   httpServer.listen(5000);
   return httpServer.address() as string;

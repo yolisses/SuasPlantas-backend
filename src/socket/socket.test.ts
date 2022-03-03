@@ -15,6 +15,10 @@ beforeAll((done) => {
     io.on('connection', (socket) => {
       serverSocket = socket;
       socket.on('ping', (cb) => { cb('pong'); });
+      socket.on('send_message', (message, callback) => {
+        console.log(message);
+        callback('ok');
+      });
     });
     clientSocket.on('connect', done);
   });
@@ -40,7 +44,18 @@ test('should receive a message', (done) => {
   serverSocket.emit('receive message', message);
 });
 
-test('should work (with ack)', (done) => {
+test('should send a message', (done) => {
+  const message = {
+    receiverId: 1,
+    text: 'sent message',
+  };
+  clientSocket.emit('send_message', message, (res) => {
+    expect(res).toBe('ok');
+    done();
+  });
+});
+
+test('should ping a response', (done) => {
   clientSocket.emit('ping', (arg) => {
     expect(arg).toBe('pong');
     done();
