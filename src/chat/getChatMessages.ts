@@ -1,6 +1,5 @@
 import { paginateResults } from '../common/paginateResults';
 import { UserId } from '../users/User';
-import { ChatId } from './Chat';
 import { Message } from './Message';
 
 interface GetChatMessagesParams{

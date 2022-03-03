@@ -12,8 +12,9 @@ export const ChatController = {
     validateAuthenticated(req);
     const { page } = req.query;
     const { id } = req.params;
+    const { userId } = req.session;
     const messages = await getChatMessages({
-      chatId: int(id),
+      userIds: [int(id), userId],
       page: int(page) || 0,
     });
     res.send(messages);
