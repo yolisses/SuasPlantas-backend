@@ -1,34 +1,26 @@
 SELECT
-    u.id,
-    name,
-    text,
-    image,
-    sender_id,
-    receiver_id last_message.created_at,
+    last_message.*,
+    "user".name,
+    "user".image
 FROM
     (
         SELECT
-            DISTINCT ON (user_id) *
-        FROM
+            DISTINCT ON (user_id) *,
             (
-                SELECT
-                    (
-                        CASE
-                            WHEN sender_id = 1 THEN receiver_id
-                            ELSE sender_id
-                        END
-                    ) AS user_id,
-                    *
-                FROM
-                    message
-                WHERE
-                    sender_id = 1
-                    OR receiver_id = 1
-            ) AS all_messages
+                CASE
+                    WHEN sender_id = 1 THEN receiver_id
+                    ELSE sender_id
+                END
+            ) AS user_id
+        FROM
+            message
+        WHERE
+            sender_id = 1
+            OR receiver_id = 1
         ORDER BY
             user_id,
             created_at DESC
     ) AS last_message
-    LEFT JOIN "user" u ON u.id = user_id
+    LEFT JOIN "user" ON "user".id = user_id
 ORDER BY
-    last_message.created_at DESC
+    created_at DESC

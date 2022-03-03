@@ -3,10 +3,10 @@ import { UserId } from '../users/User';
 
 interface SendMessageParams{
     text:string
-    chatId:number
     senderId: UserId
+    receiverId:UserId
 }
 
-export async function sendMessage({ text, senderId, chatId }:SendMessageParams) {
-  return Message.create({ text, senderId, chatId }).save();
+export async function sendMessage({ text, senderId, receiverId }:SendMessageParams) {
+  return Message.create({ text, senderId, receiverId }).save();
 }

@@ -1,12 +1,10 @@
 import { Request, Response } from 'express';
 
-import { ChatId } from './Chat';
 import { int } from '../utils/int';
 import { error } from '../utils/error';
 import { sendMessage } from './sendMessage';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
-import { findOrCreateChat } from './findOrCreateChat';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 
 export const ChatController = {
@@ -34,16 +32,9 @@ export const ChatController = {
 
   async message(req:Request, res:Response) {
     validateAuthenticated(req);
-    const { text, chatId: chatIdParam, userId: receiverId } = req.body;
     const { userId: senderId } = req.session;
-
-    let chatId:ChatId = chatIdParam;
-    if (!chatId) {
-      if (!receiverId) error(400, 'Nor chatId or userId provided to send message');
-      const chat = await findOrCreateChat([senderId, receiverId]);
-      chatId = chat.id;
-    }
-    const message = sendMessage({ text, senderId, chatId });
+    const { text, userId: receiverId } = req.body;
+    const message = sendMessage({ text, senderId, receiverId });
     return res.send(message);
   },
 };

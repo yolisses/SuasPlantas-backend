@@ -65,6 +65,9 @@ export class User extends BaseEntity {
   @OneToMany(() => Message, (message) => message.sender, { cascade: true })
     sentMessages: Message[];
 
+  @OneToMany(() => Message, (message) => message.receiver, { cascade: true })
+    receivedMessages: Message[];
+
   @OneToMany(() => Quest, (quest) => quest.user, { cascade: true })
     quests: Quest[];
 

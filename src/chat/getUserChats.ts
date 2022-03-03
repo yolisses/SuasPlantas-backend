@@ -4,45 +4,30 @@ import { UserId } from '../users/User';
 export async function getUserChats(userId:UserId) {
   return getManager().query(`  
 SELECT
-    chats.id AS id,
-    users.id AS "userId",
-    users.name AS "name",
-    users.image AS "image",
-    last_message.text AS "lastText",
-    last_message.sender_id AS "lastUserId",
-    last_message.created_at AS "lastTime"
-FROM
+    last_message.*,
+    "user".name,
+    "user".image
+    FROM
     (
         SELECT
+            DISTINCT ON (user_id) *,
             (
                 CASE
-                    WHEN user1 = $1 THEN user2
-                    ELSE user1
+                    WHEN sender_id = $1 THEN receiver_id
+                    ELSE sender_id
                 END
-            ) AS other,
-            *
-        FROM
-            chat
-        WHERE
-            user1 = $1
-            OR user2 = $1
-    ) AS chats
-    LEFT JOIN (
-        SELECT
-            DISTINCT ON (chat_id) *
+            ) AS user_id
         FROM
             message
+        WHERE
+            sender_id = $1
+            OR receiver_id = $1
         ORDER BY
-            chat_id,
+            user_id,
             created_at DESC
-    ) AS last_message ON last_message.chat_id = chats.id
-    LEFT JOIN (
-        SELECT
-            *
-        FROM
-            "user"
-    ) AS users ON users.id = chats.other
+    ) AS last_message
+    LEFT JOIN "user" ON "user".id = user_id
 ORDER BY
-    "lastTime" DESC
+    created_at DESC
 `, [userId]);
 }

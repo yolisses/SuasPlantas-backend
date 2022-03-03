@@ -1,75 +1,63 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import req from 'supertest';
-import { app } from '../app';
-import { Chat } from './Chat';
 import { Message } from './Message';
 import { User } from '../users/User';
 import { sendMessage } from './sendMessage';
 import { getUserChats } from './getUserChats';
-import { userCookie } from '../test/userCookie';
 import { getChatMessages } from './getChatMessages';
-import { findOrCreateChat } from './findOrCreateChat';
 import { startDatabase } from '../database/startDatabase';
 
 beforeAll(async () => {
   await startDatabase();
-  for (const id of [1, 2, 3, 4]) {
-    await User.create({ id, name: `user ${id}`, image: `image ${id}` }).save();
-  }
-  await Chat.create({ id: 1, user1: 1, user2: 2 }).save();
-  await Chat.create({ id: 2, user1: 1, user2: 3 }).save();
-  await Chat.create({ id: 3, user1: 2, user2: 3 }).save();
-  await Message.create({
-    id: 1, text: '1 -> 2', senderId: 1, chatId: 1,
-  }).save();
-  await Message.create({
-    id: 2, text: '2 -> 1', senderId: 2, chatId: 1,
-  }).save();
-  await Message.create({
-    id: 3, text: '1 -> 3', senderId: 1, chatId: 2,
-  }).save();
-  await Message.create({
-    id: 4, text: '3 -> 1', senderId: 3, chatId: 2,
-  }).save();
-  await Message.create({
-    id: 5, text: '2 -> 3', senderId: 2, chatId: 3,
-  }).save();
-  await Message.create({
-    id: 6, text: '3 -> 2', senderId: 3, chatId: 3,
-  }).save();
+  const userRepo = User.getRepository();
+  const messageRepo = Message.getRepository();
+
+  await Promise.all([
+    userRepo.insert({ id: 1, name: `user ${1}`, image: `image ${1}` }),
+    userRepo.insert({ id: 2, name: `user ${2}`, image: `image ${2}` }),
+    userRepo.insert({ id: 3, name: `user ${3}`, image: `image ${3}` }),
+    userRepo.insert({ id: 4, name: `user ${4}`, image: `image ${4}` }),
+  ]);
+
+  const messages = [[1, 2], [2, 1], [1, 3], [3, 1], [2, 3], [3, 2]];
+
+  await Promise.all(
+    messages.map(async (value, id) => messageRepo.insert({
+      id: id + 1, senderId: value[0], receiverId: value[1], text: `${value[0]} -> ${value[1]}`,
+    })),
+  );
 });
 
 it('should return user chats', async () => {
   const userId = 1;
   const chats = await getUserChats(userId);
   expect(chats[0].lastTime > chats[1].lastTime);
-  expect(chats).toEqual(
-    [
-      {
-        id: 2,
-        userId: 3,
-        name: 'user 3',
-        image: 'image 3',
-        lastText: '3 -> 1',
-        lastUserId: 3,
-        lastTime: expect.any(Date),
-      },
-      {
-        id: 1,
-        userId: 2,
-        name: 'user 2',
-        image: 'image 2',
-        lastText: '2 -> 1',
-        lastUserId: 2,
-        lastTime: expect.any(Date),
-      },
-    ],
-  );
+  expect(chats).toEqual([
+    {
+      id: 4,
+      text: '3 -> 1',
+      sender_id: 3,
+      receiver_id: 1,
+      created_at: expect.any(Date),
+      user_id: 3,
+      name: 'user 3',
+      image: 'image 3',
+    },
+    {
+      id: 2,
+      text: '2 -> 1',
+      sender_id: 2,
+      receiver_id: 1,
+      created_at: expect.any(Date),
+      user_id: 2,
+      name: 'user 2',
+      image: 'image 2',
+    },
+  ]);
 });
 
 it('should return chat messages', async () => {
-  const res = await getChatMessages({ chatId: 1 });
+  const res = await getChatMessages({ userIds: [1, 2] });
   expect(res).toMatchObject({
     pageData: {
       page: 0, totalPages: 1, totalCount: 2, nextPage: null,
@@ -80,8 +68,8 @@ it('should return chat messages', async () => {
         text: '2 -> 1',
         senderId: 2,
         sender: undefined,
-        chatId: 1,
-        chat: undefined,
+        receiverId: 1,
+        receiver: undefined,
         createdAt: expect.any(Date),
       },
       {
@@ -89,42 +77,25 @@ it('should return chat messages', async () => {
         text: '1 -> 2',
         senderId: 1,
         sender: undefined,
-        chatId: 1,
-        chat: undefined,
+        receiverId: 2,
+        receiver: undefined,
         createdAt: expect.any(Date),
-      }],
+      },
+    ],
   });
   expect(res.content[0].createdAt > res.content[1].createdAt);
 });
 
-it('should return a present chat', async () => {
-  const users = [1, 2];
-  const chat = await findOrCreateChat(users);
-  expect(chat).toMatchObject({
-    id: 1, user1: 1, user2: 2, messages: undefined,
-  });
-});
-
-it('should return a new chat', async () => {
-  const users = [3, 4];
-  const chat = await findOrCreateChat(users);
-  expect(chat).toMatchObject({
-    id: expect.any(Number), user1: 3, user2: 4, messages: undefined,
-  });
-});
-
 it('should send a message', async () => {
-  const users = [3, 4];
-  const { id: chatId } = await findOrCreateChat(users);
-  const message = await sendMessage({ chatId, text: '3 -> 4', senderId: 3 });
+  const message = await sendMessage({ text: '3 -> 4', senderId: 3, receiverId: 4 });
   expect(message).toMatchObject(
     {
       id: expect.any(Number),
       text: '3 -> 4',
       senderId: 3,
       sender: undefined,
-      chatId: 4,
-      chat: undefined,
+      receiverId: 4,
+      receiver: undefined,
       createdAt: expect.any(Date),
     },
   );
