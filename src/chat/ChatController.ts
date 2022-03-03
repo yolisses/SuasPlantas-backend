@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 
 import { int } from '../utils/int';
-import { error } from '../utils/error';
 import { sendMessage } from './sendMessage';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
@@ -23,12 +22,8 @@ export const ChatController = {
   async getContacts(req, res) {
     validateAuthenticated(req);
     const { userId } = req.session;
-    try {
-      const contacts = await getUserChats(userId);
-      return res.send(contacts);
-    } catch (err) {
-      console.error(err);
-    }
+    const contacts = await getUserChats(userId);
+    return res.send(contacts);
   },
 
   async message(req:Request, res:Response) {
