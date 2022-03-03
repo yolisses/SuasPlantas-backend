@@ -5,8 +5,7 @@ import { startDatabase } from './database/startDatabase';
 async function run() {
   await startDatabase();
   const app = server();
-  const port = PORT || 3001;
-  app.listen(port, () => console.info(`Server running on http://localhost:${port}`));
+  app.listen(PORT, () => console.info(`Server running on http://localhost:${PORT}`));
 }
 
 run();

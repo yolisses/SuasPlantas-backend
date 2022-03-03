@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
+import { int } from '../utils/int';
 
 dotenv.config();
 
 export const {
-  PORT,
   BASE_URL,
   NODE_ENV,
   AUTH_SECRET,
@@ -25,6 +25,7 @@ export const {
 } = process.env;
 
 const {
+  PORT: PORT_ENV,
   DATABASE_DEV_URL,
   DATABASE_TEST_URL,
   DATABASE_STAGE_URL,
@@ -49,3 +50,5 @@ function getDataBaseUrl() {
 export const DATABASE_URL = getDataBaseUrl();
 
 export const DB_SSL = (isDev || isTest) ? useStageDB : true;
+
+export const PORT = int(PORT_ENV) || 3001;
