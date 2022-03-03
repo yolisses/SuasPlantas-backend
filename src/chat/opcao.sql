@@ -1,7 +1,11 @@
 SELECT
-    last_message.*,
-    "user".name,
-    "user".image
+    last_message.text,
+    "user".name AS name,
+    "user".image AS image,
+    last_message.user_id AS "userId",
+    last_message.sender_id AS "senderId",
+    last_message.created_at AS "lastTime",
+    last_message.receiver_id AS "receiverId"
 FROM
     (
         SELECT
@@ -23,4 +27,4 @@ FROM
     ) AS last_message
     LEFT JOIN "user" ON "user".id = user_id
 ORDER BY
-    created_at DESC
+    last_message.created_at DESC
