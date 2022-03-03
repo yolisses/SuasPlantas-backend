@@ -10,7 +10,6 @@ export async function startSocket():Promise<Server> {
       io.on('connection', (socket) => {
         socket.on('ping', (cb) => { cb('pong'); });
         socket.on('send_message', (message, callback) => {
-          console.log(message);
           callback('ok');
         });
       });
