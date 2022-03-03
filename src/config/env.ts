@@ -26,6 +26,8 @@ export const {
 
 const {
   PORT: PORT_ENV,
+  PORT_SOCKET: PORT_SOCKET_ENV,
+
   DATABASE_DEV_URL,
   DATABASE_TEST_URL,
   DATABASE_STAGE_URL,
@@ -52,3 +54,4 @@ export const DATABASE_URL = getDataBaseUrl();
 export const DB_SSL = (isDev || isTest) ? useStageDB : true;
 
 export const PORT = int(PORT_ENV) || 3001;
+export const PORT_SOCKET = int(PORT_SOCKET_ENV) || 5000;

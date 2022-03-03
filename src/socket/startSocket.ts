@@ -1,16 +1,20 @@
-import { createServer } from 'http';
 import { Server } from 'socket.io';
+import { createServer } from 'http';
+import { PORT_SOCKET } from '../config/env';
 
-export function startSocket() {
+export async function startSocket():Promise<Server> {
   const httpServer = createServer();
   const io = new Server(httpServer);
-  io.on('connection', (socket) => {
-    socket.on('ping', (callback) => { callback('pong'); });
-    socket.on('send_message', (message, callback) => {
-      console.log(message);
-      callback('ok');
+  return new Promise((resolve) => {
+    httpServer.listen(PORT_SOCKET, () => {
+      io.on('connection', (socket) => {
+        socket.on('ping', (cb) => { cb('pong'); });
+        socket.on('send_message', (message, callback) => {
+          console.log(message);
+          callback('ok');
+        });
+      });
+      resolve(io);
     });
   });
-  httpServer.listen(5000);
-  return httpServer.address() as string;
 }
