@@ -8,12 +8,26 @@ let clientSocket:Socket;
 
 beforeAll(async () => {
   io = await startSocket();
-  clientSocket = new Client(`http://localhost:${PORT_SOCKET}`);
+  clientSocket = new Client(`http://localhost:${PORT_SOCKET}`, { passphrase });
 });
 
 afterAll(() => {
   io.close();
   clientSocket.close();
+});
+
+test('should ping a response', (done) => {
+  clientSocket.emit('ping', (res) => {
+    expect(res).toBe('pong');
+    done();
+  });
+});
+
+test('should get the socket rooms', (done) => {
+  clientSocket.emit('rooms', (res) => {
+    console.log(res);
+    done();
+  });
 });
 
 test.skip('should receive a message', (done) => {
@@ -38,13 +52,6 @@ test('should send a message', (done) => {
   };
   clientSocket.emit('send_message', message, (res) => {
     expect(res).toBe('ok');
-    done();
-  });
-});
-
-test('should ping a response', (done) => {
-  clientSocket.emit('ping', (arg) => {
-    expect(arg).toBe('pong');
     done();
   });
 });

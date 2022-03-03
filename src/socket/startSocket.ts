@@ -7,10 +7,14 @@ export async function startSocket():Promise<Server> {
   const io = new Server(httpServer);
   return new Promise((resolve) => {
     httpServer.listen(PORT_SOCKET, () => {
-      io.on('connection', (socket) => {
-        socket.on('ping', (cb) => { cb('pong'); });
-        socket.on('send_message', (message, callback) => {
-          callback('ok');
+      io.on('connection', async (socket) => {
+        await socket.join('1');
+        socket.on('ping', (send) => { send('pong'); });
+        socket.on('send_message', (message, send) => {
+          send('ok');
+        });
+        socket.on('rooms', (send) => {
+          send(Array.from(socket.rooms));
         });
       });
       resolve(io);
