@@ -1,10 +1,18 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
+import req from 'supertest';
+import Client, { Socket } from 'socket.io-client';
+
+import { io } from '../server/io';
 import { Message } from './Message';
+import { app } from '../server/app';
 import { User } from '../users/User';
 import { saveMessage } from './saveMessage';
+import { PORT_SOCKET } from '../config/env';
+import { session } from '../session/session';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
+import { startSocket } from '../socket/startSocket';
 import { startDatabase } from '../database/startDatabase';
 
 beforeAll(async () => {
@@ -23,7 +31,10 @@ beforeAll(async () => {
 
   await Promise.all(
     messages.map(async (value, id) => messageRepo.insert({
-      id: id + 1, senderId: value[0], receiverId: value[1], text: `${value[0]} -> ${value[1]}`,
+      id: id + 1,
+      senderId: value[0],
+      receiverId: value[1],
+      text: `${value[0]} -> ${value[1]}`,
     })),
   );
 });
@@ -85,7 +96,11 @@ it('should return chat messages', async () => {
 });
 
 it('should send a message', async () => {
-  const message = await saveMessage({ text: '3 -> 4', senderId: 3, receiverId: 4 });
+  const message = await saveMessage({
+    text: '3 -> 4',
+    senderId: 3,
+    receiverId: 4,
+  });
   expect(message).toMatchObject(
     {
       id: expect.any(Number),
@@ -97,4 +112,55 @@ it('should send a message', async () => {
       createdAt: expect.any(Date),
     },
   );
+});
+
+describe.only('message sending and realtime', () => {
+  let clientSocket:Socket;
+
+  beforeAll(async () => {
+    startSocket();
+    clientSocket = Client(`http://localhost:${PORT_SOCKET}`);
+  });
+
+  afterAll(async () => {
+    io.close();
+    clientSocket.close();
+  });
+
+  it('should send a message with realtime event', (done) => {
+    const expectedMessage = {
+      id: expect.any(Number),
+      text: '3 -> 4',
+      senderId: 3,
+      receiverId: 4,
+      createdAt: expect.any(String),
+    };
+
+    // create client socket to user 4
+    clientSocket.on('receive_message', async (message) => {
+      expect(message).toMatchObject(expectedMessage);
+      done();
+    });
+    session().create(4).then((token) => {
+      clientSocket.emit('auth', token, (rooms) => {
+        expect(rooms).toMatchObject({
+          rooms: [expect.any(String), '4'],
+          status: 200,
+          userId: 4,
+        });
+      });
+    });
+
+    // send message as user 3 to user 4
+    session().create(3).then((token) => {
+      const message = { text: '3 -> 4', userId: 4 };
+      req(app)
+        .post('/chat')
+        .set('Authorization', token)
+        .send(message)
+        .expect(200)
+        .then((res) => expect(res.body)
+          .toMatchObject(expectedMessage));
+    });
+  });
 });
