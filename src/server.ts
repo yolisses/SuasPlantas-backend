@@ -3,15 +3,11 @@ import 'regenerator-runtime';
 import 'express-async-errors';
 
 import express from 'express';
-import session from 'express-session';
 
 import { routes } from './routes';
 import { corsConfig } from './config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
-import { sessionConfig } from './config/sessionConfig';
-import { getSessionStore } from './session/getSessionStore';
-import { getAuthCookieFromHeader } from './auth/getAuthCookieFromHeader';
-import { setAuthHeaderFromCookie } from './auth/setAuthHeaderFromCookie';
+import { sessionMidleware } from './session/sessionMiddleware';
 
 export function server() {
   const app = express();
@@ -19,9 +15,7 @@ export function server() {
   app.use(corsConfig);
   app.use(express.json());
 
-  app.use(getAuthCookieFromHeader);
-  app.use(session({ ...sessionConfig, store: getSessionStore() }));
-  app.use(setAuthHeaderFromCookie);
+  app.use(sessionMidleware);
 
   app.use(routes);
 
