@@ -1,11 +1,9 @@
 import { Server } from 'socket.io';
-import { createServer } from 'http';
 import { session } from '../session/session';
 
-export function startSocket():Server {
-  const httpServer = createServer();
-  const io = new Server(httpServer);
-  io.on('connection', async (socket) => {
+export function socket():Server {
+  const server = new Server();
+  server.on('connection', async (socket) => {
     socket.on('ping', (send) => { send('pong'); });
     socket.on('send_message', (message, send) => {
       send('ok');
@@ -21,5 +19,5 @@ export function startSocket():Server {
       send(Array.from(socket.rooms));
     });
   });
-  return io;
+  return server;
 }
