@@ -30,6 +30,10 @@ export class MemorySessionManager {
     return token;
   }
 
+  async delete(token:string) {
+    delete sessions[token];
+  }
+
   getExpiration(date:Date, timeToExpire:number) {
     const expiration = new Date(date);
     expiration.setSeconds(expiration.getSeconds() + timeToExpire);

@@ -5,6 +5,7 @@ export async function sessionMidleware(req:Request, res:Response, next:NextFunct
   const token = req.header('Authorization');
   if (token) {
     const userId = await session.getUserId(token);
+    req.token = token;
     req.userId = userId;
   }
   next();

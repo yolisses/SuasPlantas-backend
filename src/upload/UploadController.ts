@@ -9,7 +9,7 @@ export const UploadController = {
     validateAuthenticated(req);
     const key = uuid();
     const uri = `${AWS_BUCKET_PATH}/uploads/${key}`;
-    const uploadLink = await getNewUploadLink(key, req.session.userId);
+    const uploadLink = await getNewUploadLink(key, req.userId);
     return res.send({ uploadLink, uri });
   },
 };

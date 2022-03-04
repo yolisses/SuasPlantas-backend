@@ -28,7 +28,7 @@ export const ChatController = {
 
   async message(req:Request, res:Response) {
     validateAuthenticated(req);
-    const { userId: senderId } = req.session;
+    const { userId: senderId } = req;
     const { text, userId: receiverId } = req.body;
     const message = sendMessage({ text, senderId, receiverId });
     return res.send(message);

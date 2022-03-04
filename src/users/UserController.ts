@@ -94,10 +94,8 @@ export const UserController = {
   },
 
   async logout(req:Request, res:Response) {
-    req.session.destroy((err) => {
-      if (err) { error(500, 'Unexpected error in logout'); }
-      return res.end();
-    });
+    await session.delete(req.token);
+    return res.send();
   },
 
   async getQuests(req:Request, res:Response) {
