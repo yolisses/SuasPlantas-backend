@@ -3,7 +3,7 @@ export interface SessionManager{
 
     constructor:Function
 
-    getUserId:(token:string)=>Promise<number>
+    getUserId:(token:string)=>Promise<number|undefined>
 
     create:(userId:number)=>Promise<string>
 

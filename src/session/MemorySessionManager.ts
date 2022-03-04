@@ -18,7 +18,7 @@ export class MemorySessionManager implements SessionManager {
   }
 
   async getUserId(token:string) {
-    return sessions[token].userId;
+    return sessions[token]?.userId;
   }
 
   getNewToken() {
