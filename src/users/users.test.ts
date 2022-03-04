@@ -2,8 +2,8 @@ import req from 'supertest';
 import { app } from '../app';
 import { User } from './User';
 import { getUser } from './getUser';
-import { userCookie } from '../test/userCookie';
 import { startDatabase } from '../database/startDatabase';
+import { session } from '../session/session';
 
 const userId = 1;
 
@@ -22,7 +22,7 @@ it.only(
   async () => {
     const res = await req(app)
       .get('/users/me')
-      .set('Authorization', await userCookie(userId));
+      .set('Authorization', await session.create(userId));
     expect(res.body).toHaveProperty('id');
     expect(res.body).toHaveProperty('name');
     expect(res.body).toHaveProperty('image');

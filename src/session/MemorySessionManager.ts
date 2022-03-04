@@ -19,7 +19,7 @@ export class MemorySessionManager {
     return `${Math.random()}`;
   }
 
-  async createSession(userId:number) {
+  async create(userId:number) {
     const token = this.getNewToken();
     const createdAt = new Date();
     sessions[token] = { token, userId, createdAt };
