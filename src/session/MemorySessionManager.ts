@@ -33,20 +33,4 @@ export class MemorySessionManager {
   async delete(token:string) {
     delete sessions[token];
   }
-
-  getExpiration(date:Date, timeToExpire:number) {
-    const expiration = new Date(date);
-    expiration.setSeconds(expiration.getSeconds() + timeToExpire);
-    return expiration;
-  }
-
-  deleteExpiredSessions() {
-    Object.values(sessions).forEach((session) => {
-      const now = new Date();
-      const expiration = this.getExpiration(session.createdAt, this.timeToExpire);
-      if (now > expiration) {
-        delete sessions[session.token];
-      }
-    });
-  }
 }
