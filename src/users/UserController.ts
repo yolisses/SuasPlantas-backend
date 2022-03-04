@@ -15,6 +15,7 @@ import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 import { validateFound } from '../utils/validateFound';
+import { session } from '../session/session';
 
 export const UserController = {
   async get(req:Request, res:Response) {
@@ -42,26 +43,26 @@ export const UserController = {
 
   async me(req: Request, res) {
     validateAuthenticated(req);
-    const { userId } = req.session;
+    const { userId } = req;
     const user = await getUser(userId);
     validateFound({ user });
     return res.send(user);
   },
 
   async remove(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     await removeUser(userId);
     return res.send();
   },
 
   async edit(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     const user = await editUser(userId, req.body);
     return res.send(user);
   },
 
   async editLocation(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     const { latitude, longitude } = req.body;
     validateProvided({ latitude, longitude });
     const location = { latitude, longitude };
@@ -78,8 +79,8 @@ export const UserController = {
       accessToken,
       previewCode,
     });
-    req.session.userId = user.id;
-    return res.send(user);
+    const token = await session.create(user.id);
+    return res.setHeader('Authorization', token).send(user);
   },
 
   async createByProfile(req:Request, res:Response) {
@@ -100,7 +101,7 @@ export const UserController = {
   },
 
   async getQuests(req:Request, res:Response) {
-    const { userId } = req.session;
+    const { userId } = req;
     const quests = await getUserQuests(userId);
     return res.send(quests);
   },
@@ -115,7 +116,7 @@ export const UserController = {
   },
 
   async setAsPreview(req:Request, res:Response) {
-    const { userId } = req.session;
+    const { userId } = req;
     const user = await setUserPreview(userId, false);
     res.send(user);
   },

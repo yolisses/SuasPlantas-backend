@@ -28,27 +28,27 @@ export const PlantsController = {
 
   async getOne(req, res) {
     const { id } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     const plant = await findPlant(Number(id), userId);
     res.send(plant);
     if (userId) { addView(userId, plant.id); }
   },
 
   async create(req:Request, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     const plant = await createPlant(req.body, userId);
     res.send(plant);
     await notificateNewPlant(plant);
   },
 
   async edit(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     res.send(await editPlant(req.body, userId));
   },
 
   async remove(req, res) {
     const { id } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     await removePlant(id, userId);
     res.send();
   },
@@ -60,14 +60,14 @@ export const PlantsController = {
 
   async like(req, res) {
     const { id } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     const like = await likePlant(id, userId);
     res.send(like);
   },
 
   async dislike(req, res) {
     const { id } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     const like = await dislikePlant(id, userId);
     res.send(like);
   },

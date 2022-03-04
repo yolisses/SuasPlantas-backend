@@ -5,7 +5,7 @@ import { removeQuest } from './removeQuests';
 
 export const QuestController = {
   async create(req, res) {
-    const { userId } = req.session;
+    const { userId } = req;
     res.send(await createQuest(req.body, userId));
   },
 
@@ -26,14 +26,14 @@ export const QuestController = {
 
   async delete(req, res) {
     const { id } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     await removeQuest(id, userId);
     res.send();
   },
 
   async edit(req, res) {
     const { id } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     const quest = await editQuest({ ...req.body, id }, userId);
     res.send(quest);
   },

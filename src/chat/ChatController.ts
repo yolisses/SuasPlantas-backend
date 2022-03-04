@@ -11,7 +11,7 @@ export const ChatController = {
     validateAuthenticated(req);
     const { page } = req.query;
     const { id } = req.params;
-    const { userId } = req.session;
+    const { userId } = req;
     const messages = await getChatMessages({
       userIds: [int(id), userId],
       page: int(page) || 0,
@@ -21,7 +21,7 @@ export const ChatController = {
 
   async getContacts(req, res) {
     validateAuthenticated(req);
-    const { userId } = req.session;
+    const { userId } = req;
     const contacts = await getUserChats(userId);
     return res.send(contacts);
   },
