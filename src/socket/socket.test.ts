@@ -2,12 +2,14 @@ import { Socket } from 'socket.io';
 import Client from 'socket.io-client';
 
 import { io } from '../server/io';
+import { startSocket } from './startSocket';
 import { PORT_SOCKET } from '../config/env';
 import { session } from '../session/session';
 
 let clientSocket:Socket;
 
 beforeAll(async () => {
+  startSocket();
   clientSocket = new Client(`http://localhost:${PORT_SOCKET}`);
 });
 

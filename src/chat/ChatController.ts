@@ -5,7 +5,7 @@ import { saveMessage } from './saveMessage';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
-import { io } from '../socket/io';
+import { io } from '../server/io';
 
 export const ChatController = {
   async chatMessages(req:Request, res:Response) {
@@ -32,7 +32,7 @@ export const ChatController = {
     const { userId: senderId } = req;
     const { text, userId: receiverId } = req.body;
     const message = await saveMessage({ text, senderId, receiverId });
-    io().to(`${message.receiverId}`).emit('receive_message', message);
+    io.to(`${message.receiverId}`).emit('receive_message', message);
     return res.send(message);
   },
 };

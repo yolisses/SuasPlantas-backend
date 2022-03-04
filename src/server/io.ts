@@ -1,3 +1,3 @@
-import { socket } from '../socket/startSocket';
+import { socket } from '../socket/socket';
 
 export const io = socket();

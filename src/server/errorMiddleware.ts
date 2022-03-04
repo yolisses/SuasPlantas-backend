@@ -1,8 +1,8 @@
-import { NODE_ENV } from './config/env';
+import { NODE_ENV } from '../config/env';
 
 // eslint-disable-next-line no-unused-vars
 export async function errorMiddleware(error, req, res, next) {
-  if (!(NODE_ENV === 'test')) {
+  if (NODE_ENV !== 'test') {
     console.error(error);
   }
   return res

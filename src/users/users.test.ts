@@ -1,9 +1,9 @@
 import req from 'supertest';
-import { app } from '../server/app';
 import { User } from './User';
+import { app } from '../server/app';
 import { getUser } from './getUser';
-import { startDatabase } from '../database/startDatabase';
 import { session } from '../session/session';
+import { startDatabase } from '../database/startDatabase';
 
 const userId = 1;
 
