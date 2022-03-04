@@ -20,30 +20,25 @@ beforeAll(async () => {
   const userRepo = User.getRepository();
   const messageRepo = Message.getRepository();
 
-  await Promise.all([
-    userRepo.insert({ id: 1, name: `user ${1}`, image: `image ${1}` }),
-    userRepo.insert({ id: 2, name: `user ${2}`, image: `image ${2}` }),
-    userRepo.insert({ id: 3, name: `user ${3}`, image: `image ${3}` }),
-    userRepo.insert({ id: 4, name: `user ${4}`, image: `image ${4}` }),
-  ]);
+  for (let i = 1; i <= 4; i++) {
+    await userRepo.insert({ name: `user ${i}`, image: `image ${i}` });
+  }
 
   const messages = [[1, 2], [2, 1], [1, 3], [3, 1], [2, 3], [3, 2]];
 
-  await Promise.all(
-    messages.map(async (value, id) => messageRepo.insert({
-      id: id + 1,
+  for (const value of messages) {
+    await messageRepo.insert({
       senderId: value[0],
       receiverId: value[1],
       text: `${value[0]} -> ${value[1]}`,
-    })),
-  );
+    });
+  }
 });
 
 it('should return user chats', async () => {
   const userId = 1;
   const chats = await getUserChats(userId);
-  expect(chats[0].lastTime > chats[1].lastTime);
-  expect(chats).toEqual([
+  expect(chats).toMatchObject([
     {
       text: '3 -> 1',
       senderId: 3,
@@ -63,6 +58,7 @@ it('should return user chats', async () => {
       image: 'image 2',
     },
   ]);
+  expect(chats[0].lastTime > chats[1].lastTime);
 });
 
 it('should return chat messages', async () => {
@@ -114,7 +110,7 @@ it('should send a message', async () => {
   );
 });
 
-describe.only('message sending and realtime', () => {
+describe('message sending and realtime', () => {
   let clientSocket:Socket;
 
   beforeAll(async () => {

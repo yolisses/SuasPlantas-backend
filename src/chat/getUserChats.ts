@@ -30,7 +30,7 @@ FROM
           user_id,
           created_at DESC
   ) AS last_message
-  LEFT JOIN "user" ON "user".id = user_id
+  LEFT JOIN "user" ON "user".id = last_message.user_id
 ORDER BY
   last_message.created_at DESC  
 `, [userId]);
