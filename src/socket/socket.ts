@@ -12,11 +12,18 @@ export function socket():Server {
       send(Array.from(socket.rooms));
     });
     socket.on('auth', async (token:string, send) => {
-      const userId = await session().getUserId(token);
+      const res:any = {};
+      const userId = await session().getUserId(`${token}`);
       if (userId) {
         await socket.join(`${userId}`);
+        res.userId = userId;
+        res.status = 200;
+      } else {
+        res.userId = null;
+        res.status = 403;
       }
-      send(Array.from(socket.rooms));
+      res.rooms = Array.from(socket.rooms);
+      send(res);
     });
   });
   return server;
