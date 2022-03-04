@@ -18,20 +18,20 @@ afterAll(() => {
   clientSocket.close();
 });
 
-test('should ping a response', (done) => {
+it('should ping a response', (done) => {
   clientSocket.emit('ping', (res) => {
     expect(res).toBe('pong');
     done();
   });
 });
 
-test('should get the socket rooms', (done) => {
+it('should get the socket rooms', (done) => {
   clientSocket.emit('rooms', (res) => {
     done();
   });
 });
 
-test('should receive a message', (done) => {
+it('should receive a message', (done) => {
   const message = {
     id: 1,
     senderId: 2,
@@ -46,7 +46,7 @@ test('should receive a message', (done) => {
   io.emit('receive_message', message);
 });
 
-test('should send a message', (done) => {
+it('should send a message', (done) => {
   const message = {
     receiverId: 1,
     text: 'sent message',
@@ -57,7 +57,7 @@ test('should send a message', (done) => {
   });
 });
 
-test('should join the userId room', (done) => {
+it('should join the userId room', (done) => {
   const userId = 1;
   session().create(userId).then((token) => {
     clientSocket.emit('auth', token, (res) => {
