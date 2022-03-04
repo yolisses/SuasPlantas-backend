@@ -1,8 +1,9 @@
 import { isTest } from '../config/env';
+import { SessionManager } from './SessionManager';
 import { DBSessionManager } from './DBSessionManager';
 import { MemorySessionManager } from './MemorySessionManager';
 
-let sessionValue;
+let sessionValue:SessionManager;
 
 export function session() {
   if (!sessionValue) {

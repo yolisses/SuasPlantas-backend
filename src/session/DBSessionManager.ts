@@ -1,10 +1,11 @@
 import { LessThan } from 'typeorm';
 import { Session } from './SessionEntity';
+import { SessionManager } from './SessionManager';
 
-export class DBSessionManager {
+export class DBSessionManager implements SessionManager {
   timeToExpire: number;
 
-  constructor({ timeToExpire }) {
+  constructor({ timeToExpire }:{timeToExpire:number}) {
     this.timeToExpire = timeToExpire;
     this.deleteExpiredSessions();
   }
@@ -21,7 +22,7 @@ export class DBSessionManager {
 
   async delete(token:string) {
     const session = await Session.findOne(token);
-    return session.remove();
+    await session.remove();
   }
 
   deleteExpiredSessions() {

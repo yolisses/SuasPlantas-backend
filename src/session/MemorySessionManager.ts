@@ -1,3 +1,5 @@
+import { SessionManager } from './SessionManager';
+
 export interface Session{
   token:string
   userId:number
@@ -8,7 +10,7 @@ type SessionGroup = {[key:string]:Session}
 
 const sessions:SessionGroup = {};
 
-export class MemorySessionManager {
+export class MemorySessionManager implements SessionManager {
   timeToExpire: number;
 
   constructor({ timeToExpire }) {
