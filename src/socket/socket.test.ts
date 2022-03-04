@@ -1,5 +1,4 @@
-import { Socket } from 'socket.io';
-import Client from 'socket.io-client';
+import Client, { Socket } from 'socket.io-client';
 
 import { io } from '../server/io';
 import { startSocket } from './startSocket';
@@ -10,7 +9,7 @@ let clientSocket:Socket;
 
 beforeAll(async () => {
   startSocket();
-  clientSocket = new Client(`http://localhost:${PORT_SOCKET}`);
+  clientSocket = Client(`http://localhost:${PORT_SOCKET}`);
 });
 
 afterAll(() => {
@@ -21,12 +20,6 @@ afterAll(() => {
 it('should ping a response', (done) => {
   clientSocket.emit('ping', (res) => {
     expect(res).toBe('pong');
-    done();
-  });
-});
-
-it('should get the socket rooms', (done) => {
-  clientSocket.emit('rooms', (res) => {
     done();
   });
 });
@@ -47,10 +40,7 @@ it('should receive a message', (done) => {
 });
 
 it('should send a message', (done) => {
-  const message = {
-    receiverId: 1,
-    text: 'sent message',
-  };
+  const message = { receiverId: 1, text: 'sent message' };
   clientSocket.emit('send_message', message, (res) => {
     expect(res).toBe('ok');
     done();
@@ -60,11 +50,12 @@ it('should send a message', (done) => {
 it('should join the userId room', (done) => {
   const userId = 1;
   session().create(userId).then((token) => {
-    clientSocket.emit('auth', token, (res) => {
-      expect(res).toMatchObject([
-        expect.any(String),
-        `${userId}`,
-      ]);
+    clientSocket.emit('auth', token, (rooms) => {
+      expect(rooms).toMatchObject({
+        userId,
+        status: 200,
+        rooms: [expect.any(String), `${userId}`],
+      });
       done();
     });
   });
