@@ -1,6 +1,6 @@
 import req from 'supertest';
 import Server, { Express } from 'express';
-import { session } from './session';
+import { session } from './reqSession';
 import { sessionMidleware } from './sessionMiddleware';
 
 let app:Express;

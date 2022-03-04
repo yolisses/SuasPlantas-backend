@@ -3,7 +3,7 @@ import { app } from '../app';
 import { User } from './User';
 import { getUser } from './getUser';
 import { startDatabase } from '../database/startDatabase';
-import { session } from '../session/session';
+import { session } from '../session/reqSession';
 
 const userId = 1;
 

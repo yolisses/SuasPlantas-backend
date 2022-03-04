@@ -15,7 +15,7 @@ import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 import { validateFound } from '../utils/validateFound';
-import { session } from '../session/session';
+import { session } from '../session/reqSession';
 
 export const UserController = {
   async get(req:Request, res:Response) {

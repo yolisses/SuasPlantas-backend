@@ -1,7 +1,5 @@
 import { Router } from 'express';
 
-import { isDev } from './utils/isDev';
-import { devRoutes } from './dev/devRoutes';
 import { pingRoutes } from './ping/pingRoutes';
 import { chatRoutes } from './chat/chatRoutes';
 import { userRoutes } from './users/userRoutes';
@@ -31,7 +29,3 @@ routes.use('/location', locationRoutes);
 routes.use('/interactions', interactionRoutes);
 routes.use('/notifications', notificationsRoutes);
 routes.use('/visualizations', visualizationRoutes);
-
-if (isDev) {
-  routes.use('/dev', devRoutes);
-}

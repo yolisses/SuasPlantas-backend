@@ -1,4 +1,8 @@
-import { Session } from './Session';
+export interface Session{
+  token:string
+  userId:number
+  createdAt:Date
+}
 
 type SessionGroup = {[key:string]:Session}
 
