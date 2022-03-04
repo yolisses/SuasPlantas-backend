@@ -19,6 +19,11 @@ export class DBSessionManager {
     return session.token;
   }
 
+  async delete(token:string) {
+    const session = await Session.findOne(token);
+    return session.remove();
+  }
+
   deleteExpiredSessions() {
     const expiration = new Date();
     expiration.setSeconds(expiration.getSeconds() - this.timeToExpire);
