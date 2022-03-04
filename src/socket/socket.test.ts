@@ -8,7 +8,7 @@ let clientSocket:Socket;
 
 beforeAll(async () => {
   io = await startSocket();
-  clientSocket = new Client(`http://localhost:${PORT_SOCKET}`, { passphrase });
+  clientSocket = new Client(`http://localhost:${PORT_SOCKET}`);
 });
 
 afterAll(() => {
@@ -25,7 +25,6 @@ test('should ping a response', (done) => {
 
 test('should get the socket rooms', (done) => {
   clientSocket.emit('rooms', (res) => {
-    console.log(res);
     done();
   });
 });
