@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io';
 import Client from 'socket.io-client';
 
-import { io } from '../io';
+import { io } from '../server/io';
 import { PORT_SOCKET } from '../config/env';
 import { session } from '../session/session';
 

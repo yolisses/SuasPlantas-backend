@@ -1,4 +1,4 @@
-import { server } from './server';
+import { server } from './server/server';
 import { PORT } from './config/env';
 import { startDatabase } from './database/startDatabase';
 

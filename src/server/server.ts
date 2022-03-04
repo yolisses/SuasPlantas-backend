@@ -5,9 +5,9 @@ import 'express-async-errors';
 import express from 'express';
 
 import { routes } from './routes';
-import { corsConfig } from './config/corsConfig';
+import { corsConfig } from '../config/corsConfig';
 import { errorMiddleware } from './errorMiddleware';
-import { sessionMidleware } from './session/sessionMiddleware';
+import { sessionMidleware } from '../session/sessionMiddleware';
 
 export function server() {
   const app = express();

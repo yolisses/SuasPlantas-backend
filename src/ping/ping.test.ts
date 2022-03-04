@@ -1,5 +1,5 @@
 import req from 'supertest';
-import { app } from '../app';
+import { app } from '../server/app';
 
 it('should ping a response', (done) => {
   req(app)

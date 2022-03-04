@@ -1,5 +1,5 @@
 import req from 'supertest';
-import { app } from '../app';
+import { app } from '../server/app';
 import { User } from './User';
 import { getUser } from './getUser';
 import { startDatabase } from '../database/startDatabase';
