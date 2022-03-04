@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 
 import { int } from '../utils/int';
-import { sendMessage } from './sendMessage';
+import { saveMessage } from './saveMessage';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
+import { io } from '../socket/io';
 
 export const ChatController = {
   async chatMessages(req:Request, res:Response) {
@@ -30,7 +31,8 @@ export const ChatController = {
     validateAuthenticated(req);
     const { userId: senderId } = req;
     const { text, userId: receiverId } = req.body;
-    const message = sendMessage({ text, senderId, receiverId });
+    const message = await saveMessage({ text, senderId, receiverId });
+    io().to(`${message.receiverId}`).emit('receive_message', message);
     return res.send(message);
   },
 };

@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import { Message } from './Message';
 import { User } from '../users/User';
-import { sendMessage } from './sendMessage';
+import { saveMessage } from './saveMessage';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { startDatabase } from '../database/startDatabase';
@@ -85,7 +85,7 @@ it('should return chat messages', async () => {
 });
 
 it('should send a message', async () => {
-  const message = await sendMessage({ text: '3 -> 4', senderId: 3, receiverId: 4 });
+  const message = await saveMessage({ text: '3 -> 4', senderId: 3, receiverId: 4 });
   expect(message).toMatchObject(
     {
       id: expect.any(Number),

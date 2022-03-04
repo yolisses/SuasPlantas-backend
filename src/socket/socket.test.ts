@@ -1,8 +1,8 @@
-import { Server, Socket } from 'socket.io';
 import Client from 'socket.io-client';
+import { Server, Socket } from 'socket.io';
+import { startSocket } from './startSocket';
 import { PORT_SOCKET } from '../config/env';
 import { session } from '../session/session';
-import { startSocket } from './startSocket';
 
 let io:Server;
 let clientSocket:Socket;
@@ -30,7 +30,7 @@ test('should get the socket rooms', (done) => {
   });
 });
 
-test.skip('should receive a message', (done) => {
+test('should receive a message', (done) => {
   const message = {
     id: 1,
     senderId: 2,
@@ -38,11 +38,11 @@ test.skip('should receive a message', (done) => {
     text: 'message 1',
     createdAt: Date.now().toString(),
   };
-  clientSocket.on('receive message', (arg) => {
+  clientSocket.on('receive_message', (arg) => {
     expect(arg).toMatchObject(message);
     done();
   });
-  serverSocket.emit('receive message', message);
+  io.emit('receive_message', message);
 });
 
 test('should send a message', (done) => {
