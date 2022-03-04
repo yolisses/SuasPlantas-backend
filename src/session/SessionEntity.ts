@@ -5,7 +5,7 @@ import {
 
 @Entity()
 export class Session extends BaseEntity {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
       token:string;
 
     @Column()

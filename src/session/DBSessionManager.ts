@@ -11,8 +11,13 @@ export class DBSessionManager implements SessionManager {
   }
 
   async getUserId(token:string) {
-    const sesssion = await Session.findOne(token);
-    return sesssion.userId;
+    try {
+      const sesssion = await Session.findOne(token);
+      return sesssion.userId;
+    } catch (err) {
+      console.error(err);
+    }
+    return undefined;
   }
 
   async create(userId:number) {
