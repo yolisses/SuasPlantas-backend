@@ -17,12 +17,14 @@ import { startDatabase } from '../database/startDatabase';
 
 beforeAll(async () => {
   await startDatabase();
-  const userRepo = User.getRepository();
   const messageRepo = Message.getRepository();
 
-  for (let i = 1; i <= 4; i++) {
-    await userRepo.insert({ name: `user ${i}`, image: `image ${i}` });
-  }
+  await User.createQueryBuilder().insert().values([
+    { name: 'user 1', image: 'image 1' },
+    { name: 'user 2', image: 'image 2' },
+    { name: 'user 3', image: 'image 3' },
+    { name: 'user 4', image: 'image 4' },
+  ]).execute();
 
   const messages = [[1, 2], [2, 1], [1, 3], [3, 1], [2, 3], [3, 2]];
 
@@ -132,31 +134,33 @@ describe('message sending and realtime', () => {
       createdAt: expect.any(String),
     };
 
-    // create client socket to user 4
+    // authenticate client socket to user 4
     clientSocket.on('receive_message', async (message) => {
       expect(message).toMatchObject(expectedMessage);
       done();
     });
     session().create(4).then((token) => {
-      clientSocket.emit('auth', token, (rooms) => {
-        expect(rooms).toMatchObject({
+      clientSocket.emit('auth', token, (res) => {
+        expect(res).toMatchObject({
           rooms: [expect.any(String), '4'],
           status: 200,
           userId: 4,
         });
-      });
-    });
 
-    // send message as user 3 to user 4
-    session().create(3).then((token) => {
-      const message = { text: '3 -> 4', userId: 4 };
-      req(app)
-        .post('/chat')
-        .set('Authorization', token)
-        .send(message)
-        .expect(200)
-        .then((res) => expect(res.body)
-          .toMatchObject(expectedMessage));
+        // send message as user 3 to user 4
+        session().create(3).then((token) => {
+          const message = { text: '3 -> 4', userId: 4 };
+          req(app)
+            .post('/chat')
+            .set('Authorization', token)
+            .send(message)
+            .expect(200)
+            .then((res) => {
+              expect(res.body)
+                .toMatchObject(expectedMessage);
+            });
+        });
+      });
     });
   });
 });
