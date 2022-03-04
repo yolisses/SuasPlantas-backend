@@ -8,7 +8,7 @@ import { Quest } from '../quests/Quest';
 import { City } from '../location/City';
 import { State } from '../location/State';
 import { Message } from '../chat/Message';
-import { Session } from '../session/Session';
+import { Session } from '../session/SessionEntity';
 import { PlantView } from '../plant/PlantView';
 import { Feedback } from '../feedback/Feedback';
 import { Interaction } from '../interaction/Interaction';

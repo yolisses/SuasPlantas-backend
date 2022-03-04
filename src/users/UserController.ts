@@ -15,7 +15,7 @@ import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 import { validateFound } from '../utils/validateFound';
-import { session } from '../session/reqSession';
+import { session } from '../session/session';
 
 export const UserController = {
   async get(req:Request, res:Response) {
@@ -79,7 +79,7 @@ export const UserController = {
       accessToken,
       previewCode,
     });
-    const token = await session.create(user.id);
+    const token = await session().create(user.id);
     return res.setHeader('Authorization', token).send(user);
   },
 
@@ -94,7 +94,7 @@ export const UserController = {
   },
 
   async logout(req:Request, res:Response) {
-    await session.delete(req.token);
+    await session().delete(req.token);
     return res.send();
   },
 

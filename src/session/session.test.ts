@@ -1,11 +1,11 @@
 import req from 'supertest';
 import Server, { Express } from 'express';
-import { session } from './reqSession';
+import { session } from './session';
 import { sessionMidleware } from './sessionMiddleware';
 
 let app:Express;
 
-beforeAll(() => {
+beforeAll(async () => {
   app = Server();
   app.use(sessionMidleware);
   app.get('/me', async (req, res) => {
@@ -21,7 +21,7 @@ it('should return undefined userId', async () => {
 
 it('should return the current user id', async () => {
   const userId = 1;
-  const token = await session.create(userId);
+  const token = await session().create(userId);
   const res = await req(app).get('/me').set('Authorization', token);
   expect(res.body).toMatchObject({ userId: 1 });
 });

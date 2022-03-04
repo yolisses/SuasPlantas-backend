@@ -1,5 +1,5 @@
 import { LessThan } from 'typeorm';
-import { Session } from './Session';
+import { Session } from './SessionEntity';
 
 export class DBSessionManager {
   timeToExpire: number;
