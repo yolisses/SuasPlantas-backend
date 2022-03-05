@@ -1,26 +1,28 @@
 import { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
+
+import { io } from './io';
 import { session } from '../session/session';
+import { saveMessage } from '../chat/saveMessage';
 import { corsOrigins } from '../config/corsConfig';
 
 export function socket(httpServer?:HttpServer):Server {
   const server = new Server(httpServer, { cors: { origin: corsOrigins } });
   server.on('connection', async (socket) => {
-    socket.on('ping', (send) => {
-      try {
-        send('pong');
-      } catch (err) {
-        console.error(err);
-      }
+    socket.on('ping', async (send) => { send('pong'); });
+
+    socket.on('send_message', async (token, messageData, send) => {
+      const senderId = await session().getUserId(token);
+      const { text, userId: receiverId } = messageData;
+      const message = await saveMessage({ text, senderId, receiverId });
+      io.to(`${message.receiverId}`).emit('receive_message', message);
+      send(message);
     });
 
-    socket.emit('receive_message', { text: 'hello world' });
-    socket.on('send_message', (message, send) => {
-      send('ok');
-    });
     socket.on('rooms', (send) => {
       send(Array.from(socket.rooms));
     });
+
     socket.on('auth', async (token:string, send) => {
       const res:any = {};
       const userId = await session().getUserId(`${token}`);
@@ -35,6 +37,7 @@ export function socket(httpServer?:HttpServer):Server {
       res.rooms = Array.from(socket.rooms);
       send(res);
     });
+
     socket.on('error', (coisa) => {
       console.log('error', coisa);
     });
