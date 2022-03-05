@@ -5,7 +5,7 @@ import { saveMessage } from './saveMessage';
 import { getUserChats } from './getUserChats';
 import { getChatMessages } from './getChatMessages';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
-import { io } from '../server/io';
+import { io } from '../socket/io';
 
 export const ChatController = {
   async chatMessages(req:Request, res:Response) {

@@ -1,4 +1,4 @@
-import './server/io';
+import './socket/io';
 import { PORT } from './config/env';
 import { httpServer } from './server/httpServer';
 import { startDatabase } from './database/startDatabase';

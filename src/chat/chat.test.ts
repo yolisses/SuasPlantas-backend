@@ -3,7 +3,7 @@
 import req from 'supertest';
 import Client, { Socket } from 'socket.io-client';
 
-import { io } from '../server/io';
+import { io } from '../socket/io';
 import { Message } from './Message';
 import { app } from '../server/app';
 import { User } from '../users/User';
