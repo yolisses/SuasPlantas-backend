@@ -9,7 +9,9 @@ export function session() {
   if (!sessionValue) {
     sessionValue = isTest
       ? new MemorySessionManager({ timeToExpire: 10000 })
-      : new DBSessionManager({ timeToExpire: 1000 });
+      : new DBSessionManager({
+        timeToExpire: 60 * 60 * 24 * 7 * 2, // two weeks
+      });
   }
   return sessionValue;
 }
