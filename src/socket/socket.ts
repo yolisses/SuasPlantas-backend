@@ -39,7 +39,7 @@ export function socket(httpServer?:HttpServer):Server {
     });
 
     socket.on('error', (coisa) => {
-      console.log('error', coisa);
+      console.error('error', coisa);
     });
   });
   return server;

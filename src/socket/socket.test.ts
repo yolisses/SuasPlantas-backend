@@ -39,14 +39,6 @@ it('should receive a message', (done) => {
   io.emit('receive_message', message);
 });
 
-it('should send a message', (done) => {
-  const message = { receiverId: 1, text: 'sent message' };
-  clientSocket.emit('send_message', message, (res) => {
-    expect(res).toBe('ok');
-    done();
-  });
-});
-
 it('should join the userId room', (done) => {
   const userId = 1;
   session().create(userId).then((token) => {

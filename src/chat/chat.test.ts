@@ -150,15 +150,9 @@ describe('message sending and realtime', () => {
         // send message as user 3 to user 4
         session().create(3).then((token) => {
           const message = { text: '3 -> 4', userId: 4 };
-          req(app)
-            .post('/chat')
-            .set('Authorization', token)
-            .send(message)
-            .expect(200)
-            .then((res) => {
-              expect(res.body)
-                .toMatchObject(expectedMessage);
-            });
+          clientSocket.emit('send_message', token, message, (res) => {
+            expect(res).toMatchObject(expectedMessage);
+          });
         });
       });
     });
