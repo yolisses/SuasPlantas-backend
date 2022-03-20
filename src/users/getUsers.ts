@@ -8,15 +8,17 @@ interface GetUserParams{
   radius?:number
   latitude?:number
   longitude?:number
+  profileRelations?:boolean
 }
 
 export async function getUsers({
   text,
   radius,
   latitude,
-  longitude,
   page = 0,
+  longitude,
   take = 50,
+  profileRelations,
 }:GetUserParams) {
   const query = User.createQueryBuilder('user');
 
@@ -33,6 +35,15 @@ export async function getUsers({
       @@ plainto_tsquery('portuguese', :text)`,
       { text },
     );
+  }
+
+  if (profileRelations) {
+    query
+      .leftJoinAndSelect('user.plants', 'plants')
+      .leftJoinAndSelect('user.likedPlants', 'likedPlants')
+      .leftJoinAndSelect('user.quests', 'quests')
+      .addOrderBy('plants.createdAt', 'DESC')
+      .addOrderBy('likedPlants.createdAt', 'DESC');
   }
 
   return paginateResults(query.getManyAndCount(), { page, take });

@@ -4,23 +4,22 @@ import { getUser } from './getUser';
 import { getUsers } from './getUsers';
 import { editUser } from './editUser';
 import { getReqIp } from './getReqIp';
-import { error } from '../utils/error';
 import { removeUser } from './removeUser';
+import { session } from '../session/session';
 import { getReqUA } from '../request/getReqUA';
 import { getUserQuests } from './getUserQuests';
 import { editUserLocation } from './editUserLocation';
 import { getUserPreview } from '../preview/getPreview';
+import { validateFound } from '../utils/validateFound';
 import { setUserPreview } from '../preview/setUserPreview';
 import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
-import { validateFound } from '../utils/validateFound';
-import { session } from '../session/session';
 
 export const UserController = {
   async get(req:Request, res:Response) {
     const {
-      page, radius, latitude, longitude,
+      page, radius, latitude, longitude, profileRelations,
     } = req.query;
 
     const users = await getUsers({
@@ -29,6 +28,7 @@ export const UserController = {
       radius: Number(radius),
       latitude: Number(latitude),
       longitude: Number(longitude),
+      profileRelations: profileRelations === 'true',
     });
     return res.send(users);
   },
