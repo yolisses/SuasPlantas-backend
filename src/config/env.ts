@@ -21,7 +21,6 @@ export const {
   AWS_BUCKET_PATH,
   AWS_ACCESS_KEY_ID,
   AWS_SECRET_ACCESS_KEY,
-  CREATE_CARD_LAMBDA_FUNCTION,
 } = process.env;
 
 const {
