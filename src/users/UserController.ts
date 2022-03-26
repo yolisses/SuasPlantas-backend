@@ -72,12 +72,11 @@ export const UserController = {
 
   async signIn(req:Request, res:Response) {
     const ip = getReqIp(req);
-    const { accessToken, provider, previewCode } = req.body;
+    const { accessToken, provider } = req.body;
     const user = await signIn({
       ip,
       provider,
       accessToken,
-      previewCode,
     });
     const token = await session().create(user.id);
     return res.setHeader('Authorization', token).send(user);
