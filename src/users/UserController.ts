@@ -15,12 +15,13 @@ import { validateAuthenticated } from '../utils/validateAuthenticated';
 export const UserController = {
   async get(req:Request, res:Response) {
     const {
-      page, radius, latitude, longitude, profileRelations,
+      page, radius, latitude, longitude, profileRelations, take,
     } = req.query;
 
     const users = await getUsers({
       ...req.query,
       page: Number(page) || 0,
+      take: Number(take) || 0,
       radius: Number(radius),
       latitude: Number(latitude),
       longitude: Number(longitude),
