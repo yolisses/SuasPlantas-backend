@@ -18,17 +18,18 @@ export async function signIn({
   const providerData = await validateWithProvider(provider, accessToken);
 
   let user: User;
+
   user = await getUserByEmail(providerData.email);
+
   if (!user) {
     user = User.create({
       name: providerData.name,
+      email: providerData.email,
       image: providerData.picture,
     });
   }
 
-  if (!user.email) user.email = providerData.email;
   await mutateUserWithIpInfo(user, ip);
-
   user = await user.save();
 
   return user;
