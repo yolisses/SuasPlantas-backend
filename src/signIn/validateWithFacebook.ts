@@ -13,7 +13,8 @@ interface facebookResponse
 // eslint-disable-next-line consistent-return
 export async function validateWithFacebook(accessToken: string):Promise<ValidationResponse> {
   try {
-    const res = await axios.get(`https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Cemail%2Cpicture.type(large)%7Burl%7D&access_token=${accessToken}`);
+    const endpoint = `https://graph.facebook.com/v13.0/me?fields=id%2Cname%2Cemail%2Cpicture.type(large)%7Burl%7D&access_token=${accessToken}`;
+    const res = await axios.get(endpoint);
     const { email, name, picture: { data: { url } } } = res.data as facebookResponse;
     return { email, name, picture: url };
   } catch (err) {
