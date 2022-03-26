@@ -6,13 +6,9 @@ import { editUser } from './editUser';
 import { getReqIp } from './getReqIp';
 import { removeUser } from './removeUser';
 import { session } from '../session/session';
-import { getReqUA } from '../request/getReqUA';
 import { getUserQuests } from './getUserQuests';
 import { editUserLocation } from './editUserLocation';
-import { getUserPreview } from '../preview/getPreview';
 import { validateFound } from '../utils/validateFound';
-import { setUserPreview } from '../preview/setUserPreview';
-import { createUserByProfile } from './createUserByProfile';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
 
@@ -82,16 +78,6 @@ export const UserController = {
     return res.setHeader('Authorization', token).send(user);
   },
 
-  async createByProfile(req:Request, res:Response) {
-    const {
-      name, image, city, state, fbId,
-    } = req.body;
-    const user = await createUserByProfile({
-      name, image, city, state, fbId,
-    });
-    res.status(201).send(user);
-  },
-
   async logout(req:Request, res:Response) {
     await session().delete(req.token);
     return res.send();
@@ -101,20 +87,5 @@ export const UserController = {
     const { userId } = req;
     const quests = await getUserQuests(userId);
     return res.send(quests);
-  },
-
-  async getPreview(req:Request, res:Response) {
-    const ip = getReqIp(req);
-    const ua = getReqUA(req);
-    const { code } = req.params;
-    validateProvided({ code });
-    const user = await getUserPreview(code as string, ip, ua);
-    res.send(user);
-  },
-
-  async setAsPreview(req:Request, res:Response) {
-    const { userId } = req;
-    const user = await setUserPreview(userId, false);
-    res.send(user);
   },
 };
