@@ -22,7 +22,7 @@ export const UserController = {
     const users = await getUsers({
       ...req.query,
       page: int(page) || 0,
-      take: int(page) || 50,
+      take: int(take) || 50,
       radius: Number(radius),
       latitude: Number(latitude),
       longitude: Number(longitude),
