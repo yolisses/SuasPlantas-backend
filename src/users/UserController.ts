@@ -11,6 +11,7 @@ import { editUserLocation } from './editUserLocation';
 import { validateFound } from '../utils/validateFound';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
+import { int } from '../utils/int';
 
 export const UserController = {
   async get(req:Request, res:Response) {
@@ -20,8 +21,8 @@ export const UserController = {
 
     const users = await getUsers({
       ...req.query,
-      page: Number(page) || 0,
-      take: Number(take) || 0,
+      page: int(page) || 0,
+      take: int(page) || 50,
       radius: Number(radius),
       latitude: Number(latitude),
       longitude: Number(longitude),
