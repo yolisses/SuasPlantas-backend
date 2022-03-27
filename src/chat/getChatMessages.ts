@@ -15,9 +15,5 @@ export function getChatMessages({ userIds, page = 0, take = 10000 }:GetChatMessa
   query.where('message.senderId = :id1 and message.receiverId = :id2');
   query.orWhere('message.senderId = :id2 and message.receiverId = :id1');
 
-  const skip = page * take;
-  query
-    .skip(skip)
-    .take(take);
-  return paginateResults(query.getManyAndCount(), { page, take });
+  return paginateResults(query, { page, take });
 }

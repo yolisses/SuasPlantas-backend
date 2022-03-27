@@ -21,11 +21,7 @@ export async function getFusers({
   if (state) query.where('city.state = :state', { state });
   if (city) query.where({ cityId: city });
 
-  const skip = page * take;
-  query
-    .skip(skip)
-    .take(take)
-    .addSelect('user');
+  query.addSelect('user');
 
-  return paginateResults(query.getManyAndCount(), { page, take });
+  return paginateResults(query, { page, take });
 }

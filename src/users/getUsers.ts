@@ -15,10 +15,10 @@ export async function getUsers({
   text,
   radius,
   latitude,
-  page = 0,
   longitude,
-  take = 50,
   profileRelations,
+  page = 0,
+  take = 50,
 }:GetUserParams) {
   const query = User.createQueryBuilder('user');
 
@@ -46,5 +46,5 @@ export async function getUsers({
       .addOrderBy('likedPlants.createdAt', 'DESC');
   }
 
-  return paginateResults(query.getManyAndCount(), { page, take });
+  return paginateResults(query, { page, take });
 }

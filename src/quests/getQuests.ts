@@ -38,9 +38,5 @@ export async function getQuests({
     );
   }
 
-  query
-    .skip(skip)
-    .take(take);
-
-  return paginateResults(query.getManyAndCount(), { page, take });
+  return paginateResults(query, { page, take });
 }

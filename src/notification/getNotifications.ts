@@ -17,5 +17,5 @@ export async function getNotifications({ userId, page = 0, take = 20 }:GetNotifi
 
   const skip = page * take;
   query.limit(take).skip(skip);
-  return paginateResults(query.getManyAndCount(), { page, take });
+  return paginateResults(query, { page, take });
 }

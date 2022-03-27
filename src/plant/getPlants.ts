@@ -44,10 +44,5 @@ export async function getPlants({
     );
   }
 
-  const skip = page * take;
-  query
-    .skip(skip)
-    .take(take);
-
-  return paginateResults(query.getManyAndCount(), { page, take });
+  return paginateResults(query, { page, take });
 }
