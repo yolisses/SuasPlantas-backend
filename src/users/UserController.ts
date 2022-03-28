@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { signIn } from './signIn';
+import { int } from '../utils/int';
 import { getUser } from './getUser';
 import { getUsers } from './getUsers';
 import { editUser } from './editUser';
@@ -11,7 +12,6 @@ import { editUserLocation } from './editUserLocation';
 import { validateFound } from '../utils/validateFound';
 import { validateProvided } from '../utils/validateProvided';
 import { validateAuthenticated } from '../utils/validateAuthenticated';
-import { int } from '../utils/int';
 
 export const UserController = {
   async get(req:Request, res:Response) {
