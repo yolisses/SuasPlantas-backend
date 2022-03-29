@@ -18,8 +18,6 @@ export async function getQuests({
   page = 0,
   take = 20,
 }:GetQuestsParams) {
-  const skip = page * take;
-
   const query = Quest.createQueryBuilder('quest')
     .leftJoinAndSelect('quest.user', 'user');
 
