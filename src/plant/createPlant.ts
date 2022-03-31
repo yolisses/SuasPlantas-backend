@@ -1,6 +1,8 @@
+/* eslint-disable prefer-destructuring */
 import { Plant } from './Plant';
 import { error } from '../utils/error';
 import { Image } from '../upload/Image';
+import { createImage } from './createImage';
 
 interface IPlantCreationDTO {
   name: string;
@@ -18,23 +20,26 @@ export async function createPlant(plant: IPlantCreationDTO, userId: number) {
     name, description, amount, price, swap, donate, images,
   } = plant;
 
-  if (!images) error(400, 'Images not provided');
+  let card;
+  let imagesInstances;
+  if (images) {
+    card = images[0];
+    imagesInstances = await Promise.all(
+      images.map((uri) => createImage(uri)),
+    );
+  }
 
   const result = Plant.create({
     name,
     swap,
+    card,
     price,
     amount,
     donate,
     userId,
     description,
-    card: images[0],
+    images: imagesInstances,
   });
-
-  const imagesInstances: Image[] = await Promise.all(
-    plant.images.map(async (uri) => Image.create({ uri }).save()),
-  );
-  result.images = imagesInstances;
 
   return result.save();
 }
