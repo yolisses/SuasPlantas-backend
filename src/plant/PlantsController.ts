@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { int } from '../utils/int';
 import { findPlant } from './findPlant';
 import { getPlants } from './getPlants';
 import { editPlant } from './editPlant';
@@ -8,8 +9,6 @@ import { createPlant } from './createPlant';
 import { removePlant } from './removePlant';
 import { dislikePlant } from './dislikePlant';
 import { getPlantsSitemap } from './getPlantsSitemap';
-import { notificateNewPlant } from '../notification/notificateNewPlant';
-import { int } from '../utils/int';
 
 export const PlantsController = {
   async get(req, res) {
@@ -38,7 +37,6 @@ export const PlantsController = {
     const { userId } = req;
     const plant = await createPlant(req.body, userId);
     res.send(plant);
-    await notificateNewPlant(plant);
   },
 
   async edit(req, res) {

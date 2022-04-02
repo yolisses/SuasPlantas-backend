@@ -7,7 +7,6 @@ import { editUser } from './editUser';
 import { getReqIp } from './getReqIp';
 import { removeUser } from './removeUser';
 import { session } from '../session/session';
-import { getUserQuests } from './getUserQuests';
 import { editUserLocation } from './editUserLocation';
 import { validateFound } from '../utils/validateFound';
 import { validateProvided } from '../utils/validateProvided';
@@ -83,11 +82,5 @@ export const UserController = {
   async logout(req:Request, res:Response) {
     await session().delete(req.token);
     return res.send();
-  },
-
-  async getQuests(req:Request, res:Response) {
-    const { userId } = req;
-    const quests = await getUserQuests(userId);
-    return res.send(quests);
   },
 };

@@ -4,7 +4,6 @@ import { Tag } from '../plant/tag/Tag';
 import { Plant } from '../plant/Plant';
 import { FUser } from '../fuser/FUser';
 import { Image } from '../upload/Image';
-import { Quest } from '../quests/Quest';
 import { City } from '../location/City';
 import { State } from '../location/State';
 import { Message } from '../chat/Message';
@@ -22,7 +21,6 @@ export const entities = [
   City,
   FUser,
   State,
-  Quest,
   Plant,
   Image,
   Session,

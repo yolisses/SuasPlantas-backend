@@ -14,7 +14,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Plant } from '../plant/Plant';
-import { Quest } from '../quests/Quest';
 import { Message } from '../chat/Message';
 import { Feedback } from '../feedback/Feedback';
 
@@ -67,9 +66,6 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Message, (message) => message.receiver, { cascade: true })
     receivedMessages: Message[];
-
-  @OneToMany(() => Quest, (quest) => quest.user, { cascade: true })
-    quests: Quest[];
 
   @ManyToMany(() => Plant, (plant) => plant.likedBy)
   @JoinTable()

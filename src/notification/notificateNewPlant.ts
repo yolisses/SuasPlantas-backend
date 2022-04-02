@@ -1,6 +1,5 @@
 import { client } from './client';
 import { Plant } from '../plant/Plant';
-import { Quest } from '../quests/Quest';
 import { BASE_URL } from '../config/env';
 import { Notification } from './Notification';
 

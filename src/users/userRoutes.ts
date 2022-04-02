@@ -4,7 +4,6 @@ import { UserController } from './UserController';
 
 export const userRoutes = Router();
 // The order matters!
-userRoutes.get('/me/quests', UserController.getQuests);
 userRoutes.get('/me', UserController.me);
 userRoutes.get('/:id', UserController.getOne);
 userRoutes.get('/', UserController.get);
