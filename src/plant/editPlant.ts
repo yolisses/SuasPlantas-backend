@@ -1,33 +1,26 @@
 import { Image } from '../upload/Image';
 import { Plant, PlantId } from './Plant';
 import { validateOwner } from '../utils/validateOwner';
-import { editIfNotUndefined } from '../utils/editIfNotUndefined';
 import { validateFound } from '../utils/validateFound';
+import { editIfNotUndefined } from '../utils/editIfNotUndefined';
 
 interface IPlantEditDTO {
   id:PlantId
   name: string;
-  description: string;
-  amount?: number;
-  price?: number;
-  swap: boolean;
-  donate: boolean;
-  tags: string[];
   images: string[];
+  description: string;
 }
 
 export async function editPlant(plant: IPlantEditDTO, userId: number) {
   const {
-    name, description, amount, price, swap, donate, images, id,
+    name, description, images, id,
   } = plant;
 
   const result = await Plant.findOneOrFail(id);
   validateFound({ plant });
   validateOwner({ plant }, userId);
 
-  editIfNotUndefined(result, {
-    name, description, amount, price, swap, donate,
-  });
+  editIfNotUndefined(result, { name, description });
 
   if (images) {
     const card = images[0];

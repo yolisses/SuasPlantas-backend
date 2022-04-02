@@ -1,13 +1,10 @@
 /* eslint-disable prefer-destructuring */
 import { Plant } from './Plant';
-import { error } from '../utils/error';
-import { Image } from '../upload/Image';
 import { createImage } from './createImage';
 
 interface IPlantCreationDTO {
   name: string;
   swap: boolean;
-  tags: string[];
   price?: number;
   donate: boolean;
   amount?: number;

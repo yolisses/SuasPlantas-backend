@@ -6,7 +6,7 @@ import { Plant, PlantId } from './Plant';
 
 export async function findPlant(plantId: PlantId, userId?:UserId) {
   const plant = await Plant.findOne(plantId, {
-    relations: ['user', 'images', 'tags'],
+    relations: ['user', 'images'],
     loadRelationIds: userId ? {
       relations: ['likedBy'],
     } : undefined,

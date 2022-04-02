@@ -14,7 +14,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { Tag } from './tag/Tag';
 import { Image } from '../upload/Image';
 import { User, UserId } from '../users/User';
 
@@ -29,28 +28,6 @@ export class Plant extends BaseEntity {
   @Column()
     name: string;
 
-  @Column({
-    scale: 2,
-    precision: 6,
-    type: 'decimal',
-    unsigned: true,
-    nullable: true,
-  })
-    price: number;
-
-  @Column({
-    type: 'int',
-    unsigned: true,
-    nullable: true,
-  })
-    amount?: number;
-
-  @Column({ default: false })
-    swap: boolean;
-
-  @Column({ default: false })
-    donate: boolean;
-
   @Index({ fulltext: true })
   @Column({ nullable: true })
     description?: string;
@@ -58,9 +35,8 @@ export class Plant extends BaseEntity {
   @Column({ nullable: true })
     card: string;
 
-  @ManyToMany(() => Tag)
-  @JoinTable()
-    tags: Tag[];
+  @Column()
+    quest: boolean;
 
   @Column()
     userId: UserId;
