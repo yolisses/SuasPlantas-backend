@@ -35,7 +35,7 @@ export class Plant extends BaseEntity {
   @Column({ nullable: true })
     card: string;
 
-  @Column()
+  @Column({ default: false })
     quest: boolean;
 
   @Column()
