@@ -7,20 +7,25 @@ import { editIfNotUndefined } from '../utils/editIfNotUndefined';
 interface IPlantEditDTO {
   id:PlantId
   name: string;
+  quest:boolean;
   images: string[];
   description: string;
 }
 
 export async function editPlant(plant: IPlantEditDTO, userId: number) {
   const {
-    name, description, images, id,
+    id,
+    name,
+    quest,
+    images,
+    description,
   } = plant;
 
   const result = await Plant.findOneOrFail(id);
   validateFound({ plant });
   validateOwner({ plant }, userId);
 
-  editIfNotUndefined(result, { name, description });
+  editIfNotUndefined(result, { name, description, quest });
 
   if (images) {
     const card = images[0];
